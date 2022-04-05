@@ -1,6 +1,10 @@
-FROM php:8.1-fpm-bullseye AS base
+FROM php:8.1-apache-bullseye AS base
 
-WORKDIR /data
+WORKDIR /var/www/html
+
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # timezone environment
 ENV TZ=UTC \
@@ -41,7 +45,7 @@ COPY ./infra/docker/php/php.development.ini /usr/local/etc/php/php.ini
 FROM base AS deploy
 
 COPY ./infra/docker/php/php.deploy.ini /usr/local/etc/php/php.ini
-COPY ./src /data
+COPY ./src /var/www/html
 
 RUN composer install -q -n --no-ansi --no-dev --no-scripts --no-progress --prefer-dist \
   && chmod -R 777 storage bootstrap/cache \

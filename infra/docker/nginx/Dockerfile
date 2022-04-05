@@ -1,6 +1,6 @@
 FROM nginx:1.20
 
-WORKDIR /data
+WORKDIR /var/www/src
 
 ENV TZ=UTC
 

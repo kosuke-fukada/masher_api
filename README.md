@@ -1,56 +1,54 @@
-# docker-laravel 🐳
+# Masher
 
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/35098175/145682384-0f531ede-96e0-44c3-a35e-32494bd9af42.png" alt="docker-laravel">
-</p>
-<p align="center">
-    <img src="https://github.com/ucan-lab/docker-laravel/actions/workflows/laravel-create-project.yml/badge.svg" alt="Test laravel-create-project.yml">
-    <img src="https://github.com/ucan-lab/docker-laravel/actions/workflows/laravel-git-clone.yml/badge.svg" alt="Test laravel-git-clone.yml">
-    <img src="https://img.shields.io/github/license/ucan-lab/docker-laravel" alt="License">
-</p>
+## ローカル環境構築について
 
-## Introduction
+### hostsに追加
 
-Build a simple laravel development environment with docker-compose. Compatible with Windows(WSL2), macOS(M1) and Linux.
-
-## Usage
-
-1. Click [Use this template](https://github.com/ucan-lab/docker-laravel/generate)
-2. Git clone & change directory
-3. Execute the following command
-
-```bash
-$ make create-project # Install the latest Laravel project
-$ make install-recommend-packages # Optional
+```
+sudo vi /private/etc/hosts
 ```
 
-http://localhost
+以下を追記
 
-## Tips
-
-- Read this [Makefile](https://github.com/ucan-lab/docker-laravel/blob/main/Makefile).
-- Read this [Wiki](https://github.com/ucan-lab/docker-laravel/wiki).
-
-## Container structures
-
-```bash
-├── app
-├── web
-└── db
+```
+127.0.0.1 local.api.masher.app
 ```
 
-### app container
+### OpenSSLで自己証明書作成
 
-- Base image
-  - [php](https://hub.docker.com/_/php):8.1-fpm-bullseye
-  - [composer](https://hub.docker.com/_/composer):2.2
+- `certs`ディレクトリを作成
 
-### web container
+```
+mkdir certs
+cd certs
+```
 
-- Base image
-  - [nginx](https://hub.docker.com/_/nginx):1.20
+- 秘密鍵を作成
 
-### db container
+```
+openssl genrsa -aes128 2048 > server.key
+```
 
-- Base image
-  - [mysql/mysql-server](https://hub.docker.com/r/mysql/mysql-server):8.0
+- 証明書署名要求(CSR)を作成
+
+```
+openssl req -new -key server.key -out server.csr
+```
+
+- パスフレーズ解除
+
+```
+cp server.key server.key.org
+openssl rsa -in server.key.org -out server.key
+```
+
+- 自己証明書(CRT)を作成
+
+```
+openssl x509 -days 3650 -req -signkey server.key < server.csr > server.crt -extfile san.ext
+```
+
+※参考  
+- https://portaltan.hatenablog.com/entry/2017/10/12/134120
+- https://portaltan.hatenablog.com/entry/2017/10/16/174619
+- https://qiita.com/kawasukeeee/items/81a71cb55db87cdbba4d
