@@ -3,66 +3,27 @@ services:
   app:
     build:
       context: .
-      dockerfile: ./infra/docker/php/Dockerfile
+      dockerfile: ./docker/php/Dockerfile
     volumes:
       - ./src/:/var/www/html/
-      - /var/run/php-fpm
-    expose:
-      - "80"
+    ports:
+      - 8080:80
     environment:
       - DB_CONNECTION=mysql
       - DB_HOST=db
       - DB_PORT=3306
       - DB_DATABASE=masher
-      - DB_USERNAME=root
-      - DB_PASSWORD=root
-      - VIRTUAL_HOST=local.api.masher.app
-      - VIRTUAL_PORT=80
-      - VIRTUAL_PROTO=http
-      - VIRTUAL_ROOT=/var/www/html/
-      - LETSENCRYPT_HOST=local.api.masher.app
-      - LETSENCRYPT_EMAIL=j.lee.style.boogie.piano@gmail.com
-      - CERT_NAME=server
-
-  nginx:
-    image: nginxproxy/nginx-proxy
-    container_name: nginx-proxy
-    ports:
-      - 443:443
-      - 8080:80
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./certs/:/etc/nginx/certs/
-      - /etc/nginx/vhost.d
-      - /usr/share/nginx/html/
-      - ./infra/docker/nginx/proxy.conf:/etc/nginx/conf.d/proxy.conf
-    environment:
-      - DEFAULT_HOST=local.api.masher.app
-      - HTTPS_METHOD=noredirect
-    restart: always
-    depends_on:
-      - app
-
-  # acme-companion:
-  #   image: nginxproxy/acme-companion
-  #   container_name: nginx-proxy-acme
-  #   volumes_from:
-  #     - nginx
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock:ro
-  #     - ./certs/:/etc/nginx/certs/
-  #     - /etc/acme.sh
+      - DB_USERNAME=masher
+      - DB_PASSWORD=masher_password
 
   db:
-    build:
-      context: .
-      dockerfile: ./infra/docker/mysql/Dockerfile
+    image: mysql:5.6
     ports:
       - 3306:3306
     volumes:
       -  /var/lib/mysql
     environment:
       - MYSQL_DATABASE=masher
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
+      - MYSQL_USER=masher
+      - MYSQL_PASSWORD=masher_password
       - MYSQL_ROOT_PASSWORD=root
