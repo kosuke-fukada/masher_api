@@ -1,7 +1,0 @@
-.idea
-.vscode
-.env
-/certs/server.crt
-/certs/server.csr
-/certs/server.key
-/certs/server.key.org

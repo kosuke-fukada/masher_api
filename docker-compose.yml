@@ -17,13 +17,15 @@ services:
       - DB_PASSWORD=masher_password
 
   db:
-    image: mysql:5.6
+    image: mysql:5.7
     ports:
       - 3306:3306
     volumes:
-      -  /var/lib/mysql
+      -  db_data:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=masher
       - MYSQL_USER=masher
       - MYSQL_PASSWORD=masher_password
       - MYSQL_ROOT_PASSWORD=root
+volumes:
+  db_data:
