@@ -31,4 +31,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'twitter-oauth-2' => [
+        'client_id' => env('TWITTER_AUTH_CLIENT_ID'),
+        'client_secret' => env('TWITTER_AUTH_CLIENT_SECRET'),
+        'redirect' => env('TWITTER_AUTH_REDIRECT_URI')
+    ],
+
 ];
