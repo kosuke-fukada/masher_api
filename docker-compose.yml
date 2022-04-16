@@ -8,13 +8,6 @@ services:
       - ./src/:/var/www/html/
     ports:
       - 8080:80
-    environment:
-      - DB_CONNECTION=mysql
-      - DB_HOST=db
-      - DB_PORT=3306
-      - DB_DATABASE=masher
-      - DB_USERNAME=masher
-      - DB_PASSWORD=masher_password
 
   db:
     image: mysql:5.7

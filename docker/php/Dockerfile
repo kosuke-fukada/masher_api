@@ -1,9 +1,14 @@
-FROM php:8.0-apache
+FROM php:8.1-apache
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 RUN apt-get update && apt-get install -y \
-  git zip unzip \
+  git zip unzip sqlite3 \
   && docker-php-ext-install pdo_mysql
+
+RUN pecl install xdebug \
+  && docker-php-ext-enable xdebug
+
+COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
 
 ENV APACHE_DOCUMENT_ROOT /var/www/html/public
 
