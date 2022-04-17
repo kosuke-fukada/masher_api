@@ -13,8 +13,9 @@ class SetAuthSessionService implements SetAuthSessionServiceInterface
      * @param User $user
      * @return void
      */
-    public function process(User $user): void
+    public function process(User $user): int
     {
         Auth::login($user, true);
+        return Auth::id();
     }
 }

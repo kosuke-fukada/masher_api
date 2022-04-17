@@ -29,7 +29,8 @@ class SetAuthSessionServiceTest extends TestCase
     public function testProcess(SetAuthSessionServiceInterface $setAuthSessionService): void
     {
         $user = new User();
-        $setAuthSessionService->process($user);
+        $userId = $setAuthSessionService->process($user);
         $this->assertTrue(Auth::check());
+        $this->assertSame(1, $userId);
     }
 }
