@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace Tests\ValueObjects\User;
 
-use App\ValueObjects\User\AccountId;
-use InvalidArgumentException;
 use Tests\TestCase;
+use InvalidArgumentException;
+use App\ValueObjects\User\AccountId;
+use App\ValueObjects\Foundation\StringValueObject;
 
 class AccountIdTest extends TestCase
 {
@@ -16,6 +17,7 @@ class AccountIdTest extends TestCase
     {
         $expected = 'test_id.';
         $accountId = new AccountId($expected);
+        $this->assertInstanceOf(StringValueObject::class, $accountId);
         $this->assertSame($expected, (string)$accountId);
     }
 

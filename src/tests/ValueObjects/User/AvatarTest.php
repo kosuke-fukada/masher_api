@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace Tests\ValueObjects\User;
 
-use App\ValueObjects\User\Avatar;
-use InvalidArgumentException;
 use Tests\TestCase;
+use InvalidArgumentException;
+use App\ValueObjects\User\Avatar;
+use App\ValueObjects\Foundation\StringValueObject;
 
 class AvatarTest extends TestCase
 {
@@ -16,6 +17,7 @@ class AvatarTest extends TestCase
     {
         $expected = 'https://example.com/test_image.png';
         $avatar = new Avatar($expected);
+        $this->assertInstanceOf(StringValueObject::class, $avatar);
         $this->assertSame($expected, (string)$avatar);
     }
 

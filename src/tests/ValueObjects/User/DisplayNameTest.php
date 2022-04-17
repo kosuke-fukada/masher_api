@@ -6,6 +6,7 @@ namespace Tests\ValueObjects\User;
 use Tests\TestCase;
 use InvalidArgumentException;
 use App\ValueObjects\User\DisplayName;
+use App\ValueObjects\Foundation\StringValueObject;
 
 class DisplayNameTest extends TestCase
 {
@@ -16,6 +17,7 @@ class DisplayNameTest extends TestCase
     {
         $expected = 'test_display_name';
         $displayName = new DisplayName($expected);
+        $this->assertInstanceOf(StringValueObject::class, $displayName);
         $this->assertSame($expected, (string)$displayName);
     }
 

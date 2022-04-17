@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace Tests\ValueObjects\User;
 
-use App\ValueObjects\User\AccessToken;
-use InvalidArgumentException;
 use Tests\TestCase;
+use InvalidArgumentException;
+use App\ValueObjects\User\AccessToken;
+use App\ValueObjects\Foundation\StringValueObject;
 
 class AccessTokenTest extends TestCase
 {
@@ -16,6 +17,7 @@ class AccessTokenTest extends TestCase
     {
         $expected = 'test_access-token';
         $accessToken = new AccessToken($expected);
+        $this->assertInstanceOf(StringValueObject::class, $accessToken);
         $this->assertSame($expected, (string)$accessToken);
     }
 
