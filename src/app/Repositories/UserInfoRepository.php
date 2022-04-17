@@ -3,48 +3,49 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-use App\Exceptions\ExceptionBaseClass;
-use App\Interfaces\Repositories\UserRepositoryInterface;
-use App\Models\UserInfo;
-use Illuminate\Support\Facades\DB;
-use RuntimeException;
 use Throwable;
+use RuntimeException;
+use App\Models\UserInfo;
+use App\Entities\User\User;
+use Illuminate\Support\Facades\DB;
+use App\Exceptions\ExceptionBaseClass;
+use App\Interfaces\Repositories\UserInfoRepositoryInterface;
 
-class UserRepository implements UserRepositoryInterface
+class UserInfoRepository implements UserInfoRepositoryInterface
 {
     /**
      * @var UserInfo
      */
-    private UserInfo $model;
+    private UserInfo $userInfo;
 
     /**
-     * @param UserInfo $model
+     * @param UserInfo $userInfo
      */
-    public function __construct(UserInfo $model)
+    public function __construct(UserInfo $userInfo)
     {
-        $this->model = $model;
+        $this->userInfo = $userInfo;
     }
 
     /**
-     * @param \App\Entities\User\User $user
+     * @param User $user
      * @return UserInfo
      */
-    public function signin(\App\Entities\User\User $user): UserInfo
+    public function signin(User $user): UserInfo
     {
-        $authUser = $this->model->newQuery()
+        $userInfo = $this->userInfo->newQuery()
             ->firstOrNew([
                 'account_id' => (string)$user->accountId(),
                 'provider' => $user->provider()->value,
             ]);
-        if (!$authUser->exists) {
-            $authUser->fill([
+        if (!$userInfo->exists) {
+            $userInfo->fill([
                 'display_name' => (string)$user->displayName(),
                 'avatar' => (string)$user->avatar(),
                 'access_token' => (string)$user->accessToken(),
                 'refresh_token' => (string)$user->refreshToken(),
             ]);
             DB::beginTransaction();
-            if (!$authUser->save()) {
+            if (!$userInfo->save()) {
                 DB::rollBack();
                 throw new RuntimeException('Failed to create a user.', ExceptionBaseClass::STATUS_CODE_INTERNAL_SERVER_ERROR);
             }
@@ -52,7 +53,7 @@ class UserRepository implements UserRepositoryInterface
         } else {
             DB::beginTransaction();
             try {
-                $authUser->update([
+                $userInfo->update([
                     'account_id' => (string)$user->accountId(),
                     'display_name' => (string)$user->displayName(),
                     'avatar' => (string)$user->avatar(),
@@ -62,6 +63,6 @@ class UserRepository implements UserRepositoryInterface
             }
         }
 
-        return $authUser;
+        return $userInfo;
     }
 }

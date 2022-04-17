@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\Services\Signin;
 
 use Tests\TestCase;
+use App\Models\UserInfo;
 use App\Entities\User\User;
 use App\ValueObjects\User\Avatar;
 use App\ValueObjects\User\AccountId;
@@ -48,14 +49,14 @@ class SigninUserServiceTest extends TestCase
             OauthProviderName::from($provider)
         );
         $signinUserService->process($userEntity);
-        $userModel = new \App\Models\User();
-        $authUser = $userModel->newQuery()->find(1);
-        $this->assertNotEmpty($authUser);
-        $this->assertSame($accountId, $authUser->getAttribute('account_id'));
-        $this->assertSame($displayName, $authUser->getAttribute('display_name'));
-        $this->assertSame($avatar, $authUser->getAttribute('avatar'));
-        $this->assertSame($accessToken, $authUser->getAttribute('access_token'));
-        $this->assertSame($refreshToken, $authUser->getAttribute('refresh_token'));
-        $this->assertSame($provider, $authUser->getAttribute('provider'));
+        $userInfoModel = new UserInfo();
+        $userInfo = $userInfoModel->newQuery()->find(1);
+        $this->assertNotEmpty($userInfo);
+        $this->assertSame($accountId, $userInfo->getAttribute('account_id'));
+        $this->assertSame($displayName, $userInfo->getAttribute('display_name'));
+        $this->assertSame($avatar, $userInfo->getAttribute('avatar'));
+        $this->assertSame($accessToken, $userInfo->getAttribute('access_token'));
+        $this->assertSame($refreshToken, $userInfo->getAttribute('refresh_token'));
+        $this->assertSame($provider, $userInfo->getAttribute('provider'));
     }
 }

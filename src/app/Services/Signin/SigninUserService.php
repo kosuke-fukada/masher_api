@@ -3,19 +3,20 @@ declare(strict_types=1);
 
 namespace App\Services\Signin;
 
-use App\Entities\User\User;
-use App\Interfaces\Repositories\UserRepositoryInterface;
-use App\Interfaces\Services\Signin\SigninUserServiceInterface;
-use Psr\Log\LoggerInterface;
-use RuntimeException;
 use Throwable;
+use RuntimeException;
+use App\Models\UserInfo;
+use App\Entities\User\User;
+use Psr\Log\LoggerInterface;
+use App\Interfaces\Repositories\UserInfoRepositoryInterface;
+use App\Interfaces\Services\Signin\SigninUserServiceInterface;
 
 class SigninUserService implements SigninUserServiceInterface
 {
     /**
-     * @var UserRepositoryInterface
+     * @var UserInfoRepositoryInterface
      */
-    private UserRepositoryInterface $userRepository;
+    private UserInfoRepositoryInterface $userInfoRepository;
 
     /**
      * @var LoggerInterface
@@ -23,22 +24,22 @@ class SigninUserService implements SigninUserServiceInterface
     private LoggerInterface $logger;
 
     /**
-     * @param UserRepositoryInterface $userRepository
+     * @param UserInfoRepositoryInterface $userInfoRepository
      */
-    public function __construct(UserRepositoryInterface $userRepository, LoggerInterface $logger)
+    public function __construct(UserInfoRepositoryInterface $userInfoRepository, LoggerInterface $logger)
     {
-        $this->userRepository = $userRepository;
+        $this->userInfoRepository = $userInfoRepository;
         $this->logger = $logger;
     }
 
     /**
      * @param User $user
-     * @return \App\Models\UserInfo
+     * @return UserInfo
      */
-    public function process(User $user): \App\Models\UserInfo
+    public function process(User $user): UserInfo
     {
         try {
-            return $this->userRepository->signin($user);
+            return $this->userInfoRepository->signin($user);
         } catch (Throwable $e) {
             $this->logger->info($e->getMessage());
             throw new RuntimeException('Failed to signin.', $e->getCode());

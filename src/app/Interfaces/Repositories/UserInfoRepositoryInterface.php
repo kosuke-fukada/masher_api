@@ -4,11 +4,13 @@ declare(strict_types=1);
 namespace App\Interfaces\Repositories;
 
 use App\Models\UserInfo;
+use App\Entities\User\User;
 
-interface UserRepositoryInterface
+interface UserInfoRepositoryInterface
 {
     /**
+     * @param User $user
      * @return UserInfo
      */
-    public function signin(\App\Entities\User\User $user): UserInfo;
+    public function signin(User $user): UserInfo;
 }

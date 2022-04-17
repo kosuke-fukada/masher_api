@@ -3,13 +3,14 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Services\Signin;
 
+use App\Models\UserInfo;
 use App\Entities\User\User;
 
 interface SigninUserServiceInterface
 {
     /**
      * @param User $user
-     * @return \App\Models\UserInfo
+     * @return UserInfo
      */
-    public function process(User $user): \App\Models\UserInfo;
+    public function process(User $user): UserInfo;
 }
