@@ -34,15 +34,16 @@ class UserInfoRepository implements UserInfoRepositoryInterface
     {
         $userInfo = $this->userInfo->newQuery()
             ->firstOrNew([
-                'account_id' => (string)$user->accountId(),
-                'provider' => $user->provider()->value,
+                'user_id' => $user->userId()->toInt(),
             ]);
         if (!$userInfo->exists) {
             $userInfo->fill([
+                'account_id' => (string)$user->accountId(),
                 'display_name' => (string)$user->displayName(),
                 'avatar' => (string)$user->avatar(),
                 'access_token' => (string)$user->accessToken(),
                 'refresh_token' => (string)$user->refreshToken(),
+                'provider' => $user->provider()->value,
             ]);
             DB::beginTransaction();
             if (!$userInfo->save()) {

@@ -6,6 +6,7 @@ namespace App\Interfaces\Factories\User;
 interface UserFactoryInterface
 {
     public function createUserEntity(
+        int $userId,
         string $accountId,
         string $displayName,
         string $avatar,

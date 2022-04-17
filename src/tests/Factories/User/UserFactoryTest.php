@@ -18,6 +18,7 @@ class UserFactoryTest extends TestCase
         $userFactory = $this->app->make(UserFactoryInterface::class);
         $this->assertInstanceOf(UserFactory::class, $userFactory);
 
+        $userId = 1;
         $accountId = 'test_account_id';
         $displayName = 'test-display-name';
         $avatar = 'https://example.com/test_image.png';
@@ -26,6 +27,7 @@ class UserFactoryTest extends TestCase
         $provider = 'twitter';
 
         $userEntity = $userFactory->createUserEntity(
+            $userId,
             $accountId,
             $displayName,
             $avatar,

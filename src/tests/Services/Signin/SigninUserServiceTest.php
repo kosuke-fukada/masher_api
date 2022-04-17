@@ -14,6 +14,7 @@ use App\ValueObjects\User\RefreshToken;
 use App\Services\Signin\SigninUserService;
 use App\ValueObjects\User\OauthProviderName;
 use App\Interfaces\Services\Signin\SigninUserServiceInterface;
+use App\ValueObjects\User\UserId;
 
 class SigninUserServiceTest extends TestCase
 {
@@ -34,6 +35,7 @@ class SigninUserServiceTest extends TestCase
      */
     public function testProcess(SigninUserServiceInterface $signinUserService): void
     {
+        $userId = 1;
         $accountId = 'test_account_id';
         $displayName = 'test-display-name';
         $avatar = 'https://example.com/test_image.png';
@@ -41,6 +43,7 @@ class SigninUserServiceTest extends TestCase
         $refreshToken = 'test_refresh_token';
         $provider = 'twitter';
         $userEntity = new User(
+            new UserId($userId),
             new AccountId($accountId),
             new DisplayName($displayName),
             new Avatar($avatar),
@@ -52,6 +55,7 @@ class SigninUserServiceTest extends TestCase
         $userInfoModel = new UserInfo();
         $userInfo = $userInfoModel->newQuery()->find(1);
         $this->assertNotEmpty($userInfo);
+        $this->assertSame($userId, $userInfo->getAttribute('user_id'));
         $this->assertSame($accountId, $userInfo->getAttribute('account_id'));
         $this->assertSame($displayName, $userInfo->getAttribute('display_name'));
         $this->assertSame($avatar, $userInfo->getAttribute('avatar'));

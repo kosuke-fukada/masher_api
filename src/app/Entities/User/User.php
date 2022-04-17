@@ -9,9 +9,15 @@ use App\ValueObjects\User\AccessToken;
 use App\ValueObjects\User\DisplayName;
 use App\ValueObjects\User\RefreshToken;
 use App\ValueObjects\User\OauthProviderName;
+use App\ValueObjects\User\UserId;
 
 class User
 {
+    /**
+     * @var UserId
+     */
+    private UserId $userId;
+
     /**
      * @var AccountId
      */
@@ -43,6 +49,7 @@ class User
     private OauthProviderName $provider;
 
     /**
+     * @param UserId $userId
      * @param AccountId $accountId
      * @param DisplayName $displayName
      * @param Avatar $avatar
@@ -51,6 +58,7 @@ class User
      * @param OauthProviderName $provider
      */
     public function __construct(
+        UserId $userId,
         AccountId $accountId,
         DisplayName $displayName,
         Avatar $avatar,
@@ -59,12 +67,21 @@ class User
         OauthProviderName $provider,
     )
     {
+        $this->userId = $userId;
         $this->accountId = $accountId;
         $this->displayName = $displayName;
         $this->avatar = $avatar;
         $this->accessToken = $accessToken;
         $this->refreshToken = $refreshToken;
         $this->provider = $provider;
+    }
+
+    /**
+     * @return UserId
+     */
+    public function userId(): UserId
+    {
+        return $this->userId;
     }
 
     /**
