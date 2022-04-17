@@ -9,7 +9,7 @@ interface SigninUserServiceInterface
 {
     /**
      * @param User $user
-     * @return void
+     * @return \App\Models\UserInfo
      */
-    public function process(User $user): void;
+    public function process(User $user): \App\Models\UserInfo;
 }

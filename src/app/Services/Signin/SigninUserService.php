@@ -31,10 +31,14 @@ class SigninUserService implements SigninUserServiceInterface
         $this->logger = $logger;
     }
 
-    public function process(User $user): void
+    /**
+     * @param User $user
+     * @return \App\Models\UserInfo
+     */
+    public function process(User $user): \App\Models\UserInfo
     {
         try {
-            $this->userRepository->signin($user);
+            return $this->userRepository->signin($user);
         } catch (Throwable $e) {
             $this->logger->info($e->getMessage());
             throw new RuntimeException('Failed to signin.', $e->getCode());
