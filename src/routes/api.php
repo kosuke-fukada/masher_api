@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\GetTwitterRedirectUrlAction;
+use App\Http\Controllers\SigninWithTwitterAction;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('signin')->group(function() {
+    Route::prefix('twitter')->group(function() {
+        Route::get('/', GetTwitterRedirectUrlAction::class);
+        Route::get('/callback', SigninWithTwitterAction::class);
+    });
 });
