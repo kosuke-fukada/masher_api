@@ -179,6 +179,7 @@ return [
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\FactoryServiceProvider::class,
         App\Providers\ServiceServiceProvider::class,
+        App\Providers\UsecaseServiceProvider::class,
 
     ],
 
