@@ -37,6 +37,6 @@ class SigninWithTwitterAction extends Controller
             throw new FatalError('Failed to signin.', ExceptionBaseClass::STATUS_CODE_INTERNAL_SERVER_ERROR, []);
         }
 
-        return Response::json($user->toArray());
+        return Response::json($user->toArrayWithoutCredentials());
     }
 }

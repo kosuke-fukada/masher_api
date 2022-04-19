@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Usecases\Signin;
 
-use App\Models\UserInfo;
+use App\Entities\User\UserInfo;
 use App\ValueObjects\User\OauthProviderName;
 
 interface SigninAuthUserInterface

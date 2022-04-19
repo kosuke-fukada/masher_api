@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Factories\User;
 
-use App\Entities\User\User;
+use App\Entities\User\UserInfo;
 use App\Interfaces\Factories\User\UserFactoryInterface;
 use App\ValueObjects\User\AccountId;
 use App\ValueObjects\User\DisplayName;
@@ -15,6 +15,16 @@ use App\ValueObjects\User\UserId;
 
 class UserFactory implements UserFactoryInterface
 {
+    /**
+     * @param integer $userId
+     * @param string $accountId
+     * @param string $displayName
+     * @param string $avatar
+     * @param string $accessToken
+     * @param string $refreshToken
+     * @param string $provider
+     * @return UserInfo
+     */
     public function createUserEntity(
         int $userId,
         string $accountId,
@@ -23,9 +33,9 @@ class UserFactory implements UserFactoryInterface
         string $accessToken,
         string $refreshToken,
         string $provider
-    )
+    ): UserInfo
     {
-        return new User(
+        return new UserInfo(
             new UserId($userId),
             new AccountId($accountId),
             new DisplayName($displayName),

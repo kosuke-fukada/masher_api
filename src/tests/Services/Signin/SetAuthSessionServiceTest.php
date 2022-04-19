@@ -28,7 +28,14 @@ class SetAuthSessionServiceTest extends TestCase
      */
     public function testProcess(SetAuthSessionServiceInterface $setAuthSessionService): void
     {
-        $user = new User();
+        $user = new User([
+            'account_id' => 1,
+            'display_name' => 'test_display_name',
+            'avatar' => 'https://example.com/test_image.png',
+            'access_token' => 'test_access_token',
+            'refresh_token' => 'test_refresh_token',
+            'provider' => 'twitter'
+        ]);
         $userId = $setAuthSessionService->process($user);
         $this->assertTrue(Auth::check());
         $this->assertSame(1, $userId);
