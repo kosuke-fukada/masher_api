@@ -4,11 +4,11 @@ declare(strict_types=1);
 namespace App\Usecases\Signin;
 
 use App\Entities\User\UserInfo;
-use App\Exceptions\ExceptionBaseClass;
 use App\Interfaces\Factories\User\UserFactoryInterface;
 use App\Interfaces\Services\Signin\SetAuthSessionServiceInterface;
 use App\Interfaces\Usecases\Signin\SigninAuthUserInterface;
 use App\Models\User;
+use App\ValueObjects\Foundation\StatusCode;
 use App\ValueObjects\User\OauthProviderName;
 use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
@@ -75,7 +75,7 @@ class SigninAuthUser implements SigninAuthUserInterface
             DB::commit();
         } catch (Throwable $e) {
             DB::rollBack();
-            throw new RuntimeException('Failed to signin.', ExceptionBaseClass::STATUS_CODE_INTERNAL_SERVER_ERROR, $e);
+            throw new RuntimeException('Failed to signin.', StatusCode::STATUS_CODE_INTERNAL_SERVER_ERROR->value, $e);
         }
 
         // ユーザーデータを返却
