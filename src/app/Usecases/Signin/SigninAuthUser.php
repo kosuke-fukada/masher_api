@@ -3,13 +3,12 @@ declare(strict_types=1);
 
 namespace App\Usecases\Signin;
 
-use App\Exceptions\ExceptionBaseClass;
+use App\Entities\User\UserInfo;
 use App\Interfaces\Factories\User\UserFactoryInterface;
 use App\Interfaces\Services\Signin\SetAuthSessionServiceInterface;
-use App\Interfaces\Services\Signin\SigninUserServiceInterface;
 use App\Interfaces\Usecases\Signin\SigninAuthUserInterface;
 use App\Models\User;
-use App\Models\UserInfo;
+use App\ValueObjects\Foundation\StatusCode;
 use App\ValueObjects\User\OauthProviderName;
 use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
@@ -24,28 +23,20 @@ class SigninAuthUser implements SigninAuthUserInterface
     private UserFactoryInterface $userFactory;
 
     /**
-     * @var SigninUserServiceInterface
-     */
-    private SigninUserServiceInterface $signinUserService;
-
-    /**
      * @var SetAuthSessionServiceInterface
      */
     private SetAuthSessionServiceInterface $setAuthSessionService;
 
     /**
      * @param UserFactoryInterface $userFactory
-     * @param SigninUserServiceInterface $signinUserService
      * @param SetAuthSessionServiceInterface $setAuthSessionService
      */
     public function __construct(
         UserFactoryInterface $userFactory,
-        SigninUserServiceInterface $signinUserService,
         SetAuthSessionServiceInterface $setAuthSessionService
     )
     {
         $this->userFactory = $userFactory;
-        $this->signinUserService = $signinUserService;
         $this->setAuthSessionService = $setAuthSessionService;
     }
 
@@ -60,7 +51,15 @@ class SigninAuthUser implements SigninAuthUserInterface
         DB::beginTransaction();
         try {
             // ログインセッション
-            $userId = $this->setAuthSessionService->process(new User());
+            $userInstance = new User([
+                'account_id' => $user->getId(),
+                'display_name' => $user->getNickname(),
+                'avatar' => $user->getAvatar(),
+                'access_token' => $user->token,
+                'refresh_token' => $user->refreshToken,
+                'provider' => $oauthProviderName->value
+            ]);
+            $userId = $this->setAuthSessionService->process($userInstance);
 
             // Entityを作成
             $userEntity = $this->userFactory->createUserEntity(
@@ -73,16 +72,13 @@ class SigninAuthUser implements SigninAuthUserInterface
                 $oauthProviderName->value
             );
 
-            // ユーザー情報が存在するかチェックして存在しない場合は作成
-            $authUser = $this->signinUserService->process($userEntity);
-
             DB::commit();
         } catch (Throwable $e) {
             DB::rollBack();
-            throw new RuntimeException('Failed to signin.', ExceptionBaseClass::STATUS_CODE_INTERNAL_SERVER_ERROR, $e);
+            throw new RuntimeException('Failed to signin.', StatusCode::STATUS_CODE_INTERNAL_SERVER_ERROR->value, $e);
         }
 
         // ユーザーデータを返却
-        return $authUser;
+        return $userEntity;
     }
 }

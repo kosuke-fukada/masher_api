@@ -5,8 +5,10 @@ namespace App\Providers;
 
 use App\Interfaces\Usecases\Signin\GetRedirectUrlInterface;
 use App\Interfaces\Usecases\Signin\SigninAuthUserInterface;
+use App\Interfaces\Usecases\Signout\SignoutInterface;
 use App\Usecases\Signin\GetRedirectUrl;
 use App\Usecases\Signin\SigninAuthUser;
+use App\Usecases\Signout\Signout;
 use Illuminate\Support\ServiceProvider;
 
 class UsecaseServiceProvider extends ServiceProvider
@@ -18,5 +20,6 @@ class UsecaseServiceProvider extends ServiceProvider
     {
         $this->app->singleton(SigninAuthUserInterface::class, SigninAuthUser::class);
         $this->app->singleton(GetRedirectUrlInterface::class, GetRedirectUrl::class);
+        $this->app->singleton(SignoutInterface::class, Signout::class);
     }
 }

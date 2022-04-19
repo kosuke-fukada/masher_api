@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\ExceptionBaseClass;
 use App\Interfaces\Usecases\Signin\SigninAuthUserInterface;
+use App\ValueObjects\Foundation\StatusCode;
 use App\ValueObjects\User\OauthProviderName;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
@@ -34,9 +34,9 @@ class SigninWithTwitterAction extends Controller
         try {
             $user = $this->usecase->process(OauthProviderName::TWITTER);
         } catch (Throwable $e) {
-            throw new FatalError('Failed to signin.', ExceptionBaseClass::STATUS_CODE_INTERNAL_SERVER_ERROR, []);
+            throw new FatalError('Failed to signin.', StatusCode::STATUS_CODE_INTERNAL_SERVER_ERROR->value, []);
         }
 
-        return Response::json($user->toArray());
+        return Response::json($user->toArrayWithoutCredentials());
     }
 }

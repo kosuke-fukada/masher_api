@@ -11,7 +11,7 @@ use App\ValueObjects\User\RefreshToken;
 use App\ValueObjects\User\OauthProviderName;
 use App\ValueObjects\User\UserId;
 
-class User
+class UserInfo
 {
     /**
      * @var UserId
@@ -130,5 +130,18 @@ class User
     public function provider(): OauthProviderName
     {
         return $this->provider;
+    }
+
+    /**
+     * @return array
+     */
+    public function toArrayWithoutCredentials(): array
+    {
+        return [
+            'user_id' => $this->userId()->toInt(),
+            'account_id' => (string)$this->accountId(),
+            'display_name' => (string)$this->displayName(),
+            'avatar' => (string)$this->avatar()
+        ];
     }
 }

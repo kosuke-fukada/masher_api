@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\Factories\User;
 
-use App\Entities\User\User;
+use App\Entities\User\UserInfo;
 use Tests\TestCase;
 use App\Factories\User\UserFactory;
 use App\Interfaces\Factories\User\UserFactoryInterface;
@@ -36,6 +36,6 @@ class UserFactoryTest extends TestCase
             $provider,
         );
 
-        $this->assertInstanceOf(User::class, $userEntity);
+        $this->assertInstanceOf(UserInfo::class, $userEntity);
     }
 }
