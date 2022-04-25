@@ -20,6 +20,7 @@ class User extends Authenticatable
         'id',
         'user_id',
         'account_id',
+        'user_name',
         'display_name',
         'avatar',
         'access_token',

@@ -6,7 +6,7 @@ namespace App\ValueObjects\User;
 use InvalidArgumentException;
 use App\ValueObjects\Foundation\StringValueObject;
 
-class AccountId extends StringValueObject
+class UserName extends StringValueObject
 {
     /**
      * @param string $value
@@ -27,7 +27,7 @@ class AccountId extends StringValueObject
             throw new InvalidArgumentException(sprintf('%s is required.', get_class()));
         }
 
-        if (!preg_match('/^[[:graph:]]+$/', $value)) {
+        if (!preg_match('/[a-zA-z0-9_.]+/', $value)) {
             throw new InvalidArgumentException('Included invalid characters.');
         }
     }

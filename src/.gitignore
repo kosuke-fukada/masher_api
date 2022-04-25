@@ -12,3 +12,8 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/certs/server.crt
+/certs/server.csr
+/certs/server.key
+/certs/server.key.org
+:shared-memory:

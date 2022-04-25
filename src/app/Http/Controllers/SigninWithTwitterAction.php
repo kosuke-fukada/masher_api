@@ -6,9 +6,9 @@ namespace App\Http\Controllers;
 use App\Interfaces\Usecases\Signin\SigninAuthUserInterface;
 use App\ValueObjects\Foundation\StatusCode;
 use App\ValueObjects\User\OauthProviderName;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
-use Symfony\Component\ErrorHandler\Error\FatalError;
 use Throwable;
 
 class SigninWithTwitterAction extends Controller
@@ -34,7 +34,7 @@ class SigninWithTwitterAction extends Controller
         try {
             $user = $this->usecase->process(OauthProviderName::TWITTER);
         } catch (Throwable $e) {
-            throw new FatalError('Failed to signin.', StatusCode::STATUS_CODE_INTERNAL_SERVER_ERROR->value, []);
+            throw new Exception($e->getMessage(), StatusCode::STATUS_CODE_INTERNAL_SERVER_ERROR->value);
         }
 
         return Response::json($user->toArrayWithoutCredentials());

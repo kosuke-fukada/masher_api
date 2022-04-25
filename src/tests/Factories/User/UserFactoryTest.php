@@ -20,6 +20,7 @@ class UserFactoryTest extends TestCase
 
         $userId = 1;
         $accountId = 'test_account_id';
+        $userName = 'test_user_name';
         $displayName = 'test-display-name';
         $avatar = 'https://example.com/test_image.png';
         $accessToken = 'test_access_token';
@@ -29,6 +30,7 @@ class UserFactoryTest extends TestCase
         $userEntity = $userFactory->createUserEntity(
             $userId,
             $accountId,
+            $userName,
             $displayName,
             $avatar,
             $accessToken,
