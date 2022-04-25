@@ -9,7 +9,7 @@ interface UserFactoryInterface
 {
     /**
      * @param integer $userId
-     * @param int $accountId
+     * @param string $accountId
      * @param string $userName
      * @param string $displayName
      * @param string $avatar
@@ -20,7 +20,7 @@ interface UserFactoryInterface
      */
     public function createUserEntity(
         int $userId,
-        int $accountId,
+        string $accountId,
         string $userName,
         string $displayName,
         string $avatar,

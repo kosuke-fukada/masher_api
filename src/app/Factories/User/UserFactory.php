@@ -18,7 +18,7 @@ class UserFactory implements UserFactoryInterface
 {
     /**
      * @param integer $userId
-     * @param int $accountId
+     * @param string $accountId
      * @param string $userName
      * @param string $displayName
      * @param string $avatar
@@ -29,7 +29,7 @@ class UserFactory implements UserFactoryInterface
      */
     public function createUserEntity(
         int $userId,
-        int $accountId,
+        string $accountId,
         string $userName,
         string $displayName,
         string $avatar,

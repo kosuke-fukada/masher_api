@@ -156,10 +156,55 @@ class UserInfo
     {
         return [
             'user_id' => $this->userId()->toInt(),
-            'account_id' => $this->accountId()->toInt(),
+            'account_id' => (string)$this->accountId(),
             'user_name' => (string)$this->userName(),
             'display_name' => (string)$this->displayName(),
             'avatar' => (string)$this->avatar()
         ];
+    }
+
+    /**
+     * @param UserName $userName
+     * @return void
+     */
+    public function changeUserName(UserName $userName): void
+    {
+        $this->userName = $userName;
+    }
+
+    /**
+     * @param DisplayName $displayName
+     * @return void
+     */
+    public function changeDisplayName(DisplayName $displayName): void
+    {
+        $this->displayName = $displayName;
+    }
+
+    /**
+     * @param Avatar $avatar
+     * @return void
+     */
+    public function changeAvatar(Avatar $avatar): void
+    {
+        $this->avatar = $avatar;
+    }
+
+    /**
+     * @param AccessToken $accessToken
+     * @return void
+     */
+    public function changeAccessToken(AccessToken $accessToken): void
+    {
+        $this->accessToken = $accessToken;
+    }
+
+    /**
+     * @param RefreshToken $refreshToken
+     * @return void
+     */
+    public function changeRefreshToken(RefreshToken $refreshToken): void
+    {
+        $this->refreshToken = $refreshToken;
     }
 }

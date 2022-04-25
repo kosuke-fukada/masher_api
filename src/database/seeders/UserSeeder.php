@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
-            'account_id' => 1,
+            'account_id' => 'test_account_id',
             'user_name' => 'test_user_name',
             'display_name' => 'test_display_name',
             'avatar' => 'https://example.com/test_image.png',

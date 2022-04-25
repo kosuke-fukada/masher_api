@@ -22,15 +22,6 @@ class RefreshTokenTest extends TestCase
     /**
      * @return void
      */
-    public function testRequired(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        new RefreshToken('');
-    }
-
-    /**
-     * @return void
-     */
     public function testInvalidCharacters(): void
     {
         $this->expectException(InvalidArgumentException::class);

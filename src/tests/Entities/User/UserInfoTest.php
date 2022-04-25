@@ -22,7 +22,7 @@ class UserInfoTest extends TestCase
     public function test__construct(): void
     {
         $userId = 1;
-        $accountId = 1;
+        $accountId = 'test_account_id';
         $userName = 'test_user_name';
         $displayName = 'test-display-name';
         $avatar = 'https://example.com/test_image.png';
@@ -42,7 +42,7 @@ class UserInfoTest extends TestCase
         );
 
         $this->assertSame($userId, $userEntity->userId()->toInt());
-        $this->assertSame($accountId, $userEntity->accountId()->toInt());
+        $this->assertSame($accountId, (string)$userEntity->accountId());
         $this->assertSame($userName, (string)$userEntity->userName());
         $this->assertSame($displayName, (string)$userEntity->displayName());
         $this->assertSame($avatar, (string)$userEntity->avatar());

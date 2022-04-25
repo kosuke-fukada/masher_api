@@ -36,7 +36,7 @@ class UserRepositoryTest extends TestCase
      */
     public function testFindByAccountIdAndProvider(UserRepositoryInterface $userRepository): void
     {
-        $accountId = 1;
+        $accountId = 'test_account_id';
         $provider = OauthProviderName::TWITTER;
         $result = $userRepository->findByAccountIdAndProvider(
             new AccountId($accountId),
@@ -44,7 +44,7 @@ class UserRepositoryTest extends TestCase
         );
         $this->assertInstanceOf(User::class, $result);
 
-        $accountId = 1000;
+        $accountId = 'test_invalid_account_id';
         $result = $userRepository->findByAccountIdAndProvider(
             new AccountId($accountId),
             $provider
@@ -60,7 +60,7 @@ class UserRepositoryTest extends TestCase
     public function testUpdateUser(UserRepositoryInterface $userRepository): void
     {
         $userId = 1;
-        $accountId = 1;
+        $accountId = 'test_account_id';
         $userName = 'test_user_name_updated';
         $displayName = 'test_display_name_updated';
         $avatar = 'https://example.local/test_avatar_updated.png';

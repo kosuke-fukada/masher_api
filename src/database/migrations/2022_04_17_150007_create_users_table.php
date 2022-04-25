@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('account_id')->nullable(false);
+            $table->string('account_id')->nullable(false);
             $table->string('user_name', 30)->nullable(false);
             $table->string('display_name', 50)->nullable(false);
             $table->text('avatar')->nullable(false);

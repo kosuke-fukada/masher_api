@@ -19,7 +19,7 @@ class UserFactoryTest extends TestCase
         $this->assertInstanceOf(UserFactory::class, $userFactory);
 
         $userId = 1;
-        $accountId = 1;
+        $accountId = 'test_account_id';
         $userName = 'test_user_name';
         $displayName = 'test-display-name';
         $avatar = 'https://example.com/test_image.png';

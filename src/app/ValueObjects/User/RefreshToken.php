@@ -26,6 +26,10 @@ class RefreshToken
             return;
         }
 
+        if (mb_strlen($value) === 0) {
+            return;
+        }
+
         if (!preg_match('/^[[:graph:]]+$/', $value)) {
             throw new InvalidArgumentException('Included invalid characters.');
         }
