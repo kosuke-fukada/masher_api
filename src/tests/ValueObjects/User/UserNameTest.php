@@ -5,18 +5,20 @@ namespace Tests\ValueObjects\User;
 
 use Tests\TestCase;
 use InvalidArgumentException;
-use App\ValueObjects\User\RefreshToken;
+use App\ValueObjects\User\UserName;
+use App\ValueObjects\Foundation\StringValueObject;
 
-class RefreshTokenTest extends TestCase
+class UserNameTest extends TestCase
 {
     /**
      * @return void
      */
     public function test__construct(): void
     {
-        $expected = 'test_refresh-token';
-        $refreshToken = new RefreshToken($expected);
-        $this->assertSame($expected, (string)$refreshToken);
+        $expected = 'test_id.';
+        $userName = new UserName($expected);
+        $this->assertInstanceOf(StringValueObject::class, $userName);
+        $this->assertSame($expected, (string)$userName);
     }
 
     /**
@@ -25,15 +27,15 @@ class RefreshTokenTest extends TestCase
     public function testRequired(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        new RefreshToken('');
+        new UserName('');
     }
 
     /**
      * @return void
      */
-    public function testInvalidCharacters(): void
+    public function testInvalidValue(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        new RefreshToken('あああ');
+        new UserName('あああ');
     }
 }

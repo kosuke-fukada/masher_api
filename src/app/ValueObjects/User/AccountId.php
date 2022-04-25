@@ -3,32 +3,28 @@ declare(strict_types=1);
 
 namespace App\ValueObjects\User;
 
-use App\ValueObjects\Foundation\StringValueObject;
+use App\ValueObjects\Foundation\IntegerValueObject;
 use InvalidArgumentException;
 
-class AccountId extends StringValueObject
+class AccountId extends IntegerValueObject
 {
     /**
-     * @param string $value
+     * @param int $value
      */
-    public function __construct(string $value)
+    public function __construct(int $value)
     {
         $this->validate($value);
         $this->value = $value;
     }
 
     /**
-     * @param string $value
+     * @param int $value
      * @return void
      */
-    protected function validate(string $value): void
+    protected function validate(int $value): void
     {
-        if (mb_strlen($value) === 0) {
-            throw new InvalidArgumentException(sprintf('%s is required.', get_class()));
-        }
-
-        if (!preg_match('/[a-zA-z0-9_.]+/', $value)) {
-            throw new InvalidArgumentException('Included invalid characters.');
+        if ($value < 0) {
+            throw new InvalidArgumentException(sprintf('%s must be bigger than 0.', get_class()));
         }
     }
 }

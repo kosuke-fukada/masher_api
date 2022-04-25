@@ -4,31 +4,38 @@ declare(strict_types=1);
 namespace App\ValueObjects\User;
 
 use InvalidArgumentException;
-use App\ValueObjects\Foundation\StringValueObject;
 
-class RefreshToken extends StringValueObject
+class RefreshToken
 {
     /**
-     * @param string $value
+     * @param string|null $value
      */
-    public function __construct(string $value)
+    public function __construct(?string $value)
     {
         $this->validate($value);
         $this->value = $value;
     }
 
     /**
-     * @param string $value
+     * @param string|null $value
      * @return void
      */
-    protected function validate(string $value): void
+    protected function validate(?string $value): void
     {
-        if (mb_strlen($value) === 0) {
-            throw new InvalidArgumentException(sprintf('%s is required.', get_class()));
+        if (is_null($value)) {
+            return;
         }
 
         if (!preg_match('/^[[:graph:]]+$/', $value)) {
             throw new InvalidArgumentException('Included invalid characters.');
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->value ?? '';
     }
 }

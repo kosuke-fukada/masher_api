@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace Tests\ValueObjects\User;
 
+use App\ValueObjects\Foundation\IntegerValueObject;
 use Tests\TestCase;
 use InvalidArgumentException;
 use App\ValueObjects\User\AccountId;
-use App\ValueObjects\Foundation\StringValueObject;
 
 class AccountIdTest extends TestCase
 {
@@ -15,19 +15,10 @@ class AccountIdTest extends TestCase
      */
     public function test__construct(): void
     {
-        $expected = 'test_id.';
+        $expected = 1;
         $accountId = new AccountId($expected);
-        $this->assertInstanceOf(StringValueObject::class, $accountId);
-        $this->assertSame($expected, (string)$accountId);
-    }
-
-    /**
-     * @return void
-     */
-    public function testRequired(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        new AccountId('');
+        $this->assertInstanceOf(IntegerValueObject::class, $accountId);
+        $this->assertSame($expected, $accountId->toInt());
     }
 
     /**
@@ -36,6 +27,6 @@ class AccountIdTest extends TestCase
     public function testInvalidValue(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        new AccountId('あああ');
+        new AccountId(-1);
     }
 }
