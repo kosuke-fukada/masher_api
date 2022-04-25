@@ -11,6 +11,7 @@ use App\ValueObjects\User\Avatar;
 use App\ValueObjects\User\DisplayName;
 use App\ValueObjects\User\RefreshToken;
 use App\ValueObjects\User\UserId;
+use App\ValueObjects\User\UserName;
 use Tests\TestCase;
 
 class UserInfoTest extends TestCase
@@ -21,7 +22,8 @@ class UserInfoTest extends TestCase
     public function test__construct(): void
     {
         $userId = 1;
-        $accountId = 'test_account_id';
+        $accountId = 1;
+        $userName = 'test_user_name';
         $displayName = 'test-display-name';
         $avatar = 'https://example.com/test_image.png';
         $accessToken = 'test_access_token';
@@ -31,6 +33,7 @@ class UserInfoTest extends TestCase
         $userEntity = new UserInfo(
             new UserId($userId),
             new AccountId($accountId),
+            new UserName($userName),
             new DisplayName($displayName),
             new Avatar($avatar),
             new AccessToken($accessToken),
@@ -39,7 +42,8 @@ class UserInfoTest extends TestCase
         );
 
         $this->assertSame($userId, $userEntity->userId()->toInt());
-        $this->assertSame($accountId, (string)$userEntity->accountId());
+        $this->assertSame($accountId, $userEntity->accountId()->toInt());
+        $this->assertSame($userName, (string)$userEntity->userName());
         $this->assertSame($displayName, (string)$userEntity->displayName());
         $this->assertSame($avatar, (string)$userEntity->avatar());
         $this->assertSame($accessToken, (string)$userEntity->accessToken());
@@ -48,6 +52,7 @@ class UserInfoTest extends TestCase
         $this->assertIsArray($userEntity->toArrayWithoutCredentials());
         $this->assertSame($userId, $userEntity->toArrayWithoutCredentials()['user_id']);
         $this->assertSame($accountId, $userEntity->toArrayWithoutCredentials()['account_id']);
+        $this->assertSame($userName, $userEntity->toArrayWithoutCredentials()['user_name']);
         $this->assertSame($displayName, $userEntity->toArrayWithoutCredentials()['display_name']);
         $this->assertSame($avatar, $userEntity->toArrayWithoutCredentials()['avatar']);
     }

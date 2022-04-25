@@ -10,6 +10,7 @@ use App\ValueObjects\User\DisplayName;
 use App\ValueObjects\User\RefreshToken;
 use App\ValueObjects\User\OauthProviderName;
 use App\ValueObjects\User\UserId;
+use App\ValueObjects\User\UserName;
 
 class UserInfo
 {
@@ -22,6 +23,11 @@ class UserInfo
      * @var AccountId
      */
     private AccountId $accountId;
+
+    /**
+     * @var UserName
+     */
+    private UserName $userName;
 
     /**
      * @var DisplayName
@@ -39,9 +45,9 @@ class UserInfo
     private AccessToken $accessToken;
 
     /**
-     * @var RefreshToken
+     * @var RefreshToken|null
      */
-    private RefreshToken $refreshToken;
+    private ?RefreshToken $refreshToken;
 
     /**
      * @var OauthProviderName
@@ -51,24 +57,27 @@ class UserInfo
     /**
      * @param UserId $userId
      * @param AccountId $accountId
+     * @param UserName $userName
      * @param DisplayName $displayName
      * @param Avatar $avatar
      * @param AccessToken $accessToken
-     * @param RefreshToken $refreshToken
+     * @param RefreshToken|null $refreshToken
      * @param OauthProviderName $provider
      */
     public function __construct(
         UserId $userId,
         AccountId $accountId,
+        UserName $userName,
         DisplayName $displayName,
         Avatar $avatar,
         AccessToken $accessToken,
-        RefreshToken $refreshToken,
+        ?RefreshToken $refreshToken,
         OauthProviderName $provider,
     )
     {
         $this->userId = $userId;
         $this->accountId = $accountId;
+        $this->userName = $userName;
         $this->displayName = $displayName;
         $this->avatar = $avatar;
         $this->accessToken = $accessToken;
@@ -90,6 +99,14 @@ class UserInfo
     public function accountId(): AccountId
     {
         return $this->accountId;
+    }
+
+    /**
+     * @return UserName
+     */
+    public function userName(): UserName
+    {
+        return $this->userName;
     }
 
     /**
@@ -117,9 +134,9 @@ class UserInfo
     }
 
     /**
-     * @return RefreshToken
+     * @return RefreshToken|null
      */
-    public function refreshToken(): RefreshToken
+    public function refreshToken(): ?RefreshToken
     {
         return $this->refreshToken;
     }
@@ -139,7 +156,8 @@ class UserInfo
     {
         return [
             'user_id' => $this->userId()->toInt(),
-            'account_id' => (string)$this->accountId(),
+            'account_id' => $this->accountId()->toInt(),
+            'user_name' => (string)$this->userName(),
             'display_name' => (string)$this->displayName(),
             'avatar' => (string)$this->avatar()
         ];

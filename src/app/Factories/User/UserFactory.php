@@ -12,32 +12,36 @@ use App\ValueObjects\User\AccessToken;
 use App\ValueObjects\User\OauthProviderName;
 use App\ValueObjects\User\RefreshToken;
 use App\ValueObjects\User\UserId;
+use App\ValueObjects\User\UserName;
 
 class UserFactory implements UserFactoryInterface
 {
     /**
      * @param integer $userId
-     * @param string $accountId
+     * @param int $accountId
+     * @param string $userName
      * @param string $displayName
      * @param string $avatar
      * @param string $accessToken
-     * @param string $refreshToken
+     * @param string|null $refreshToken
      * @param string $provider
      * @return UserInfo
      */
     public function createUserEntity(
         int $userId,
-        string $accountId,
+        int $accountId,
+        string $userName,
         string $displayName,
         string $avatar,
         string $accessToken,
-        string $refreshToken,
+        ?string $refreshToken,
         string $provider
     ): UserInfo
     {
         return new UserInfo(
             new UserId($userId),
             new AccountId($accountId),
+            new UserName($userName),
             new DisplayName($displayName),
             new Avatar($avatar),
             new AccessToken($accessToken),

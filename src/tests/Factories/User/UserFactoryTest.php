@@ -19,7 +19,8 @@ class UserFactoryTest extends TestCase
         $this->assertInstanceOf(UserFactory::class, $userFactory);
 
         $userId = 1;
-        $accountId = 'test_account_id';
+        $accountId = 1;
+        $userName = 'test_user_name';
         $displayName = 'test-display-name';
         $avatar = 'https://example.com/test_image.png';
         $accessToken = 'test_access_token';
@@ -29,6 +30,7 @@ class UserFactoryTest extends TestCase
         $userEntity = $userFactory->createUserEntity(
             $userId,
             $accountId,
+            $userName,
             $displayName,
             $avatar,
             $accessToken,
