@@ -2,21 +2,21 @@
 
 namespace Tests;
 
+use Illuminate\Foundation\Testing\RefreshDatabaseState;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
-use Illuminate\Support\Facades\Artisan;
 
 abstract class TestCase extends BaseTestCase
 {
-    static $testInitialized = false;
-
     use CreatesApplication;
 
     protected function setUp(): void
     {
         parent::setUp();
-        if (!self::$testInitialized) {
-            Artisan::call('migrate');
-            self::$testInitialized = true;
+
+        if (!RefreshDatabaseState::$migrated) {
+            $this->artisan('migrate:refresh');
+            $this->artisan('db:seed');
+            RefreshDatabaseState::$migrated = true;
         }
     }
 }
