@@ -32,11 +32,11 @@ class SigninWithTwitterAction extends Controller
     public function __invoke(): JsonResponse
     {
         try {
-            $user = $this->usecase->process(OauthProviderName::TWITTER);
+            $this->usecase->process(OauthProviderName::TWITTER);
         } catch (Throwable $e) {
             throw new Exception($e->getMessage(), StatusCode::STATUS_CODE_INTERNAL_SERVER_ERROR->value);
         }
 
-        return Response::json($user->toArrayWithoutCredentials());
+        return Response::json([], StatusCode::STATUS_CODE_NO_CONTENT);
     }
 }

@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Usecases\Signin;
 
-use App\Entities\User\UserInfo;
 use App\Interfaces\Factories\User\UserFactoryInterface;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
 use App\Interfaces\Services\Signin\SetAuthSessionServiceInterface;
@@ -66,9 +65,9 @@ class SigninAuthUser implements SigninAuthUserInterface
 
     /**
      * @param OauthProviderName $oauthProviderName
-     * @return UserInfo
+     * @return void
      */
-    public function process(OauthProviderName $oauthProviderName): UserInfo
+    public function process(OauthProviderName $oauthProviderName): void
     {
         $user = Socialite::driver($oauthProviderName->value)->stateless()->user();
 
@@ -95,7 +94,7 @@ class SigninAuthUser implements SigninAuthUserInterface
 
             // DBから取得してきたUserオブジェクトからEntityを作成
             $userInfo = $this->userFactory->createUserEntity(
-                $authUser->getAttribute('id'),
+                $userId,
                 $authUser->getAttribute('account_id'),
                 $authUser->getAttribute('user_name'),
                 $authUser->getAttribute('display_name'),
@@ -137,8 +136,5 @@ class SigninAuthUser implements SigninAuthUserInterface
             $this->logger->error($e->getMessage());
             throw new RuntimeException('Failed to signin: ' . $e->getMessage(), StatusCode::STATUS_CODE_INTERNAL_SERVER_ERROR->value, $e);
         }
-
-        // ユーザーデータを返却
-        return $userInfo;
     }
 }
