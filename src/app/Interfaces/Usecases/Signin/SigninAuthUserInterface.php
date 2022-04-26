@@ -3,14 +3,13 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Usecases\Signin;
 
-use App\Entities\User\UserInfo;
 use App\ValueObjects\User\OauthProviderName;
 
 interface SigninAuthUserInterface
 {
     /**
      * @param OauthProviderName $oauthProviderName
-     * @return UserInfo
+     * @return void
      */
-    public function process(OauthProviderName $oauthProviderName): UserInfo;
+    public function process(OauthProviderName $oauthProviderName): void;
 }
