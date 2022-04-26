@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\GetTwitterRedirectUrlAction;
-use App\Http\Controllers\SigninWithTwitterAction;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SignoutAction;
+use App\Http\Controllers\SigninWithTwitterAction;
+use App\Http\Controllers\GetTwitterRedirectUrlAction;
+use App\Http\Controllers\GetUserInfoAction;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,7 @@ Route::prefix('signin')->group(function() {
         Route::get('/callback', SigninWithTwitterAction::class);
     });
 });
+
+Route::get('/signout', SignoutAction::class);
+
+Route::get('/user', GetUserInfoAction::class);
