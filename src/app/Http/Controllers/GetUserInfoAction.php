@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Interfaces\Usecases\GetUserInfo\GetUserInfoInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
+use Throwable;
 
 class GetUserInfoAction extends Controller
 {
@@ -27,7 +28,16 @@ class GetUserInfoAction extends Controller
      */
     public function __invoke(): JsonResponse
     {
-        $userInfo = $this->usecase->process();
-        return Response::json($userInfo ? $userInfo->toArrayWithoutCredentials() : []);
+        try {
+            $userInfo = $this->usecase->process();
+            return Response::json($userInfo ? $userInfo->toArrayWithoutCredentials() : []);
+        } catch (Throwable $e) {
+            return Response::json(
+                [
+                    'message' => $e->getMessage(),
+                ],
+                $e->getCode()
+            );
+        }
     }
 }

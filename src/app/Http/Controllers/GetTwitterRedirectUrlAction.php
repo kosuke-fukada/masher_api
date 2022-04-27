@@ -6,6 +6,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Interfaces\Usecases\Signin\GetRedirectUrlInterface;
 use App\ValueObjects\User\OauthProviderName;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Response;
+use Throwable;
 
 class GetTwitterRedirectUrlAction extends Controller
 {
@@ -23,11 +26,20 @@ class GetTwitterRedirectUrlAction extends Controller
     }
 
     /**
-     * @return string
+     * @return JsonResponse
      */
-    public function __invoke(): string
+    public function __invoke(): JsonResponse
     {
         $oauthProvider = OauthProviderName::TWITTER;
-        return $this->usecase->process($oauthProvider);
+        try {
+            return Response::json($this->usecase->process($oauthProvider));
+        } catch(Throwable $e) {
+            return Response::json(
+                [
+                    'message' => $e->getMessage(),
+                ],
+                $e->getCode()
+            );
+        }
     }
 }
