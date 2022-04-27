@@ -34,7 +34,12 @@ class SigninWithTwitterAction extends Controller
         try {
             $this->usecase->process(OauthProviderName::TWITTER);
         } catch (Throwable $e) {
-            throw new Exception($e->getMessage(), StatusCode::STATUS_CODE_INTERNAL_SERVER_ERROR->value);
+            return Response::json(
+                [
+                    'message' => $e->getMessage(),
+                ],
+                $e->getCode()
+            );
         }
 
         return Response::json([], StatusCode::STATUS_CODE_NO_CONTENT);
