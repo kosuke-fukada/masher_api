@@ -42,6 +42,6 @@ class SigninWithTwitterAction extends Controller
             );
         }
 
-        return Response::json([], StatusCode::STATUS_CODE_NO_CONTENT);
+        return Response::json([], StatusCode::STATUS_CODE_NO_CONTENT->value);
     }
 }
