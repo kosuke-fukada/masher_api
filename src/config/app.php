@@ -180,6 +180,7 @@ return [
         App\Providers\FactoryServiceProvider::class,
         App\Providers\ServiceServiceProvider::class,
         App\Providers\UsecaseServiceProvider::class,
+        App\Providers\ClientServiceProvider::class,
 
     ],
 

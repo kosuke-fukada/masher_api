@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GetTwitterLikeListAction;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SignoutAction;
 use App\Http\Controllers\SigninWithTwitterAction;
@@ -27,3 +28,9 @@ Route::prefix('signin')->group(function() {
 Route::get('/signout', SignoutAction::class);
 
 Route::get('/user', GetUserInfoAction::class);
+
+Route::prefix('likes')->group(function() {
+    Route::prefix('twitter')->group(function() {
+        Route::get('/', GetTwitterLikeListAction::class);
+    });
+});

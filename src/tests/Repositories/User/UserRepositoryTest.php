@@ -3,19 +3,20 @@ declare(strict_types=1);
 
 namespace Tests\Repositories\User;
 
-use App\Entities\User\UserInfo;
-use App\Interfaces\Repositories\User\UserRepositoryInterface;
+use Tests\TestCase;
 use App\Models\User;
-use App\Repositories\User\UserRepository;
-use App\ValueObjects\User\AccessToken;
-use App\ValueObjects\User\AccountId;
+use App\Entities\User\UserInfo;
 use App\ValueObjects\User\Avatar;
-use App\ValueObjects\User\DisplayName;
-use App\ValueObjects\User\OauthProviderName;
-use App\ValueObjects\User\RefreshToken;
 use App\ValueObjects\User\UserId;
 use App\ValueObjects\User\UserName;
-use Tests\TestCase;
+use App\ValueObjects\User\AccountId;
+use Illuminate\Support\Facades\Auth;
+use App\ValueObjects\User\AccessToken;
+use App\ValueObjects\User\DisplayName;
+use App\ValueObjects\User\RefreshToken;
+use App\Repositories\User\UserRepository;
+use App\ValueObjects\User\OauthProviderName;
+use App\Interfaces\Repositories\User\UserRepositoryInterface;
 
 class UserRepositoryTest extends TestCase
 {
@@ -83,5 +84,25 @@ class UserRepositoryTest extends TestCase
         $this->assertSame($avatar, $user->getAttribute('avatar'));
         $this->assertSame($accessToken, $user->getAttribute('access_token'));
         $this->assertSame($refreshToken, $user->getAttribute('refresh_token'));
+    }
+
+    /**
+     * @depends test__construct
+     * @param UserRepositoryInterface $userRepository
+     * @return void
+     */
+    public function testFindAuthUser(UserRepositoryInterface $userRepository): void
+    {
+        $authUser = $userRepository->findAuthUser();
+        $this->assertNull($authUser);
+
+        $accountId = 'test_account_id';
+        $user = $userRepository->findByAccountIdAndProvider(
+            new AccountId($accountId),
+            OauthProviderName::TWITTER
+        );
+        Auth::login($user);
+        $authUser = $userRepository->findAuthUser();
+        $this->assertSame($user->getAttribute('id'), $authUser->getAttribute('id'));
     }
 }
