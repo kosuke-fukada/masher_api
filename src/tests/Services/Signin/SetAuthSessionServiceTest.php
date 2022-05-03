@@ -48,6 +48,7 @@ class SetAuthSessionServiceTest extends TestCase
             'avatar' => 'https://example.com/test_image_2.png',
             'access_token' => 'test_access_token_2',
             'refresh_token' => 'test_refresh_token_2',
+            'expires_at' => time(),
             'provider' => 'twitter'
         ]);
         $userId = $setAuthSessionService->process($user);

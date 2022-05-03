@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             'avatar' => 'https://example.com/test_image.png',
             'access_token' => 'test_access_token',
             'refresh_token' => 'test_refresh_token',
+            'expires_at' => time(),
             'provider' => 'twitter',
         ]);
     }

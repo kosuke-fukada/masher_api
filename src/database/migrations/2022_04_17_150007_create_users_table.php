@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('avatar')->nullable(false);
             $table->string('access_token')->nullable(false);
             $table->string('refresh_token')->nullable();
+            $table->timestamp('expires_at')->nullable();
             $table->string('provider')->nullable(false);
             $table->string('remember_token', 100)->nullable();
             $table->timestamps();
