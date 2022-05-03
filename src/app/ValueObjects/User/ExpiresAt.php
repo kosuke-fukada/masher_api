@@ -35,4 +35,12 @@ class ExpiresAt extends IntegerValueObject
     {
         return $this->value - time() <= 1800;
     }
+
+    /**
+     * @return string
+     */
+    public function toDate(): string
+    {
+        return date('Y-m-d H:i:s', $this->value);
+    }
 }

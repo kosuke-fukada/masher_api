@@ -87,7 +87,7 @@ class UserRepositoryTest extends TestCase
         $this->assertSame($avatar, $user->getAttribute('avatar'));
         $this->assertSame($accessToken, $user->getAttribute('access_token'));
         $this->assertSame($refreshToken, $user->getAttribute('refresh_token'));
-        $this->assertSame($expiresAt, $user->getAttribute('expires_at'));
+        $this->assertSame($expiresAt, strtotime($user->getAttribute('expires_at')));
     }
 
     /**

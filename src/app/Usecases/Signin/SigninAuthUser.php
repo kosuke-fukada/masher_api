@@ -74,6 +74,7 @@ class SigninAuthUser implements SigninAuthUserInterface
 
         DB::beginTransaction();
         try {
+            $currentTime = time();
             // accountIdとproviderでユーザーを検索
             $authUser = $this->userRepository->findByAccountIdAndProvider(
                 new AccountId($user->getId()),
@@ -88,7 +89,7 @@ class SigninAuthUser implements SigninAuthUserInterface
                     'avatar' => $user->getAvatar(),
                     'access_token' => $user->token,
                     'refresh_token' => $user->refreshToken,
-                    'expires_at' => time() + $user->expiresIn,
+                    'expires_at' => date('Y-m-d H:i:s', $currentTime + $user->expiresIn),
                     'provider' => $oauthProviderName->value
                 ]);
             }
@@ -103,7 +104,7 @@ class SigninAuthUser implements SigninAuthUserInterface
                 $authUser->getAttribute('avatar'),
                 $authUser->getAttribute('access_token'),
                 $authUser->getAttribute('refresh_token'),
-                $authUser->getAttribute('expires_at'),
+                (int)strtotime($authUser->getAttribute('expires_at')),
                 $authUser->getAttribute('provider'),
             );
 
@@ -129,7 +130,7 @@ class SigninAuthUser implements SigninAuthUserInterface
                 $userInfo->changeRefreshToken(new RefreshToken($user->refreshToken));
                 $updated = true;
             }
-            if ($userInfo->expiresAt()->toInt() !== $user->expiresIn) {
+            if ($userInfo->expiresAt()->toInt() !== $currentTime + $user->expiresIn) {
                 $userInfo->changeExpiresAt(new ExpiresAt(time() + $user->expiresIn));
                 $updated = true;
             }
