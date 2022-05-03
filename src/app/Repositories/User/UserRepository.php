@@ -51,7 +51,7 @@ class UserRepository implements UserRepositoryInterface
             'avatar' => (string)$userInfo->avatar(),
             'access_token' => (string)$userInfo->accessToken(),
             'refresh_token' => (string)$userInfo->refreshToken(),
-            'expires_at' => $userInfo->expiresAt(),
+            'expires_at' => date('Y-m-d H:i:s', $userInfo->expiresAt()->toInt()),
         ]);
         $targetUser->save();
     }

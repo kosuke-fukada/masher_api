@@ -42,7 +42,7 @@ class GetUserInfo implements GetUserInfoInterface
                 $user->getAttribute('avatar'),
                 $user->getAttribute('access_token'),
                 $user->getAttribute('refresh_token'),
-                $user->getAttribute('expires_at'),
+                (int)strtotime($user->getAttribute('expires_at')),
                 $user->getAttribute('provider')
             );
     }
