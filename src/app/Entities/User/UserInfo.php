@@ -7,6 +7,7 @@ use App\ValueObjects\User\Avatar;
 use App\ValueObjects\User\AccountId;
 use App\ValueObjects\User\AccessToken;
 use App\ValueObjects\User\DisplayName;
+use App\ValueObjects\User\ExpiresAt;
 use App\ValueObjects\User\RefreshToken;
 use App\ValueObjects\User\OauthProviderName;
 use App\ValueObjects\User\UserId;
@@ -50,6 +51,11 @@ class UserInfo
     private ?RefreshToken $refreshToken;
 
     /**
+     * @var ExpiresAt|null
+     */
+    private ?ExpiresAt $expiresAt;
+
+    /**
      * @var OauthProviderName
      */
     private OauthProviderName $provider;
@@ -62,6 +68,7 @@ class UserInfo
      * @param Avatar $avatar
      * @param AccessToken $accessToken
      * @param RefreshToken|null $refreshToken
+     * @param ExpiresAt|null $expiresAt
      * @param OauthProviderName $provider
      */
     public function __construct(
@@ -72,6 +79,7 @@ class UserInfo
         Avatar $avatar,
         AccessToken $accessToken,
         ?RefreshToken $refreshToken,
+        ?ExpiresAt $expiresAt,
         OauthProviderName $provider,
     )
     {
@@ -82,6 +90,7 @@ class UserInfo
         $this->avatar = $avatar;
         $this->accessToken = $accessToken;
         $this->refreshToken = $refreshToken;
+        $this->expiresAt = $expiresAt;
         $this->provider = $provider;
     }
 
@@ -139,6 +148,14 @@ class UserInfo
     public function refreshToken(): ?RefreshToken
     {
         return $this->refreshToken;
+    }
+
+    /**
+     * @return ExpiresAt|null
+     */
+    public function expiresAt(): ?ExpiresAt
+    {
+        return $this->expiresAt;
     }
 
     /**
@@ -206,5 +223,14 @@ class UserInfo
     public function changeRefreshToken(RefreshToken $refreshToken): void
     {
         $this->refreshToken = $refreshToken;
+    }
+
+    /**
+     * @param ExpiresAt $expiresAt
+     * @return void
+     */
+    public function changeExpiresAt(ExpiresAt $expiresAt): void
+    {
+        $this->expiresAt = $expiresAt;
     }
 }

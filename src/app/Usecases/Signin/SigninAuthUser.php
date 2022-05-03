@@ -13,6 +13,7 @@ use App\ValueObjects\User\AccessToken;
 use App\ValueObjects\User\AccountId;
 use App\ValueObjects\User\Avatar;
 use App\ValueObjects\User\DisplayName;
+use App\ValueObjects\User\ExpiresAt;
 use App\ValueObjects\User\OauthProviderName;
 use App\ValueObjects\User\RefreshToken;
 use App\ValueObjects\User\UserName;
@@ -87,6 +88,7 @@ class SigninAuthUser implements SigninAuthUserInterface
                     'avatar' => $user->getAvatar(),
                     'access_token' => $user->token,
                     'refresh_token' => $user->refreshToken,
+                    'expires_at' => time() + $user->expiresIn,
                     'provider' => $oauthProviderName->value
                 ]);
             }
@@ -101,6 +103,7 @@ class SigninAuthUser implements SigninAuthUserInterface
                 $authUser->getAttribute('avatar'),
                 $authUser->getAttribute('access_token'),
                 $authUser->getAttribute('refresh_token'),
+                $authUser->getAttribute('expires_at'),
                 $authUser->getAttribute('provider'),
             );
 
@@ -124,6 +127,10 @@ class SigninAuthUser implements SigninAuthUserInterface
             }
             if ((string)$userInfo->refreshToken() !== $user->refreshToken) {
                 $userInfo->changeRefreshToken(new RefreshToken($user->refreshToken));
+                $updated = true;
+            }
+            if ($userInfo->expiresAt()->toInt() !== $user->expiresIn) {
+                $userInfo->changeExpiresAt(new ExpiresAt(time() + $user->expiresIn));
                 $updated = true;
             }
             if ($updated) {

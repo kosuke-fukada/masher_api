@@ -25,6 +25,7 @@ class UserFactoryTest extends TestCase
         $avatar = 'https://example.com/test_image.png';
         $accessToken = 'test_access_token';
         $refreshToken = 'test_refresh_token';
+        $expiresAt = time();
         $provider = 'twitter';
 
         $userEntity = $userFactory->createUserEntity(
@@ -35,6 +36,7 @@ class UserFactoryTest extends TestCase
             $avatar,
             $accessToken,
             $refreshToken,
+            $expiresAt,
             $provider,
         );
 

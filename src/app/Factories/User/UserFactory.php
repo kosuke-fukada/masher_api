@@ -9,6 +9,7 @@ use App\ValueObjects\User\AccountId;
 use App\ValueObjects\User\DisplayName;
 use App\ValueObjects\User\Avatar;
 use App\ValueObjects\User\AccessToken;
+use App\ValueObjects\User\ExpiresAt;
 use App\ValueObjects\User\OauthProviderName;
 use App\ValueObjects\User\RefreshToken;
 use App\ValueObjects\User\UserId;
@@ -24,6 +25,7 @@ class UserFactory implements UserFactoryInterface
      * @param string $avatar
      * @param string $accessToken
      * @param string|null $refreshToken
+     * @param integer|null $expiresAt
      * @param string $provider
      * @return UserInfo
      */
@@ -35,6 +37,7 @@ class UserFactory implements UserFactoryInterface
         string $avatar,
         string $accessToken,
         ?string $refreshToken,
+        ?int $expiresAt,
         string $provider
     ): UserInfo
     {
@@ -46,6 +49,7 @@ class UserFactory implements UserFactoryInterface
             new Avatar($avatar),
             new AccessToken($accessToken),
             new RefreshToken($refreshToken),
+            new ExpiresAt($expiresAt),
             OauthProviderName::from($provider)
         );
     }

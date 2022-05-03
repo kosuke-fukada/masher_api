@@ -9,6 +9,7 @@ use App\ValueObjects\User\AccessToken;
 use App\ValueObjects\User\AccountId;
 use App\ValueObjects\User\Avatar;
 use App\ValueObjects\User\DisplayName;
+use App\ValueObjects\User\ExpiresAt;
 use App\ValueObjects\User\RefreshToken;
 use App\ValueObjects\User\UserId;
 use App\ValueObjects\User\UserName;
@@ -28,6 +29,7 @@ class UserInfoTest extends TestCase
         $avatar = 'https://example.com/test_image.png';
         $accessToken = 'test_access_token';
         $refreshToken = 'test_access_secret';
+        $expiresAt = time();
         $provider = 'twitter';
 
         $userEntity = new UserInfo(
@@ -38,6 +40,7 @@ class UserInfoTest extends TestCase
             new Avatar($avatar),
             new AccessToken($accessToken),
             new RefreshToken($refreshToken),
+            new ExpiresAt($expiresAt),
             OauthProviderName::from($provider)
         );
 
@@ -48,6 +51,7 @@ class UserInfoTest extends TestCase
         $this->assertSame($avatar, (string)$userEntity->avatar());
         $this->assertSame($accessToken, (string)$userEntity->accessToken());
         $this->assertSame($refreshToken, (string)$userEntity->refreshToken());
+        $this->assertSame($expiresAt, $userEntity->expiresAt()->toInt());
         $this->assertSame($provider, $userEntity->provider()->value);
         $this->assertIsArray($userEntity->toArrayWithoutCredentials());
         $this->assertSame($userId, $userEntity->toArrayWithoutCredentials()['user_id']);
