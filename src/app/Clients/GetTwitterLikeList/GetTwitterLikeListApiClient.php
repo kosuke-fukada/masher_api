@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Clients\GetTwitterLikeList;
 
 use RuntimeException;
-use App\Client\PsrFactories;
+use App\Clients\PsrFactories;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
@@ -13,6 +13,7 @@ use Fig\Http\Message\RequestMethodInterface;
 use App\Interfaces\Clients\GetTwitterLikeList\GetTwitterLikeListApiClientInterface;
 use App\Interfaces\Clients\GetTwitterLikeList\GetTwitterLikeListApiClientRequestInterface;
 use App\Interfaces\Clients\GetTwitterLikeList\GetTwitterLikeListApiClientResponseInterface;
+use Fig\Http\Message\StatusCodeInterface;
 
 class GetTwitterLikeListApiClient implements GetTwitterLikeListApiClientInterface
 {
@@ -55,8 +56,8 @@ class GetTwitterLikeListApiClient implements GetTwitterLikeListApiClientInterfac
     {
         $request = $request->toPsrRequest($this->newGetRequest());
         $response = $this->sendRequest($request);
-        if (!($response->getStatusCode() >= 200 && $response->getStatusCode() < 300)) {
-            throw new RuntimeException('Could not get list from Twitter API.');
+        if (!($response->getStatusCode() >= StatusCodeInterface::STATUS_OK && $response->getStatusCode() < StatusCodeInterface::STATUS_MULTIPLE_CHOICES)) {
+            throw new RuntimeException('Could not get list from Twitter API.', $response->getStatusCode());
         }
 
         return new GetTwitterLikeListApiResponse($response);

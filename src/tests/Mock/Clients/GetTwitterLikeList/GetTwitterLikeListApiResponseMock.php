@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\Mock\Clients\GetTwitterLikeList;
 
 use App\Interfaces\Clients\GetTwitterLikeList\GetTwitterLikeListApiClientResponseInterface;
+use Fig\Http\Message\StatusCodeInterface;
 
 class GetTwitterLikeListApiResponseMock implements GetTwitterLikeListApiClientResponseInterface
 {
@@ -27,6 +28,6 @@ class GetTwitterLikeListApiResponseMock implements GetTwitterLikeListApiClientRe
      */
     public function getStatusCode(): int
     {
-        return 200;
+        return StatusCodeInterface::STATUS_OK;
     }
 }

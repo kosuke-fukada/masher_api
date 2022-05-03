@@ -5,6 +5,7 @@ namespace App\Clients\GetTwitterLikeList;
 
 use Psr\Http\Message\ResponseInterface;
 use App\Interfaces\Clients\GetTwitterLikeList\GetTwitterLikeListApiClientResponseInterface;
+use Fig\Http\Message\StatusCodeInterface;
 
 class GetTwitterLikeListApiResponse implements GetTwitterLikeListApiClientResponseInterface
 {
@@ -40,6 +41,6 @@ class GetTwitterLikeListApiResponse implements GetTwitterLikeListApiClientRespon
      */
     public function getStatusCode(): int
     {
-        return $this->response ? $this->response->getStatusCode() : 500;
+        return $this->response ? $this->response->getStatusCode() : StatusCodeInterface::STATUS_INTERNAL_SERVER_ERROR;
     }
 }

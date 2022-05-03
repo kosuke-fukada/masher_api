@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Client;
+namespace App\Clients;
 
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseFactoryInterface;

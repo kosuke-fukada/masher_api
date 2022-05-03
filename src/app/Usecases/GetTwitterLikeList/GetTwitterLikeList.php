@@ -10,6 +10,7 @@ use App\Clients\GetTwitterLikeList\GetTwitterLikeListApiRequest;
 use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInterface;
 use App\Interfaces\Clients\GetTwitterLikeList\GetTwitterLikeListApiClientInterface;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
+use Fig\Http\Message\StatusCodeInterface;
 use Throwable;
 
 class GetTwitterLikeList implements GetTwitterLikeListInterface
@@ -44,7 +45,7 @@ class GetTwitterLikeList implements GetTwitterLikeListInterface
     {
         $authUser = $this->userRepository->findAuthUser();
         if (is_null($authUser)) {
-            throw new RuntimeException('User is not signed in.');
+            throw new RuntimeException('User is not signed in.', StatusCodeInterface::STATUS_FORBIDDEN);
         }
 
         $request = new GetTwitterLikeListApiRequest(

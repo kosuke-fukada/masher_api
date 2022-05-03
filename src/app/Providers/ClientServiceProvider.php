@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Clients\GetTwitterLikeList\GetTwitterLikeListApiClient;
-use App\Client\GuzzleClient;
-use App\Client\PsrFactories;
+use App\Clients\GuzzleClient;
+use App\Clients\PsrFactories;
 use App\Interfaces\Clients\GetTwitterLikeList\GetTwitterLikeListApiClientInterface;
 use Illuminate\Support\Facades\App;
 use Nyholm\Psr7\Factory\Psr17Factory;
@@ -31,7 +31,7 @@ class ClientServiceProvider extends ServiceProvider
                     $factory
                 );
                 return new GetTwitterLikeListApiClient(
-                    $psrFactories->uriFactory()->createUri(config('api.twitter.base_url')),
+                    $psrFactories->uriFactory()->createUri(config('client.api.twitter.base_url')),
                     new GuzzleClient(),
                     $psrFactories
                 );

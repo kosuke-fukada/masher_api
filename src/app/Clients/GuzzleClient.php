@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Client;
+namespace App\Clients;
 
 use GuzzleHttp\Client;
 use Psr\Http\Client\ClientInterface;
