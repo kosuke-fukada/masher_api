@@ -21,4 +21,9 @@ interface UserRepositoryInterface
      * @return void
      */
     public function updateUser(\App\Entities\User\UserInfo $userInfo): void;
+
+    /**
+     * @return User|null
+     */
+    public function findAuthUser(): ?User;
 }

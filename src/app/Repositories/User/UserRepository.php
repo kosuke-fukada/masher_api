@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 namespace App\Repositories\User;
 
-use App\Entities\User\UserInfo;
-use App\Interfaces\Repositories\User\UserRepositoryInterface;
-use App\ValueObjects\User\AccountId;
-use App\ValueObjects\User\OauthProviderName;
 use App\Models\User;
+use App\Entities\User\UserInfo;
+use App\ValueObjects\User\AccountId;
+use Illuminate\Support\Facades\Auth;
+use App\ValueObjects\User\OauthProviderName;
+use App\Interfaces\Repositories\User\UserRepositoryInterface;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -52,5 +53,13 @@ class UserRepository implements UserRepositoryInterface
             'refresh_token' => (string)$userInfo->refreshToken(),
         ]);
         $targetUser->save();
+    }
+
+    /**
+     * @return User|null
+     */
+    public function findAuthUser(): ?User
+    {
+        return Auth::user();
     }
 }
