@@ -9,6 +9,7 @@ use App\ValueObjects\User\AccountId;
 use Illuminate\Support\Facades\Auth;
 use App\ValueObjects\User\OauthProviderName;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
+use App\ValueObjects\User\UserId;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -23,6 +24,16 @@ class UserRepository implements UserRepositoryInterface
     public function __construct(User $user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @param UserId $id
+     * @return User|null
+     */
+    public function findById(UserId $id): ?User
+    {
+        return $this->user->newQuery()
+            ->find($id);
     }
 
     /**

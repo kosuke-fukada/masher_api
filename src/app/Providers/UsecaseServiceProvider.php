@@ -5,11 +5,13 @@ namespace App\Providers;
 
 use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInterface;
 use App\Interfaces\Usecases\GetUserInfo\GetUserInfoInterface;
+use App\Interfaces\Usecases\RefreshTwitterAccessToken\RefreshTwitterAccessTokenInterface;
 use App\Interfaces\Usecases\Signin\GetRedirectUrlInterface;
 use App\Interfaces\Usecases\Signin\SigninAuthUserInterface;
 use App\Interfaces\Usecases\Signout\SignoutInterface;
 use App\Usecases\GetTwitterLikeList\GetTwitterLikeList;
 use App\Usecases\GetUserInfo\GetUserInfo;
+use App\Usecases\RefreshTwitterAccessToken\RefreshTwitterAccessToken;
 use App\Usecases\Signin\GetRedirectUrl;
 use App\Usecases\Signin\SigninAuthUser;
 use App\Usecases\Signout\Signout;
@@ -27,5 +29,6 @@ class UsecaseServiceProvider extends ServiceProvider
         $this->app->singleton(SignoutInterface::class, Signout::class);
         $this->app->singleton(GetUserInfoInterface::class, GetUserInfo::class);
         $this->app->singleton(GetTwitterLikeListInterface::class, GetTwitterLikeList::class);
+        $this->app->singleton(RefreshTwitterAccessTokenInterface::class, RefreshTwitterAccessToken::class);
     }
 }
