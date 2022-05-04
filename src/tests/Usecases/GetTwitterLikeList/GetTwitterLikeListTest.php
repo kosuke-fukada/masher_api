@@ -39,7 +39,7 @@ class GetTwitterLikeListTest extends TestCase
         Auth::login($user);
         $result = $usecase->process();
         $this->assertIsArray($result);
-        $this->assertArrayHasKey('id', $result[0]);
-        $this->assertArrayHasKey('text', $result[0]);
+        $this->assertArrayHasKey('id', $result['data'][0]);
+        $this->assertArrayHasKey('text', $result['data'][0]);
     }
 }

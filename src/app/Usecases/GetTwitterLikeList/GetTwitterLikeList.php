@@ -58,6 +58,6 @@ class GetTwitterLikeList implements GetTwitterLikeListInterface
         } catch (Throwable $e) {
             throw new RuntimeException($e->getMessage(), $e->getCode());
         }
-        return $list['data'];
+        return $list;
     }
 }

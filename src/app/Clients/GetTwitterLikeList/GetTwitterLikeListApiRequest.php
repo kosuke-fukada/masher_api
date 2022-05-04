@@ -54,7 +54,7 @@ class GetTwitterLikeListApiRequest implements GetTwitterLikeListApiClientRequest
      */
     public function endpointUri(UriInterface $uri): UriInterface
     {
-        return $uri->withPath('users/' . (string)$this->accountId . '/liked_tweets')
-            ->withQuery('?user.fields=id');
+        return $uri->withPath('2/users/' . (string)$this->accountId . '/liked_tweets')
+            ->withQuery('user.fields=id&max_results=10');
     }
 }
