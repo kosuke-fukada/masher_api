@@ -36,6 +36,22 @@ class UserRepositoryTest extends TestCase
      * @param UserRepositoryInterface $userRepository
      * @return void
      */
+    public function testFindById(UserRepositoryInterface $userRepository): void
+    {
+        $id = 1;
+        $user = $userRepository->findById(new UserId($id));
+        $this->assertInstanceOf(User::class, $user);
+
+        $id = 100;
+        $user = $userRepository->findById(new UserId($id));
+        $this->assertNull($user);
+    }
+
+    /**
+     * @depends test__construct
+     * @param UserRepositoryInterface $userRepository
+     * @return void
+     */
     public function testFindByAccountIdAndProvider(UserRepositoryInterface $userRepository): void
     {
         $accountId = 'test_account_id';

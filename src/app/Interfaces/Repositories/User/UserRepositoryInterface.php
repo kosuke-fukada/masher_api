@@ -6,9 +6,16 @@ namespace App\Interfaces\Repositories\User;
 use App\Models\User;
 use App\ValueObjects\User\OauthProviderName;
 use App\ValueObjects\User\AccountId;
+use App\ValueObjects\User\UserId;
 
 interface UserRepositoryInterface
 {
+    /**
+     * @param UserId $id
+     * @return User|null
+     */
+    public function findById(UserId $id): ?User;
+
     /**
      * @param AccountId $accountId
      * @param OauthProviderName $provider
