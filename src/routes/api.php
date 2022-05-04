@@ -6,6 +6,7 @@ use App\Http\Controllers\SignoutAction;
 use App\Http\Controllers\SigninWithTwitterAction;
 use App\Http\Controllers\GetTwitterRedirectUrlAction;
 use App\Http\Controllers\GetUserInfoAction;
+use App\Http\Controllers\RefreshTwitterAccessTokenAction;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,10 @@ Route::prefix('signin')->group(function() {
 
 Route::get('/signout', SignoutAction::class);
 
-Route::get('/user', GetUserInfoAction::class);
+Route::prefix('user')->group(function() {
+    Route::get('/', GetUserInfoAction::class);
+    Route::get('/refresh/twitter', RefreshTwitterAccessTokenAction::class);
+});
 
 Route::prefix('likes')->group(function() {
     Route::prefix('twitter')->group(function() {
