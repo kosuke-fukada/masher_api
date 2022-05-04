@@ -15,6 +15,6 @@ class GetRedirectUrl implements GetRedirectUrlInterface
     */
     public function process(OauthProviderName $oauthProviderName): string
     {
-        return Socialite::driver($oauthProviderName->value)->redirect()->getTargetUrl();
+        return Socialite::driver($oauthProviderName->value)->scopes(['offline.access', 'like.read'])->redirect()->getTargetUrl();
     }
 }
