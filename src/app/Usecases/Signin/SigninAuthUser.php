@@ -17,7 +17,7 @@ use App\ValueObjects\User\ExpiresAt;
 use App\ValueObjects\User\OauthProviderName;
 use App\ValueObjects\User\RefreshToken;
 use App\ValueObjects\User\UserName;
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
 use Psr\Log\LoggerInterface;
@@ -75,8 +75,8 @@ class SigninAuthUser implements SigninAuthUserInterface
 
         DB::beginTransaction();
         try {
-            $currentTime = Carbon::now();
-            $expiresAt = $currentTime->copy()->addSecond($user->expiresIn);
+            $currentTime = new CarbonImmutable();
+            $expiresAt = $currentTime->addSecond($user->expiresIn);
             // accountIdとproviderでユーザーを検索
             $authUser = $this->userRepository->findByAccountIdAndProvider(
                 new AccountId($user->getId()),

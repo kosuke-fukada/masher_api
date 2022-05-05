@@ -18,7 +18,7 @@ use App\Repositories\User\UserRepository;
 use App\ValueObjects\User\OauthProviderName;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
 use App\ValueObjects\User\ExpiresAt;
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 
 class UserRepositoryTest extends TestCase
 {
@@ -94,7 +94,7 @@ class UserRepositoryTest extends TestCase
             new Avatar($avatar),
             new AccessToken($accessToken),
             new RefreshToken($refreshToken),
-            new ExpiresAt(new Carbon($expiresAt)),
+            new ExpiresAt(new CarbonImmutable($expiresAt)),
             OauthProviderName::TWITTER
         );
         $userRepository->updateUser($userInfo);

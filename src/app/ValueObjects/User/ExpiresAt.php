@@ -3,22 +3,22 @@ declare(strict_types=1);
 
 namespace App\ValueObjects\User;
 
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 
 class ExpiresAt
 {
     /**
-     * @param Carbon $value
+     * @param CarbonImmutable $value
      */
-    public function __construct(Carbon $value)
+    public function __construct(CarbonImmutable $value)
     {
         $this->value = $value;
     }
 
     /**
-     * @return Carbon
+     * @return CarbonImmutable
      */
-    public function toCarbon(): Carbon
+    public function toCarbon(): CarbonImmutable
     {
         return $this->value;
     }
@@ -28,7 +28,7 @@ class ExpiresAt
      */
     public function isExpiredIn30Minutes(): bool
     {
-        $now = Carbon::now();
+        $now = CarbonImmutable::now();
         return $this->value->diffInSeconds($now) <= 1800;
     }
 
