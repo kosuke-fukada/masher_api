@@ -37,9 +37,9 @@ class SetAuthSessionServiceTest extends TestCase
             new AccountId($accountId),
             OauthProviderName::TWITTER
         );
-        $userId = $setAuthSessionService->process($user);
+        $providerAuthenticatedUser = $setAuthSessionService->process($user);
         $this->assertTrue(Auth::check());
-        $this->assertSame(1, $userId);
+        $this->assertSame(1, $providerAuthenticatedUser->getAttribute('id'));
 
         $user = new User([
             'account_id' => 'test_account_id_2',
@@ -51,8 +51,8 @@ class SetAuthSessionServiceTest extends TestCase
             'expires_at' => date('Y-m-d H:i:s'),
             'provider' => 'twitter'
         ]);
-        $userId = $setAuthSessionService->process($user);
+        $providerAuthenticatedUser = $setAuthSessionService->process($user);
         $this->assertTrue(Auth::check());
-        $this->assertSame(2, $userId);
+        $this->assertSame(2, $providerAuthenticatedUser->getAttribute('id'));
     }
 }

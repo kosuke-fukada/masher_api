@@ -9,7 +9,7 @@ interface SetAuthSessionServiceInterface
 {
     /**
      * @param User $user
-     * @return int
+     * @return User
      */
-    public function process(User $user): int;
+    public function process(User $user): User;
 }
