@@ -7,6 +7,7 @@ use App\Http\Controllers\SigninWithTwitterAction;
 use App\Http\Controllers\GetTwitterRedirectUrlAction;
 use App\Http\Controllers\GetUserInfoAction;
 use App\Http\Controllers\RefreshTwitterAccessTokenAction;
+use App\Http\Middleware\VerifyTwitterAccessTokenExpired;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,13 +29,15 @@ Route::prefix('signin')->group(function() {
 
 Route::get('/signout', SignoutAction::class);
 
-Route::prefix('user')->group(function() {
-    Route::get('/', GetUserInfoAction::class);
-    Route::get('/refresh/twitter', RefreshTwitterAccessTokenAction::class);
-});
-
-Route::prefix('likes')->group(function() {
-    Route::prefix('twitter')->group(function() {
-        Route::get('/', GetTwitterLikeListAction::class);
+Route::prefix('user')->middleware(VerifyTwitterAccessTokenExpired::class)
+    ->group(function() {
+        Route::get('/', GetUserInfoAction::class);
+        Route::get('/refresh/twitter', RefreshTwitterAccessTokenAction::class);
     });
-});
+
+Route::prefix('likes')->middleware(VerifyTwitterAccessTokenExpired::class)
+    ->group(function() {
+        Route::prefix('twitter')->group(function() {
+            Route::get('/', GetTwitterLikeListAction::class);
+        });
+    });
