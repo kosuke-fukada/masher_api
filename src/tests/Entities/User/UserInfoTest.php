@@ -13,7 +13,7 @@ use App\ValueObjects\User\ExpiresAt;
 use App\ValueObjects\User\RefreshToken;
 use App\ValueObjects\User\UserId;
 use App\ValueObjects\User\UserName;
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Tests\TestCase;
 
 class UserInfoTest extends TestCase
@@ -41,7 +41,7 @@ class UserInfoTest extends TestCase
             new Avatar($avatar),
             new AccessToken($accessToken),
             new RefreshToken($refreshToken),
-            new ExpiresAt(new Carbon($expiresAt)),
+            new ExpiresAt(new CarbonImmutable($expiresAt)),
             OauthProviderName::from($provider)
         );
 

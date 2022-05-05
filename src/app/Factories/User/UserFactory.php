@@ -15,7 +15,7 @@ use App\ValueObjects\User\OauthProviderName;
 use App\ValueObjects\User\RefreshToken;
 use App\ValueObjects\User\UserId;
 use App\ValueObjects\User\UserName;
-use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 
 class UserFactory implements UserFactoryInterface
 {
@@ -51,7 +51,7 @@ class UserFactory implements UserFactoryInterface
             new Avatar($avatar),
             new AccessToken($accessToken),
             new RefreshToken($refreshToken),
-            new ExpiresAt(new Carbon($expiresAt)),
+            new ExpiresAt(new CarbonImmutable($expiresAt)),
             OauthProviderName::from($provider)
         );
     }
