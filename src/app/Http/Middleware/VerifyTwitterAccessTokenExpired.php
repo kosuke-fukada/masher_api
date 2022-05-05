@@ -7,7 +7,6 @@ use Closure;
 use Illuminate\Http\Request;
 use Psr\Log\LoggerInterface;
 use App\Interfaces\Factories\User\UserFactoryInterface;
-use App\Http\Controllers\RefreshTwitterAccessTokenAction;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
 use App\Interfaces\Usecases\RefreshTwitterAccessToken\RefreshTwitterAccessTokenInterface;
 use RuntimeException;
