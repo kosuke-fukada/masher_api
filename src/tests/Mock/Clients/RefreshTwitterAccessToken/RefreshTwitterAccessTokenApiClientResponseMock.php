@@ -14,13 +14,11 @@ class RefreshTwitterAccessTokenApiClientResponseMock implements RefreshTwitterAc
     public function contents(): string
     {
         return json_encode([
-            'data' => [
-                'token_type' => 'bearer',
-                'expires_in' => 7200,
-                'access_token' => 'refreshed_access_token',
-                'scope' => 'tweet.read user.read like.read',
-                'refresh_token' => 'refreshed_refresh_token',
-            ]
+            'token_type' => 'bearer',
+            'expires_in' => 7200,
+            'access_token' => 'refreshed_access_token',
+            'scope' => 'tweet.read user.read like.read',
+            'refresh_token' => 'refreshed_refresh_token',
         ]);
     }
 

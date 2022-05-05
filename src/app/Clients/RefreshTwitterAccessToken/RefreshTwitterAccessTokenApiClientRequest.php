@@ -35,15 +35,11 @@ class RefreshTwitterAccessTokenApiClientRequest implements RefreshTwitterAccessT
         $request = $request->withMethod(RequestMethodInterface::METHOD_POST)
             ->withUri($this->endpointUri($request->getUri()));
         $request->getBody()
-            ->write(urlencode(
-                json_encode(
-                    [
-                        'refresh_token' => (string)$this->refreshToken,
-                        'grant_type' => self::GRANT_TYPE,
-                        'client_id' => config('services.twitter.client_id')
-                    ],
-                    JSON_THROW_ON_ERROR
-                )
+            ->write(http_build_query(
+                [
+                    'refresh_token' => (string)$this->refreshToken,
+                    'grant_type' => self::GRANT_TYPE,
+                ]
             ));
 
         return $request;

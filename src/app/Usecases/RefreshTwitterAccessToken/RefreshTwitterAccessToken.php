@@ -81,9 +81,9 @@ class RefreshTwitterAccessToken implements RefreshTwitterAccessTokenInterface
             $newTokens = json_decode($response->contents(), true, 512, JSON_THROW_ON_ERROR);
 
             // Entityを更新
-            $userInfo->changeAccessToken(new AccessToken($newTokens['data']['access_token']));
-            $userInfo->changeRefreshToken(new RefreshToken($newTokens['data']['refresh_token']));
-            $userInfo->changeExpiresAt(new ExpiresAt(time() + $newTokens['data']['expires_in']));
+            $userInfo->changeAccessToken(new AccessToken($newTokens['access_token']));
+            $userInfo->changeRefreshToken(new RefreshToken($newTokens['refresh_token']));
+            $userInfo->changeExpiresAt(new ExpiresAt(time() + $newTokens['expires_in']));
 
             // 永続化
             $this->userRepository->updateUser($userInfo);

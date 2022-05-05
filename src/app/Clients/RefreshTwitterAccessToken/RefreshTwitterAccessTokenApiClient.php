@@ -78,7 +78,8 @@ class RefreshTwitterAccessTokenApiClient implements RefreshTwitterAccessTokenApi
      */
     public function sendRequest(RequestInterface $request): ResponseInterface
     {
-        $request = $request->withHeader('Content-Type', 'application/x-www-form-urlencoded');
+        $request = $request->withHeader('Content-Type', 'application/x-www-form-urlencoded')
+            ->withHeader('Authorization', 'Basic ' . base64_encode(config('services.twitter.client_id') . ':' . config('services.twitter.client_secret')));
         return $this->client->sendRequest($request);
     }
 }
