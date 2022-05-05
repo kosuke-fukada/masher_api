@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Interfaces\Factories\User;
 
 use App\Entities\User\UserInfo;
+use App\Models\User;
 
 interface UserFactoryInterface
 {
@@ -19,7 +20,7 @@ interface UserFactoryInterface
      * @param string $provider
      * @return UserInfo
      */
-    public function createUserEntity(
+    public function createUserInfo(
         int $userId,
         string $accountId,
         string $userName,
@@ -30,4 +31,10 @@ interface UserFactoryInterface
         ?int $expiresAt,
         string $provider,
     ): UserInfo;
+
+    /**
+     * @param User $user
+     * @return UserInfo
+     */
+    public function createUserInfoFromUserModel(User $user): UserInfo;
 }

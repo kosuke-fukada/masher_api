@@ -33,17 +33,6 @@ class GetUserInfo implements GetUserInfoInterface
         $user = Auth::user();
 
         // Entityを作成してreturn
-        return is_null($user) ? $user :
-            $this->factory->createUserEntity(
-                $user->getAttribute('id'),
-                $user->getAttribute('account_id'),
-                $user->getAttribute('user_name'),
-                $user->getAttribute('display_name'),
-                $user->getAttribute('avatar'),
-                $user->getAttribute('access_token'),
-                $user->getAttribute('refresh_token'),
-                (int)strtotime($user->getAttribute('expires_at')),
-                $user->getAttribute('provider')
-            );
+        return is_null($user) ? $user : $this->factory->createUserInfoFromUserModel($user);
     }
 }
