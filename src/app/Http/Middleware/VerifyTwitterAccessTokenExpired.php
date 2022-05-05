@@ -63,17 +63,7 @@ class VerifyTwitterAccessTokenExpired
         $authUser = $this->userRepository->findAuthUser();
 
         // Entityを作成
-        $userInfo = $this->factory->createUserEntity(
-            $authUser->getAttribute('id'),
-            $authUser->getAttribute('account_id'),
-            $authUser->getAttribute('user_name'),
-            $authUser->getAttribute('display_name'),
-            $authUser->getAttribute('avatar'),
-            $authUser->getAttribute('access_token'),
-            $authUser->getAttribute('refresh_token'),
-            (int)strtotime($authUser->getAttribute('expires_at')),
-            $authUser->getAttribute('provider'),
-        );
+        $userInfo = $this->factory->createUserInfoFromUserModel($authUser);
 
         // AccessToken期限切れ30分前を過ぎていたら更新
         if ($userInfo->expiresAt()->isExpiredIn30Minutes()) {

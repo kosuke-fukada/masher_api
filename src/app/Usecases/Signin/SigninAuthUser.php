@@ -96,7 +96,7 @@ class SigninAuthUser implements SigninAuthUserInterface
             $userId = $this->setAuthSessionService->process($authUser);
 
             // DBから取得してきたUserオブジェクトからEntityを作成
-            $userInfo = $this->userFactory->createUserEntity(
+            $userInfo = $this->userFactory->createUserInfo(
                 $userId,
                 $authUser->getAttribute('account_id'),
                 $authUser->getAttribute('user_name'),
