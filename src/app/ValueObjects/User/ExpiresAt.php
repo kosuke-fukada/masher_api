@@ -3,29 +3,24 @@ declare(strict_types=1);
 
 namespace App\ValueObjects\User;
 
-use App\ValueObjects\Foundation\IntegerValueObject;
-use InvalidArgumentException;
+use Carbon\Carbon;
 
-class ExpiresAt extends IntegerValueObject
+class ExpiresAt
 {
     /**
-     * @param integer $value
+     * @param Carbon $value
      */
-    public function __construct(int $value)
+    public function __construct(Carbon $value)
     {
-        $this->validate($value);
         $this->value = $value;
     }
 
     /**
-     * @param integer $value
-     * @return void
+     * @return Carbon
      */
-    protected function validate(int $value): void
+    public function toCarbon(): Carbon
     {
-        if ($value <= 0) {
-            throw new InvalidArgumentException(sprintf('%s must be larger than 0', get_class()));
-        }
+        return $this->value;
     }
 
     /**
@@ -33,7 +28,8 @@ class ExpiresAt extends IntegerValueObject
      */
     public function isExpiredIn30Minutes(): bool
     {
-        return $this->value - time() <= 1800;
+        $now = Carbon::now();
+        return $this->value->diffInSeconds($now) <= 1800;
     }
 
     /**
@@ -41,7 +37,7 @@ class ExpiresAt extends IntegerValueObject
      */
     public function toDate(): string
     {
-        return date('Y-m-d H:i:s', $this->value);
+        return $this->value->format('Y-m-d H:i:s');
     }
 
     /**
@@ -49,6 +45,6 @@ class ExpiresAt extends IntegerValueObject
      */
     public function toTimestamp(): int
     {
-        return $this->value;
+        return $this->value->timestamp;
     }
 }
