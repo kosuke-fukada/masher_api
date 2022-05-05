@@ -5,6 +5,7 @@ namespace App\Factories\User;
 
 use App\Entities\User\UserInfo;
 use App\Interfaces\Factories\User\UserFactoryInterface;
+use App\Models\User;
 use App\ValueObjects\User\AccountId;
 use App\ValueObjects\User\DisplayName;
 use App\ValueObjects\User\Avatar;
@@ -29,7 +30,7 @@ class UserFactory implements UserFactoryInterface
      * @param string $provider
      * @return UserInfo
      */
-    public function createUserEntity(
+    public function createUserInfo(
         int $userId,
         string $accountId,
         string $userName,
@@ -51,6 +52,25 @@ class UserFactory implements UserFactoryInterface
             new RefreshToken($refreshToken),
             new ExpiresAt($expiresAt),
             OauthProviderName::from($provider)
+        );
+    }
+
+    /**
+     * @param User $user
+     * @return UserInfo
+     */
+    public function createUserInfoFromUserModel(User $user): UserInfo
+    {
+        return $this->createUserInfo(
+            $user->getAttribute('id'),
+            $user->getAttribute('account_id'),
+            $user->getAttribute('user_name'),
+            $user->getAttribute('display_name'),
+            $user->getAttribute('avatar'),
+            $user->getAttribute('access_token'),
+            $user->getAttribute('refresh_token'),
+            (int)strtotime($user->getAttribute('expires_at')),
+            $user->getAttribute('provider'),
         );
     }
 }

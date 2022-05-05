@@ -43,4 +43,12 @@ class ExpiresAt extends IntegerValueObject
     {
         return date('Y-m-d H:i:s', $this->value);
     }
+
+    /**
+     * @return integer
+     */
+    public function toTimestamp(): int
+    {
+        return $this->value;
+    }
 }
