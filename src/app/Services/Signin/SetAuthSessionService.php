@@ -11,11 +11,11 @@ class SetAuthSessionService implements SetAuthSessionServiceInterface
 {
     /**
      * @param User $user
-     * @return void
+     * @return User
      */
-    public function process(User $user): int
+    public function process(User $user): User
     {
         Auth::login($user, true);
-        return Auth::id();
+        return Auth::user();
     }
 }

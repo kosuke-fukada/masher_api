@@ -78,13 +78,13 @@ class SigninAuthUser implements SigninAuthUserInterface
             $currentTime = new CarbonImmutable();
             $expiresAt = $currentTime->addSecond($user->expiresIn);
             // accountIdとproviderでユーザーを検索
-            $authUser = $this->userRepository->findByAccountIdAndProvider(
+            $providerAuthenticatededUser = $this->userRepository->findByAccountIdAndProvider(
                 new AccountId($user->getId()),
                 $oauthProviderName
             );
-            if (is_null($authUser)) {
+            if (is_null($providerAuthenticatededUser)) {
                 // 新規ユーザー
-                $authUser = new User([
+                $providerAuthenticatededUser = new User([
                     'account_id' => $user->getId(),
                     'user_name' => $user->getNickname(),
                     'display_name' => $user->getName(),
@@ -95,20 +95,10 @@ class SigninAuthUser implements SigninAuthUserInterface
                     'provider' => $oauthProviderName->value
                 ]);
             }
-            $userId = $this->setAuthSessionService->process($authUser);
+            $signedInUser = $this->setAuthSessionService->process($providerAuthenticatededUser);
 
-            // DBから取得してきたUserオブジェクトからEntityを作成
-            $userInfo = $this->userFactory->createUserInfo(
-                $userId,
-                $authUser->getAttribute('account_id'),
-                $authUser->getAttribute('user_name'),
-                $authUser->getAttribute('display_name'),
-                $authUser->getAttribute('avatar'),
-                $authUser->getAttribute('access_token'),
-                $authUser->getAttribute('refresh_token'),
-                date('Y-m-d H:i:s', $authUser->getAttribute('expires_at')),
-                $authUser->getAttribute('provider'),
-            );
+            // サインイン済のUserオブジェクトからEntityを作成
+            $userInfo = $this->userFactory->createUserInfoFromUserModel($signedInUser);
 
             // DBに保存されている値と異なる場合は更新
             $updated = false;
