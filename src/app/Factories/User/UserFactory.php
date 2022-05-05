@@ -15,6 +15,7 @@ use App\ValueObjects\User\OauthProviderName;
 use App\ValueObjects\User\RefreshToken;
 use App\ValueObjects\User\UserId;
 use App\ValueObjects\User\UserName;
+use Carbon\Carbon;
 
 class UserFactory implements UserFactoryInterface
 {
@@ -26,7 +27,7 @@ class UserFactory implements UserFactoryInterface
      * @param string $avatar
      * @param string $accessToken
      * @param string|null $refreshToken
-     * @param integer|null $expiresAt
+     * @param string|null $expiresAt
      * @param string $provider
      * @return UserInfo
      */
@@ -38,7 +39,7 @@ class UserFactory implements UserFactoryInterface
         string $avatar,
         string $accessToken,
         ?string $refreshToken,
-        ?int $expiresAt,
+        ?string $expiresAt,
         string $provider
     ): UserInfo
     {
@@ -50,7 +51,7 @@ class UserFactory implements UserFactoryInterface
             new Avatar($avatar),
             new AccessToken($accessToken),
             new RefreshToken($refreshToken),
-            new ExpiresAt($expiresAt),
+            new ExpiresAt(new Carbon($expiresAt)),
             OauthProviderName::from($provider)
         );
     }
@@ -69,7 +70,7 @@ class UserFactory implements UserFactoryInterface
             $user->getAttribute('avatar'),
             $user->getAttribute('access_token'),
             $user->getAttribute('refresh_token'),
-            (int)strtotime($user->getAttribute('expires_at')),
+            $user->getAttribute('expires_at'),
             $user->getAttribute('provider'),
         );
     }

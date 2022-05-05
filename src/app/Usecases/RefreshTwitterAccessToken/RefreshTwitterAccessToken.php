@@ -14,6 +14,7 @@ use App\Interfaces\Repositories\User\UserRepositoryInterface;
 use App\Clients\RefreshTwitterAccessToken\RefreshTwitterAccessTokenApiClientRequest;
 use App\Interfaces\Usecases\RefreshTwitterAccessToken\RefreshTwitterAccessTokenInterface;
 use App\Interfaces\Clients\RefreshTwitterAccessToken\RefreshTwitterAccessTokenApiClientInterface;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -73,7 +74,7 @@ class RefreshTwitterAccessToken implements RefreshTwitterAccessTokenInterface
             // Entityを更新
             $userInfo->changeAccessToken(new AccessToken($newTokens['access_token']));
             $userInfo->changeRefreshToken(new RefreshToken($newTokens['refresh_token']));
-            $userInfo->changeExpiresAt(new ExpiresAt(time() + $newTokens['expires_in']));
+            $userInfo->changeExpiresAt(new ExpiresAt(Carbon::now()->addSecond($newTokens['expires_in'])));
 
             // 永続化
             $this->userRepository->updateUser($userInfo);

@@ -18,6 +18,7 @@ use App\Repositories\User\UserRepository;
 use App\ValueObjects\User\OauthProviderName;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
 use App\ValueObjects\User\ExpiresAt;
+use Carbon\Carbon;
 
 class UserRepositoryTest extends TestCase
 {
@@ -84,7 +85,7 @@ class UserRepositoryTest extends TestCase
         $avatar = 'https://example.local/test_avatar_updated.png';
         $accessToken = 'test_access_token_updated';
         $refreshToken = 'test_refresh_token_updated';
-        $expiresAt = time();
+        $expiresAt = date('Y-m-d H:i:s');
         $userInfo = new UserInfo(
             new UserId($userId),
             new AccountId($accountId),
@@ -93,7 +94,7 @@ class UserRepositoryTest extends TestCase
             new Avatar($avatar),
             new AccessToken($accessToken),
             new RefreshToken($refreshToken),
-            new ExpiresAt($expiresAt),
+            new ExpiresAt(new Carbon($expiresAt)),
             OauthProviderName::TWITTER
         );
         $userRepository->updateUser($userInfo);
@@ -103,7 +104,7 @@ class UserRepositoryTest extends TestCase
         $this->assertSame($avatar, $user->getAttribute('avatar'));
         $this->assertSame($accessToken, $user->getAttribute('access_token'));
         $this->assertSame($refreshToken, $user->getAttribute('refresh_token'));
-        $this->assertSame($expiresAt, strtotime($user->getAttribute('expires_at')));
+        $this->assertSame($expiresAt, $user->getAttribute('expires_at'));
     }
 
     /**

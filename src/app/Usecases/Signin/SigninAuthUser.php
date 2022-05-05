@@ -17,6 +17,7 @@ use App\ValueObjects\User\ExpiresAt;
 use App\ValueObjects\User\OauthProviderName;
 use App\ValueObjects\User\RefreshToken;
 use App\ValueObjects\User\UserName;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Laravel\Socialite\Facades\Socialite;
 use Psr\Log\LoggerInterface;
@@ -74,7 +75,8 @@ class SigninAuthUser implements SigninAuthUserInterface
 
         DB::beginTransaction();
         try {
-            $currentTime = time();
+            $currentTime = Carbon::now();
+            $expiresAt = $currentTime->copy()->addSecond($user->expiresIn);
             // accountIdとproviderでユーザーを検索
             $authUser = $this->userRepository->findByAccountIdAndProvider(
                 new AccountId($user->getId()),
@@ -89,7 +91,7 @@ class SigninAuthUser implements SigninAuthUserInterface
                     'avatar' => $user->getAvatar(),
                     'access_token' => $user->token,
                     'refresh_token' => $user->refreshToken,
-                    'expires_at' => date('Y-m-d H:i:s', $currentTime + $user->expiresIn),
+                    'expires_at' => $expiresAt->format('Y-m-d H:i:s'),
                     'provider' => $oauthProviderName->value
                 ]);
             }
@@ -104,7 +106,7 @@ class SigninAuthUser implements SigninAuthUserInterface
                 $authUser->getAttribute('avatar'),
                 $authUser->getAttribute('access_token'),
                 $authUser->getAttribute('refresh_token'),
-                (int)strtotime($authUser->getAttribute('expires_at')),
+                date('Y-m-d H:i:s', $authUser->getAttribute('expires_at')),
                 $authUser->getAttribute('provider'),
             );
 
@@ -130,8 +132,8 @@ class SigninAuthUser implements SigninAuthUserInterface
                 $userInfo->changeRefreshToken(new RefreshToken($user->refreshToken));
                 $updated = true;
             }
-            if ($userInfo->expiresAt()->toInt() !== $currentTime + $user->expiresIn) {
-                $userInfo->changeExpiresAt(new ExpiresAt(time() + $user->expiresIn));
+            if ($userInfo->expiresAt()->toDate() !== $expiresAt->format('Y-m-d H:i:s')) {
+                $userInfo->changeExpiresAt(new ExpiresAt($expiresAt));
                 $updated = true;
             }
             if ($updated) {

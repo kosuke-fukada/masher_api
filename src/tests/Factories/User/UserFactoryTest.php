@@ -35,7 +35,7 @@ class UserFactoryTest extends TestCase
         $avatar = 'https://example.com/test_image.png';
         $accessToken = 'test_access_token';
         $refreshToken = 'test_refresh_token';
-        $expiresAt = time();
+        $expiresAt = date('Y-m-d H:i:s');
         $provider = 'twitter';
 
         $userInfo = $userFactory->createUserInfo(
@@ -58,7 +58,7 @@ class UserFactoryTest extends TestCase
         $this->assertSame($avatar, (string)$userInfo->avatar());
         $this->assertSame($accessToken, (string)$userInfo->accessToken());
         $this->assertSame($refreshToken, (string)$userInfo->refreshToken());
-        $this->assertSame($expiresAt, $userInfo->expiresAt()->toTimestamp());
+        $this->assertSame($expiresAt, $userInfo->expiresAt()->toDate());
         $this->assertSame($provider, $userInfo->provider()->value);
     }
 

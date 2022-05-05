@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Tests\ValueObjects\User;
 
-use App\ValueObjects\Foundation\IntegerValueObject;
 use App\ValueObjects\User\ExpiresAt;
+use Carbon\Carbon;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
@@ -15,10 +15,11 @@ class ExpiresAtTest extends TestCase
      */
     public function test__construct(): void
     {
-        $expected = time() + 3600;
-        $expiresAt = new ExpiresAt($expected);
-        $this->assertInstanceOf(IntegerValueObject::class, $expiresAt);
-        $this->assertSame($expected, $expiresAt->toInt());
+        $expected = date('Y-m-d H:i:s');
+        $expiresAt = new ExpiresAt(new Carbon($expected));
+        $this->assertInstanceOf(Carbon::class, $expiresAt->toCarbon());
+        $this->assertSame($expected, $expiresAt->toDate());
+        $this->assertSame(strtotime($expected), $expiresAt->toTimestamp());
     }
 
     /**
@@ -27,7 +28,7 @@ class ExpiresAtTest extends TestCase
     public function testInvalidValue(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        new ExpiresAt(-1);
+        new ExpiresAt(new Carbon('あああ'));
     }
 
     /**
@@ -35,12 +36,12 @@ class ExpiresAtTest extends TestCase
      */
     public function testIsExpiredIn30Minutes(): void
     {
-        $expected = time() + 3600;
-        $expiresAt = new ExpiresAt($expected);
+        $expected = date('Y-m-d H:i:s', time() + 3600);
+        $expiresAt = new ExpiresAt(new Carbon($expected));
         $this->assertFalse($expiresAt->isExpiredIn30Minutes());
 
-        $expected = time() + 600;
-        $expiresAt = new ExpiresAt($expected);
+        $expected = date('Y-m-d H:i:s', time() + 600);
+        $expiresAt = new ExpiresAt(new Carbon($expected));
         $this->assertTrue($expiresAt->isExpiredIn30Minutes());
     }
 }

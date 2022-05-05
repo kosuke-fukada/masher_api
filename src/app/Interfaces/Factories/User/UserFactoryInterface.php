@@ -16,7 +16,7 @@ interface UserFactoryInterface
      * @param string $avatar
      * @param string $accessToken
      * @param string|null $refreshToken
-     * @param integer|null $expiresAt
+     * @param string|null $expiresAt
      * @param string $provider
      * @return UserInfo
      */
@@ -28,7 +28,7 @@ interface UserFactoryInterface
         string $avatar,
         string $accessToken,
         ?string $refreshToken,
-        ?int $expiresAt,
+        ?string $expiresAt,
         string $provider,
     ): UserInfo;
 
