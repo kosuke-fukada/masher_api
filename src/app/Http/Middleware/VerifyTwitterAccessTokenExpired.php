@@ -60,6 +60,9 @@ class VerifyTwitterAccessTokenExpired
     public function handle(Request $request, Closure $next)
     {
         $authUser = $this->userRepository->findAuthUser();
+        if (is_null($authUser)) {
+            return $next($request);
+        }
 
         // Entityを作成
         $userInfo = $this->factory->createUserInfoFromUserModel($authUser);
