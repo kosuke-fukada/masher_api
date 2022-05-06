@@ -43,5 +43,9 @@ class ExpiresAtTest extends TestCase
         $expected = date('Y-m-d H:i:s', time() + 600);
         $expiresAt = new ExpiresAt(new CarbonImmutable($expected));
         $this->assertTrue($expiresAt->isExpiredIn30Minutes());
+
+        $expected = date('Y-m-d H:i:s', time() - 600);
+        $expiresAt = new ExpiresAt(new CarbonImmutable($expected));
+        $this->assertTrue($expiresAt->isExpiredIn30Minutes());
     }
 }

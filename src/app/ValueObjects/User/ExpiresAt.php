@@ -29,7 +29,7 @@ class ExpiresAt
     public function isExpiredIn30Minutes(): bool
     {
         $now = CarbonImmutable::now();
-        return $this->value->diffInSeconds($now) <= 1800;
+        return $now->diffInSeconds($this->value, false) <= 1800;
     }
 
     /**
