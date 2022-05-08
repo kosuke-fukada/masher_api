@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\GetTwitterLikeList;
 
-use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInterface;
+use Throwable;
+use Psr\Log\LoggerInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
-use Psr\Log\LoggerInterface;
-use Throwable;
+use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInterface;
 
-class GetTwitterLikeListAction extends Controller
+class GetTwitterLikeListAction
 {
     /**
      * @var GetTwitterLikeListInterface

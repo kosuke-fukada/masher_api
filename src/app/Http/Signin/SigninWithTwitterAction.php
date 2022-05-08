@@ -1,17 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Signin;
 
-use App\Interfaces\Usecases\Signin\SigninAuthUserInterface;
-use App\ValueObjects\Foundation\StatusCode;
-use App\ValueObjects\User\OauthProviderName;
-use Exception;
+use Throwable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
-use Throwable;
+use App\ValueObjects\Foundation\StatusCode;
+use App\ValueObjects\User\OauthProviderName;
+use App\Interfaces\Usecases\Signin\SigninAuthUserInterface;
 
-class SigninWithTwitterAction extends Controller
+class SigninWithTwitterAction
 {
     /**
      * @var SigninAuthUserInterface

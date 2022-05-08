@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\RefreshTwitterAccessToken;
 
-use App\Interfaces\Usecases\RefreshTwitterAccessToken\RefreshTwitterAccessTokenInterface;
-use Fig\Http\Message\StatusCodeInterface;
+use Throwable;
+use Psr\Log\LoggerInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
-use Psr\Log\LoggerInterface;
-use Throwable;
+use Fig\Http\Message\StatusCodeInterface;
+use App\Interfaces\Usecases\RefreshTwitterAccessToken\RefreshTwitterAccessTokenInterface;
 
-class RefreshTwitterAccessTokenAction extends Controller
+class RefreshTwitterAccessTokenAction
 {
     /**
      * @var RefreshTwitterAccessTokenInterface
