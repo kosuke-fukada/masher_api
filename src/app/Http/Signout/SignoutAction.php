@@ -1,36 +1,37 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Signout;
 
-use App\Interfaces\Usecases\GetUserInfo\GetUserInfoInterface;
+use App\Interfaces\Usecases\Signout\SignoutInterface;
+use App\ValueObjects\Foundation\StatusCode;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
 use Throwable;
 
-class GetUserInfoAction extends Controller
+class SignoutAction
 {
     /**
-     * @var GetUserInfoInterface
+     * @var SignoutInterface
      */
-    private GetUserInfoInterface $usecase;
+    private SignoutInterface $usecase;
 
     /**
-     * @param GetUserInfoInterface $usecase
+     * @param SignoutInterface $usecase
      */
-    public function __construct(GetUserInfoInterface $usecase)
+    public function __construct(SignoutInterface $usecase)
     {
         $this->usecase = $usecase;
     }
 
     /**
-     * @return void
+     * @return JsonResponse
      */
     public function __invoke(): JsonResponse
     {
         try {
-            $userInfo = $this->usecase->process();
-            return Response::json($userInfo ? $userInfo->toArrayWithoutCredentials() : []);
+            $this->usecase->process();
+            return Response::json([], StatusCode::STATUS_CODE_NO_CONTENT->value);
         } catch (Throwable $e) {
             return Response::json(
                 [

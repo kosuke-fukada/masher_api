@@ -1,16 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Signin;
 
-use App\Http\Controllers\Controller;
 use App\Interfaces\Usecases\Signin\GetRedirectUrlInterface;
 use App\ValueObjects\User\OauthProviderName;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
 use Throwable;
 
-class GetTwitterRedirectUrlAction extends Controller
+class GetTwitterRedirectUrlAction
 {
     /**
      * @var GetRedirectUrlInterface
