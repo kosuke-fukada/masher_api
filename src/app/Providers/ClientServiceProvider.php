@@ -58,7 +58,7 @@ class ClientServiceProvider extends ServiceProvider
                     $psrFactories
                 );
             });
-            $this->app->singleton(RefreshTwitterAccessTokenApiClientInterface::class, function() {
+            $this->app->singleton(GetTweetApiClientInterface::class, function() {
                 $factory = new Psr17Factory();
                 $psrFactories = new PsrFactories(
                     $factory,
