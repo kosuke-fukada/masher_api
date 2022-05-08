@@ -7,6 +7,7 @@ use App\Http\Controllers\SigninWithTwitterAction;
 use App\Http\Controllers\GetTwitterRedirectUrlAction;
 use App\Http\Controllers\GetUserInfoAction;
 use App\Http\Controllers\RefreshTwitterAccessTokenAction;
+use App\Http\GetTweet\GetTweetAction;
 use App\Http\Middleware\VerifyTwitterAccessTokenExpired;
 
 /*
@@ -41,3 +42,5 @@ Route::prefix('likes')->middleware(VerifyTwitterAccessTokenExpired::class)
             Route::get('/', GetTwitterLikeListAction::class);
         });
     });
+
+Route::get('/tweet', GetTweetAction::class);
