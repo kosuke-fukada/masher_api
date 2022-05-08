@@ -67,7 +67,7 @@ class ClientServiceProvider extends ServiceProvider
                     $factory
                 );
                 return new GetTweetApiClient(
-                    $psrFactories->uriFactory()->createUri(config('client.api.twitter.base_url')),
+                    $psrFactories->uriFactory()->createUri(config('client.api.twitter_oembed.base_url')),
                     new GuzzleClient(),
                     $psrFactories
                 );
