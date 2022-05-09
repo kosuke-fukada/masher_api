@@ -6,7 +6,8 @@ namespace App\Interfaces\Usecases\GetTwitterLikeList;
 interface GetTwitterLikeListInterface
 {
     /**
+     * @param GetTwitterLikeListInputPort $input
      * @return array<int, mixed>
      */
-    public function process(): array;
+    public function process(GetTwitterLikeListInputPort $input): array;
 }

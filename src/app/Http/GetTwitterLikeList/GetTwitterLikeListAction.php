@@ -8,6 +8,7 @@ use Psr\Log\LoggerInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
 use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInterface;
+use App\Usecases\GetTwitterLikeList\GetTwitterLikeListInput;
 
 class GetTwitterLikeListAction
 {
@@ -33,10 +34,13 @@ class GetTwitterLikeListAction
     /**
      * @return JsonResponse
      */
-    public function __invoke(): JsonResponse
+    public function __invoke(GetTwitterLikeListRequest $request): JsonResponse
     {
+        $input = new GetTwitterLikeListInput(
+            $request->nextToken()
+        );
         try {
-            $list = $this->usecase->process();
+            $list = $this->usecase->process($input);
         } catch (Throwable $e) {
             $this->logger->error((string)$e);
             return Response::json(

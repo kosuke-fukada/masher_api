@@ -9,6 +9,7 @@ use App\ValueObjects\User\AccessToken;
 use Psr\Http\Message\RequestInterface;
 use Fig\Http\Message\RequestMethodInterface;
 use App\Interfaces\Clients\GetTwitterLikeList\GetTwitterLikeListApiClientRequestInterface;
+use App\ValueObjects\Tweet\NextToken;
 
 class GetTwitterLikeListApiRequest implements GetTwitterLikeListApiClientRequestInterface
 {
@@ -23,16 +24,24 @@ class GetTwitterLikeListApiRequest implements GetTwitterLikeListApiClientRequest
     private AccessToken $accessToken;
 
     /**
+     * @var NextToken
+     */
+    private NextToken $nextToken;
+
+    /**
      * @param AccountId $accountId
      * @param AccessToken $accessToken
+     * @param NextToken $nextToken
      */
     public function __construct(
         AccountId $accountId,
-        AccessToken $accessToken
+        AccessToken $accessToken,
+        NextToken $nextToken
     )
     {
         $this->accountId = $accountId;
         $this->accessToken = $accessToken;
+        $this->nextToken = $nextToken;
     }
 
     /**
@@ -54,7 +63,11 @@ class GetTwitterLikeListApiRequest implements GetTwitterLikeListApiClientRequest
      */
     public function endpointUri(UriInterface $uri): UriInterface
     {
+        $query = 'user.fields=id&max_results=10&expansions=author_id';
+        if ($this->nextToken->existNext()) {
+            $query .= '&pagination_token=' . (string)$this->nextToken;
+        }
         return $uri->withPath('2/users/' . (string)$this->accountId . '/liked_tweets')
-            ->withQuery('user.fields=id&max_results=10');
+            ->withQuery($query);
     }
 }
