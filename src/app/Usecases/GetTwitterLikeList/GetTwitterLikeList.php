@@ -10,6 +10,7 @@ use App\Clients\GetTwitterLikeList\GetTwitterLikeListApiRequest;
 use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInterface;
 use App\Interfaces\Clients\GetTwitterLikeList\GetTwitterLikeListApiClientInterface;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
+use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInputPort;
 use Fig\Http\Message\StatusCodeInterface;
 use Throwable;
 
@@ -39,9 +40,10 @@ class GetTwitterLikeList implements GetTwitterLikeListInterface
     }
 
     /**
+     * @param GetTwitterLikeListInputPort $input
      * @return array<int, mixed>
      */
-    public function process(): array
+    public function process(GetTwitterLikeListInputPort $input): array
     {
         $authUser = $this->userRepository->findAuthUser();
         if (is_null($authUser)) {
@@ -50,7 +52,8 @@ class GetTwitterLikeList implements GetTwitterLikeListInterface
 
         $request = new GetTwitterLikeListApiRequest(
             new AccountId((string)$authUser->getAttribute('account_id')),
-            new AccessToken((string)$authUser->getAttribute('access_token'))
+            new AccessToken((string)$authUser->getAttribute('access_token')),
+            $input->nextToken()
         );
         try {
             $response = $this->client->process($request);

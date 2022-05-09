@@ -6,6 +6,8 @@ namespace Tests\Usecases\GetTwitterLikeList;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
 use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInterface;
 use App\Usecases\GetTwitterLikeList\GetTwitterLikeList;
+use App\Usecases\GetTwitterLikeList\GetTwitterLikeListInput;
+use App\ValueObjects\Tweet\NextToken;
 use App\ValueObjects\User\AccountId;
 use App\ValueObjects\User\OauthProviderName;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +39,11 @@ class GetTwitterLikeListTest extends TestCase
             OauthProviderName::TWITTER
         );
         Auth::login($user);
-        $result = $usecase->process();
+        $nextToken = 'test_next_token';
+        $input = new GetTwitterLikeListInput(
+            new NextToken($nextToken)
+        );
+        $result = $usecase->process($input);
         $this->assertIsArray($result);
         $this->assertArrayHasKey('id', $result['data'][0]);
         $this->assertArrayHasKey('text', $result['data'][0]);
