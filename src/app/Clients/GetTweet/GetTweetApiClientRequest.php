@@ -43,6 +43,13 @@ class GetTweetApiClientRequest implements GetTweetApiClientRequestInterface
     public function endpointUri(UriInterface $uri): UriInterface
     {
         return $uri->withPath('oembed')
-            ->withQuery(http_build_query(['url' => $this->tweet->tweetUrl()]));
+            ->withQuery(
+                http_build_query([
+                    'url' => $this->tweet->tweetUrl(),
+                    'hide_thread' => true,
+                    'omit_script' => true,
+                    'align' => 'center',
+                ])
+            );
     }
 }
