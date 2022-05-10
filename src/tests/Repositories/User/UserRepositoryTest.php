@@ -5,20 +5,20 @@ namespace Tests\Repositories\User;
 
 use Tests\TestCase;
 use App\Models\User;
+use Carbon\CarbonImmutable;
 use App\Entities\User\UserInfo;
 use App\ValueObjects\User\Avatar;
 use App\ValueObjects\User\UserId;
-use App\ValueObjects\User\UserName;
-use App\ValueObjects\User\AccountId;
+use App\ValueObjects\User\ExpiresAt;
 use Illuminate\Support\Facades\Auth;
+use App\ValueObjects\Shared\UserName;
+use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\User\AccessToken;
 use App\ValueObjects\User\DisplayName;
 use App\ValueObjects\User\RefreshToken;
 use App\Repositories\User\UserRepository;
 use App\ValueObjects\User\OauthProviderName;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
-use App\ValueObjects\User\ExpiresAt;
-use Carbon\CarbonImmutable;
 
 class UserRepositoryTest extends TestCase
 {

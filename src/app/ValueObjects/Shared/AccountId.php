@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace App\ValueObjects\Tweet;
+namespace App\ValueObjects\Shared;
 
 use InvalidArgumentException;
 use App\ValueObjects\Foundation\StringValueObject;
 
-class AuthorId extends StringValueObject
+class AccountId extends StringValueObject
 {
     /**
      * @param string $value

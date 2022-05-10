@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\ValueObjects\User;
+namespace Tests\ValueObjects\Shared;
 
 use Tests\TestCase;
 use InvalidArgumentException;
-use App\ValueObjects\User\UserName;
+use App\ValueObjects\Shared\UserName;
 use App\ValueObjects\Foundation\StringValueObject;
 
 class UserNameTest extends TestCase

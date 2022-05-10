@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\ValueObjects\Tweet;
+namespace Tests\ValueObjects\Shared;
 
 use Tests\TestCase;
 use InvalidArgumentException;
-use App\ValueObjects\Tweet\AuthorId;
+use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\Foundation\StringValueObject;
 
-class AuthorIdTest extends TestCase
+class AccountIdTest extends TestCase
 {
     /**
      * @return void
@@ -16,7 +16,7 @@ class AuthorIdTest extends TestCase
     public function test__construct(): void
     {
         $expected = 'test_account_id';
-        $accountId = new AuthorId($expected);
+        $accountId = new AccountId($expected);
         $this->assertInstanceOf(StringValueObject::class, $accountId);
         $this->assertSame($expected, (string)$accountId);
     }
@@ -27,7 +27,7 @@ class AuthorIdTest extends TestCase
     public function testRequired(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        new AuthorId('');
+        new AccountId('');
     }
 
     /**
@@ -36,6 +36,6 @@ class AuthorIdTest extends TestCase
     public function testInvalidValue(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        new AuthorId('あああ');
+        new AccountId('あああ');
     }
 }

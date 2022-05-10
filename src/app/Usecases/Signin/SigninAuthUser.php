@@ -3,26 +3,26 @@ declare(strict_types=1);
 
 namespace App\Usecases\Signin;
 
+use Throwable;
+use App\Models\User;
+use RuntimeException;
+use Carbon\CarbonImmutable;
+use Psr\Log\LoggerInterface;
+use App\ValueObjects\User\Avatar;
+use Illuminate\Support\Facades\DB;
+use App\ValueObjects\User\ExpiresAt;
+use App\ValueObjects\Shared\UserName;
+use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\User\AccessToken;
+use App\ValueObjects\User\DisplayName;
+use App\ValueObjects\User\RefreshToken;
+use Laravel\Socialite\Facades\Socialite;
+use App\ValueObjects\Foundation\StatusCode;
+use App\ValueObjects\User\OauthProviderName;
 use App\Interfaces\Factories\User\UserFactoryInterface;
+use App\Interfaces\Usecases\Signin\SigninAuthUserInterface;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
 use App\Interfaces\Services\Signin\SetAuthSessionServiceInterface;
-use App\Interfaces\Usecases\Signin\SigninAuthUserInterface;
-use App\Models\User;
-use App\ValueObjects\Foundation\StatusCode;
-use App\ValueObjects\User\AccessToken;
-use App\ValueObjects\User\AccountId;
-use App\ValueObjects\User\Avatar;
-use App\ValueObjects\User\DisplayName;
-use App\ValueObjects\User\ExpiresAt;
-use App\ValueObjects\User\OauthProviderName;
-use App\ValueObjects\User\RefreshToken;
-use App\ValueObjects\User\UserName;
-use Carbon\CarbonImmutable;
-use Illuminate\Support\Facades\DB;
-use Laravel\Socialite\Facades\Socialite;
-use Psr\Log\LoggerInterface;
-use RuntimeException;
-use Throwable;
 
 class SigninAuthUser implements SigninAuthUserInterface
 {

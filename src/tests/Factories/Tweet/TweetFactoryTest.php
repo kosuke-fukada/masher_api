@@ -28,7 +28,7 @@ class TweetFactoryTest extends TestCase
     public function testCreateTweet(TweetFactoryInterface $factory): void
     {
         $tweetId = '1';
-        $authorId = 'test_author_id';
+        $authorId = 'test_account_id';
         $authorName = 'test_user_name';
         $tweet = $factory->createTweet(
             $tweetId,
@@ -37,7 +37,7 @@ class TweetFactoryTest extends TestCase
         );
         $this->assertInstanceOf(Tweet::class, $tweet);
         $this->assertSame($tweetId, (string)$tweet->tweetId());
-        $this->assertSame($authorId, (string)$tweet->authorId());
-        $this->assertSame($authorName, (string)$tweet->authorName());
+        $this->assertSame($authorId, (string)$tweet->accountId());
+        $this->assertSame($authorName, (string)$tweet->userName());
     }
 }

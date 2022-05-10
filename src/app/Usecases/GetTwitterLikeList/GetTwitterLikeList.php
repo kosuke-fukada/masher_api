@@ -3,17 +3,17 @@ declare(strict_types=1);
 
 namespace App\Usecases\GetTwitterLikeList;
 
+use Throwable;
 use RuntimeException;
-use App\ValueObjects\User\AccountId;
+use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\User\AccessToken;
-use App\Clients\GetTwitterLikeList\GetTwitterLikeListApiRequest;
-use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInterface;
-use App\Interfaces\Clients\GetTwitterLikeList\GetTwitterLikeListApiClientInterface;
+use Fig\Http\Message\StatusCodeInterface;
 use App\Interfaces\Factories\Tweet\TweetFactoryInterface;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
+use App\Clients\GetTwitterLikeList\GetTwitterLikeListApiRequest;
 use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInputPort;
-use Fig\Http\Message\StatusCodeInterface;
-use Throwable;
+use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInterface;
+use App\Interfaces\Clients\GetTwitterLikeList\GetTwitterLikeListApiClientInterface;
 
 class GetTwitterLikeList implements GetTwitterLikeListInterface
 {

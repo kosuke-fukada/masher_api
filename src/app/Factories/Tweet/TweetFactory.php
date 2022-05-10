@@ -5,28 +5,28 @@ namespace App\Factories\Tweet;
 
 use App\Entities\Tweet\Tweet;
 use App\ValueObjects\Tweet\TweetId;
-use App\ValueObjects\Tweet\AuthorId;
-use App\ValueObjects\Tweet\AuthorName;
 use App\Interfaces\Factories\Tweet\TweetFactoryInterface;
+use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\Shared\UserName;
 
 class TweetFactory implements TweetFactoryInterface
 {
     /**
      * @param string $tweetId
-     * @param string $authorId
-     * @param string $authorName
+     * @param string $accountId
+     * @param string $userName
      * @return Tweet
      */
     public function createTweet(
         string $tweetId,
-        string $authorId,
-        string $authorName
+        string $accountId,
+        string $userName
     ): Tweet
     {
         return new Tweet(
             new TweetId($tweetId),
-            new AuthorId($authorId),
-            new AuthorName($authorName)
+            new AccountId($accountId),
+            new UserName($userName)
         );
     }
 }

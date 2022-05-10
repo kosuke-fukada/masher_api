@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Usecases\GetTweet;
 
-use App\ValueObjects\Tweet\AuthorId;
-use App\ValueObjects\Tweet\AuthorName;
 use App\ValueObjects\Tweet\TweetId;
+use App\ValueObjects\Shared\UserName;
+use App\ValueObjects\Shared\AccountId;
 
 interface GetTweetInputPort
 {
@@ -15,12 +15,12 @@ interface GetTweetInputPort
     public function tweetId(): TweetId;
 
     /**
-     * @return AuthorId
+     * @return AccountId
      */
-    public function authorId(): AuthorId;
+    public function accountId(): AccountId;
 
     /**
-     * @return AuthorName
+     * @return UserName
      */
-    public function authorName(): AuthorName;
+    public function userName(): UserName;
 }

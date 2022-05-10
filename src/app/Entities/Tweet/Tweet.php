@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace App\Entities\Tweet;
 
 use App\ValueObjects\Tweet\TweetId;
-use App\ValueObjects\Tweet\AuthorId;
-use App\ValueObjects\Tweet\AuthorName;
+use App\ValueObjects\Shared\UserName;
+use App\ValueObjects\Shared\AccountId;
 
 class Tweet
 {
@@ -15,29 +15,29 @@ class Tweet
     private TweetId $tweetId;
 
     /**
-     * @var AuthorId
+     * @var AccountId
      */
-    private AuthorId $authorId;
+    private AccountId $accountId;
 
     /**
-     * @var AuthorName
+     * @var UserName
      */
-    private AuthorName $authorName;
+    private UserName $userName;
 
     /**
      * @param TweetId $tweetId
-     * @param AuthorId $authorId
-     * @param AuthorName $authorName
+     * @param AccountId $accountId
+     * @param UserName $userName
      */
     public function __construct(
         TweetId $tweetId,
-        AuthorId $authorId,
-        AuthorName $authorName
+        AccountId $accountId,
+        UserName $userName
     )
     {
         $this->tweetId = $tweetId;
-        $this->authorId = $authorId;
-        $this->authorName = $authorName;
+        $this->accountId = $accountId;
+        $this->userName = $userName;
     }
 
     /**
@@ -49,19 +49,19 @@ class Tweet
     }
 
     /**
-     * @return AuthorId
+     * @return AccountId
      */
-    public function authorId(): AuthorId
+    public function accountId(): AccountId
     {
-        return $this->authorId;
+        return $this->accountId;
     }
 
     /**
-     * @return AuthorName
+     * @return UserName
      */
-    public function authorName(): AuthorName
+    public function userName(): UserName
     {
-        return $this->authorName;
+        return $this->userName;
     }
 
     /**
@@ -69,7 +69,7 @@ class Tweet
      */
     public function tweetUrl(): string
     {
-        return config('client.twitter.base_url') . $this->authorName() . '/status/' . $this->tweetId();
+        return config('client.twitter.base_url') . $this->userName() . '/status/' . $this->tweetId();
     }
 
     /**
@@ -79,8 +79,8 @@ class Tweet
     {
         return [
             'tweet_id' => (string)$this->tweetId(),
-            'author_id' => (string)$this->authorId(),
-            'author_name' => (string)$this->authorName()
+            'account_id' => (string)$this->accountId(),
+            'user_name' => (string)$this->userName()
         ];
     }
 }

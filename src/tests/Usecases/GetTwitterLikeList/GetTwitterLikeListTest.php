@@ -3,15 +3,15 @@ declare(strict_types=1);
 
 namespace Tests\Usecases\GetTwitterLikeList;
 
-use App\Interfaces\Repositories\User\UserRepositoryInterface;
-use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInterface;
+use Tests\TestCase;
+use Illuminate\Support\Facades\Auth;
+use App\ValueObjects\Tweet\NextToken;
+use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\User\OauthProviderName;
 use App\Usecases\GetTwitterLikeList\GetTwitterLikeList;
 use App\Usecases\GetTwitterLikeList\GetTwitterLikeListInput;
-use App\ValueObjects\Tweet\NextToken;
-use App\ValueObjects\User\AccountId;
-use App\ValueObjects\User\OauthProviderName;
-use Illuminate\Support\Facades\Auth;
-use Tests\TestCase;
+use App\Interfaces\Repositories\User\UserRepositoryInterface;
+use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInterface;
 
 class GetTwitterLikeListTest extends TestCase
 {
@@ -46,7 +46,7 @@ class GetTwitterLikeListTest extends TestCase
         $result = $usecase->process($input);
         $this->assertIsArray($result);
         $this->assertArrayHasKey('tweet_id', $result[0]);
-        $this->assertArrayHasKey('author_id', $result[0]);
-        $this->assertArrayHasKey('author_name', $result[0]);
+        $this->assertArrayHasKey('account_id', $result[0]);
+        $this->assertArrayHasKey('user_name', $result[0]);
     }
 }

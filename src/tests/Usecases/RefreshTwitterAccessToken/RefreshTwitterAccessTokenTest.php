@@ -4,13 +4,13 @@ declare(strict_types=1);
 namespace Tests\Usecases\RefreshTwitterAccessToken;
 
 use Tests\TestCase;
-use App\ValueObjects\User\AccountId;
+use App\ValueObjects\User\UserId;
 use Illuminate\Support\Facades\Auth;
+use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\User\OauthProviderName;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
 use App\Usecases\RefreshTwitterAccessToken\RefreshTwitterAccessToken;
 use App\Interfaces\Usecases\RefreshTwitterAccessToken\RefreshTwitterAccessTokenInterface;
-use App\ValueObjects\User\UserId;
 
 class RefreshTwitterAccessTokenTest extends TestCase
 {

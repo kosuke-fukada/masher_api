@@ -45,8 +45,8 @@ class GetTweet implements GetTweetInterface
         // Entityを作成
         $tweet = $this->factory->createTweet(
             (string)$input->tweetId(),
-            (string)$input->authorId(),
-            (string)$input->authorName()
+            (string)$input->accountId(),
+            (string)$input->userName()
         );
 
         // APIから取得
