@@ -18,6 +18,15 @@ class GetTwitterLikeListApiResponseMock implements GetTwitterLikeListApiClientRe
                 [
                     'id' => '1',
                     'text' => 'test tweet text.',
+                    'author_id' => '1'
+                ]
+            ],
+            'includes' => [
+                'users' => [
+                    [
+                        'id' => '1',
+                        'username' => 'test_user_name'
+                    ]
                 ]
             ]
         ]);

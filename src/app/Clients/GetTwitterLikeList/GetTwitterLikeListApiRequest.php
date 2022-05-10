@@ -63,7 +63,7 @@ class GetTwitterLikeListApiRequest implements GetTwitterLikeListApiClientRequest
      */
     public function endpointUri(UriInterface $uri): UriInterface
     {
-        $query = 'user.fields=id&max_results=10&expansions=author_id';
+        $query = 'user.fields=id,username&max_results=10&expansions=author_id';
         if ($this->nextToken->existNext()) {
             $query .= '&pagination_token=' . (string)$this->nextToken;
         }
