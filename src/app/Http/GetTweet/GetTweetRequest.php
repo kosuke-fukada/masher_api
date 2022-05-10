@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Http\GetTweet;
 
-use App\ValueObjects\Tweet\AuthorId;
 use App\ValueObjects\Tweet\TweetId;
-use App\ValueObjects\Tweet\AuthorName;
+use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\Shared\UserName;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GetTweetRequest extends FormRequest
@@ -25,7 +25,8 @@ class GetTweetRequest extends FormRequest
     {
         return [
             'tweet_id' => ['required', 'string'],
-            'author_name' => ['required', 'string']
+            'account_id' => ['required', 'string'],
+            'user_name' => ['required', 'string']
         ];
     }
 
@@ -38,18 +39,18 @@ class GetTweetRequest extends FormRequest
     }
 
     /**
-     * @return AuthorId
+     * @return AccountId
      */
-    public function authorId(): AuthorId
+    public function accountId(): AccountId
     {
-        return new AuthorId((string)$this->get('author_id'));
+        return new AccountId((string)$this->get('account_id'));
     }
 
     /**
-     * @return AuthorName
+     * @return UserName
      */
-    public function authorName(): AuthorName
+    public function userName(): UserName
     {
-        return new AuthorName((string)$this->get('author_name'));
+        return new UserName((string)$this->get('user_name'));
     }
 }

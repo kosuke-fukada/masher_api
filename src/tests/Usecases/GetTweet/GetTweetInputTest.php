@@ -5,10 +5,10 @@ namespace Tests\Usecases\GetTweet;
 
 use PHPUnit\Framework\TestCase;
 use App\ValueObjects\Tweet\TweetId;
-use App\ValueObjects\Tweet\AuthorName;
 use App\Usecases\GetTweet\GetTweetInput;
 use App\Interfaces\Usecases\GetTweet\GetTweetInputPort;
-use App\ValueObjects\Tweet\AuthorId;
+use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\Shared\UserName;
 
 class GetTweetInputTest extends TestCase
 {
@@ -18,16 +18,16 @@ class GetTweetInputTest extends TestCase
     public function test__construct(): void
     {
         $tweetId = '1';
-        $authorId = 'test_author_id';
-        $authorName = 'test_user_name';
+        $accountId = 'test_account_id';
+        $userName = 'test_user_name';
         $input = new GetTweetInput(
             new TweetId($tweetId),
-            new AuthorId($authorId),
-            new AuthorName($authorName)
+            new AccountId($accountId),
+            new UserName($userName)
         );
         $this->assertInstanceOf(GetTweetInputPort::class, $input);
         $this->assertSame($tweetId, (string)$input->tweetId());
-        $this->assertSame($authorId, (string)$input->authorId());
-        $this->assertSame($authorName, (string)$input->authorName());
+        $this->assertSame($accountId, (string)$input->accountId());
+        $this->assertSame($userName, (string)$input->userName());
     }
 }

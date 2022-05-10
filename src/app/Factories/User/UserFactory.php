@@ -3,19 +3,19 @@ declare(strict_types=1);
 
 namespace App\Factories\User;
 
-use App\Entities\User\UserInfo;
-use App\Interfaces\Factories\User\UserFactoryInterface;
 use App\Models\User;
-use App\ValueObjects\User\AccountId;
-use App\ValueObjects\User\DisplayName;
-use App\ValueObjects\User\Avatar;
-use App\ValueObjects\User\AccessToken;
-use App\ValueObjects\User\ExpiresAt;
-use App\ValueObjects\User\OauthProviderName;
-use App\ValueObjects\User\RefreshToken;
-use App\ValueObjects\User\UserId;
-use App\ValueObjects\User\UserName;
 use Carbon\CarbonImmutable;
+use App\Entities\User\UserInfo;
+use App\ValueObjects\User\Avatar;
+use App\ValueObjects\User\UserId;
+use App\ValueObjects\User\ExpiresAt;
+use App\ValueObjects\Shared\UserName;
+use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\User\AccessToken;
+use App\ValueObjects\User\DisplayName;
+use App\ValueObjects\User\RefreshToken;
+use App\ValueObjects\User\OauthProviderName;
+use App\Interfaces\Factories\User\UserFactoryInterface;
 
 class UserFactory implements UserFactoryInterface
 {

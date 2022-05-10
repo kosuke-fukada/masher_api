@@ -6,8 +6,8 @@ namespace Tests\Usecases\GetTweet;
 use App\Interfaces\Usecases\GetTweet\GetTweetInterface;
 use App\Usecases\GetTweet\GetTweet;
 use App\Usecases\GetTweet\GetTweetInput;
-use App\ValueObjects\Tweet\AuthorId;
-use App\ValueObjects\Tweet\AuthorName;
+use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\Shared\UserName;
 use App\ValueObjects\Tweet\TweetId;
 use Tests\TestCase;
 
@@ -31,15 +31,15 @@ class GetTweetTest extends TestCase
     public function testProcess(GetTweetInterface $usecase): void
     {
         $tweetId = '1';
-        $authorId = 'test_author_id';
-        $authorName = 'test_user_name';
+        $accountId = 'test_account_id';
+        $userName = 'test_user_name';
         $input = new GetTweetInput(
             new TweetId($tweetId),
-            new AuthorId($authorId),
-            new AuthorName($authorName)
+            new AccountId($accountId),
+            new UserName($userName)
         );
         $tweetData = $usecase->process($input);
         $this->assertIsArray($tweetData);
-        $this->assertSame($authorName, $tweetData['author_name']);
+        $this->assertSame($userName, $tweetData['author_name']);
     }
 }

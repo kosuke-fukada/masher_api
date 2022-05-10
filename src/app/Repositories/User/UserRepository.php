@@ -5,11 +5,11 @@ namespace App\Repositories\User;
 
 use App\Models\User;
 use App\Entities\User\UserInfo;
-use App\ValueObjects\User\AccountId;
+use App\ValueObjects\User\UserId;
 use Illuminate\Support\Facades\Auth;
+use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\User\OauthProviderName;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
-use App\ValueObjects\User\UserId;
 
 class UserRepository implements UserRepositoryInterface
 {

@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace App\Interfaces\Repositories\User;
 
 use App\Models\User;
-use App\ValueObjects\User\OauthProviderName;
-use App\ValueObjects\User\AccountId;
 use App\ValueObjects\User\UserId;
+use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\User\OauthProviderName;
 
 interface UserRepositoryInterface
 {

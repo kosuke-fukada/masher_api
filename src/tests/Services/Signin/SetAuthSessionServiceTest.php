@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 namespace Tests\Services\Signin;
 
-use App\Interfaces\Repositories\User\UserRepositoryInterface;
-use App\Interfaces\Services\Signin\SetAuthSessionServiceInterface;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use App\Services\Signin\SetAuthSessionService;
-use App\ValueObjects\User\AccountId;
+use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\User\OauthProviderName;
+use App\Services\Signin\SetAuthSessionService;
+use App\Interfaces\Repositories\User\UserRepositoryInterface;
+use App\Interfaces\Services\Signin\SetAuthSessionServiceInterface;
 
 class SetAuthSessionServiceTest extends TestCase
 {
