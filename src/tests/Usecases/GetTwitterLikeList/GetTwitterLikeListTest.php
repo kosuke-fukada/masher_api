@@ -45,7 +45,8 @@ class GetTwitterLikeListTest extends TestCase
         );
         $result = $usecase->process($input);
         $this->assertIsArray($result);
-        $this->assertArrayHasKey('id', $result['data'][0]);
-        $this->assertArrayHasKey('text', $result['data'][0]);
+        $this->assertArrayHasKey('tweet_id', $result[0]);
+        $this->assertArrayHasKey('author_id', $result[0]);
+        $this->assertArrayHasKey('author_name', $result[0]);
     }
 }
