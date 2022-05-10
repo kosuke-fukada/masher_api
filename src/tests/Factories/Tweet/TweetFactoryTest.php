@@ -28,10 +28,16 @@ class TweetFactoryTest extends TestCase
     public function testCreateTweet(TweetFactoryInterface $factory): void
     {
         $tweetId = '1';
+        $authorId = 'test_author_id';
         $authorName = 'test_user_name';
-        $tweet = $factory->createTweet($tweetId, $authorName);
+        $tweet = $factory->createTweet(
+            $tweetId,
+            $authorId,
+            $authorName
+        );
         $this->assertInstanceOf(Tweet::class, $tweet);
         $this->assertSame($tweetId, (string)$tweet->tweetId());
+        $this->assertSame($authorId, (string)$tweet->authorId());
         $this->assertSame($authorName, (string)$tweet->authorName());
     }
 }
