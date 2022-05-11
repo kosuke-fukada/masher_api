@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\CreateLikeCount\CreateLikeCountAction;
 use App\Http\Signout\SignoutAction;
 use App\Http\GetTweet\GetTweetAction;
 use Illuminate\Support\Facades\Route;
@@ -44,3 +45,5 @@ Route::prefix('likes')->middleware(VerifyTwitterAccessTokenExpired::class)
     });
 
 Route::get('/tweet', GetTweetAction::class);
+
+Route::post('/like_count', CreateLikeCountAction::class);
