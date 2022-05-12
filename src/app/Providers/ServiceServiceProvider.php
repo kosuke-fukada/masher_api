@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Interfaces\Services\Signin\SetAuthSessionServiceInterface;
-use App\Services\Signin\SetAuthSessionService;
+use App\Interfaces\Services\User\Signin\SetAuthSessionServiceInterface;
+use App\Services\User\Signin\SetAuthSessionService;
 use Illuminate\Support\ServiceProvider;
 
 class ServiceServiceProvider extends ServiceProvider

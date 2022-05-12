@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Interfaces\Services\Signin;
+namespace App\Interfaces\Services\User\Signin;
 
 use App\Models\User;
 

@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\Services\Signin;
+namespace Tests\Services\User\Signin;
 
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\User\OauthProviderName;
-use App\Services\Signin\SetAuthSessionService;
+use App\Services\User\Signin\SetAuthSessionService;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
-use App\Interfaces\Services\Signin\SetAuthSessionServiceInterface;
+use App\Interfaces\Services\User\Signin\SetAuthSessionServiceInterface;
 
 class SetAuthSessionServiceTest extends TestCase
 {

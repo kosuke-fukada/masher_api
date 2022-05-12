@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Services\Signin;
+namespace App\Services\User\Signin;
 
-use App\Interfaces\Services\Signin\SetAuthSessionServiceInterface;
+use App\Interfaces\Services\User\Signin\SetAuthSessionServiceInterface;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
