@@ -3,25 +3,25 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Interfaces\Usecases\GetTweet\GetTweetInterface;
-use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInterface;
-use App\Interfaces\Usecases\GetUserInfo\GetUserInfoInterface;
-use App\Interfaces\Usecases\RefreshTwitterAccessToken\RefreshTwitterAccessTokenInterface;
-use App\Interfaces\Usecases\CreateLikeCount\CreateLikeCountInterface;
-use App\Interfaces\Usecases\Signin\GetRedirectUrlInterface;
-use App\Interfaces\Usecases\Signin\SigninAuthUserInterface;
-use App\Interfaces\Usecases\Signout\SignoutInterface;
-use App\Interfaces\Usecases\UpdateLikeCount\UpdateLikeCountInterface;
-use App\Usecases\GetTweet\GetTweet;
-use App\Usecases\GetTwitterLikeList\GetTwitterLikeList;
-use App\Usecases\GetUserInfo\GetUserInfo;
-use App\Usecases\RefreshTwitterAccessToken\RefreshTwitterAccessToken;
-use App\Usecases\CreateLikeCount\CreateLikeCount;
-use App\Usecases\Signin\GetRedirectUrl;
-use App\Usecases\Signin\SigninAuthUser;
-use App\Usecases\Signout\Signout;
-use App\Usecases\UpdateLikeCount\UpdateLikeCount;
+use App\Usecases\User\Signout\Signout;
 use Illuminate\Support\ServiceProvider;
+use App\Usecases\Tweet\GetTweet\GetTweet;
+use App\Usecases\User\GetUserInfo\GetUserInfo;
+use App\Usecases\User\GetRedirectUrl\GetRedirectUrl;
+use App\Usecases\User\SigninAuthUser\SigninAuthUser;
+use App\Usecases\Like\CreateLikeCount\CreateLikeCount;
+use App\Usecases\Like\UpdateLikeCount\UpdateLikeCount;
+use App\Interfaces\Usecases\User\Signout\SignoutInterface;
+use App\Interfaces\Usecases\Tweet\GetTweet\GetTweetInterface;
+use App\Usecases\Tweet\GetTwitterLikeList\GetTwitterLikeList;
+use App\Interfaces\Usecases\User\GetUserInfo\GetUserInfoInterface;
+use App\Interfaces\Usecases\User\GetRedirectUrl\GetRedirectUrlInterface;
+use App\Interfaces\Usecases\User\SigninAuthUser\SigninAuthUserInterface;
+use App\Interfaces\Usecases\Like\CreateLikeCount\CreateLikeCountInterface;
+use App\Interfaces\Usecases\Like\UpdateLikeCount\UpdateLikeCountInterface;
+use App\Usecases\User\RefreshTwitterAccessToken\RefreshTwitterAccessToken;
+use App\Interfaces\Usecases\Tweet\GetTwitterLikeList\GetTwitterLikeListInterface;
+use App\Interfaces\Usecases\User\RefreshTwitterAccessToken\RefreshTwitterAccessTokenInterface;
 
 class UsecaseServiceProvider extends ServiceProvider
 {

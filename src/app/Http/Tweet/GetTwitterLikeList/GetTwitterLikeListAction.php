@@ -7,8 +7,8 @@ use Throwable;
 use Psr\Log\LoggerInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
-use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInterface;
-use App\Usecases\GetTwitterLikeList\GetTwitterLikeListInput;
+use App\Usecases\Tweet\GetTwitterLikeList\GetTwitterLikeListInput;
+use App\Interfaces\Usecases\Tweet\GetTwitterLikeList\GetTwitterLikeListInterface;
 
 class GetTwitterLikeListAction
 {

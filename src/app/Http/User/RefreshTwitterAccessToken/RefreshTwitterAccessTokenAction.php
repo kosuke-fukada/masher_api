@@ -8,7 +8,7 @@ use Psr\Log\LoggerInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
 use Fig\Http\Message\StatusCodeInterface;
-use App\Interfaces\Usecases\RefreshTwitterAccessToken\RefreshTwitterAccessTokenInterface;
+use App\Interfaces\Usecases\User\RefreshTwitterAccessToken\RefreshTwitterAccessTokenInterface;
 
 class RefreshTwitterAccessTokenAction
 {

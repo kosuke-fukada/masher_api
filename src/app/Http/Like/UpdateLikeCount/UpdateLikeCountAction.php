@@ -7,8 +7,8 @@ use Throwable;
 use Psr\Log\LoggerInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
-use App\Usecases\UpdateLikeCount\UpdateLikeCountInput;
-use App\Interfaces\Usecases\UpdateLikeCount\UpdateLikeCountInterface;
+use App\Usecases\Like\UpdateLikeCount\UpdateLikeCountInput;
+use App\Interfaces\Usecases\Like\UpdateLikeCount\UpdateLikeCountInterface;
 
 class UpdateLikeCountAction
 {

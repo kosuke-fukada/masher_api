@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 namespace App\Http\Tweet\GetTweet;
 
+use Throwable;
 use Psr\Log\LoggerInterface;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
-use App\Interfaces\Usecases\GetTweet\GetTweetInterface;
-use App\Usecases\GetTweet\GetTweetInput;
 use Illuminate\Support\Facades\Response;
-use Throwable;
+use App\Usecases\Tweet\GetTweet\GetTweetInput;
+use App\Interfaces\Usecases\Tweet\GetTweet\GetTweetInterface;
 
 class GetTweetAction extends Controller
 {

@@ -8,8 +8,8 @@ use Psr\Log\LoggerInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
 use App\Http\CreateLikeCount\CreateLikeCountRequest;
-use App\Usecases\CreateLikeCount\CreateLikeCountInput;
-use App\Interfaces\Usecases\CreateLikeCount\CreateLikeCountInterface;
+use App\Usecases\Like\CreateLikeCount\CreateLikeCountInput;
+use App\Interfaces\Usecases\Like\CreateLikeCount\CreateLikeCountInterface;
 
 class CreateLikeCountAction
 {

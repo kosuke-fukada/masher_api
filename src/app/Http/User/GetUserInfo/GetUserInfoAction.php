@@ -6,7 +6,7 @@ namespace App\Http\User\GetUserInfo;
 use Throwable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
-use App\Interfaces\Usecases\GetUserInfo\GetUserInfoInterface;
+use App\Interfaces\Usecases\User\GetUserInfo\GetUserInfoInterface;
 
 class GetUserInfoAction
 {

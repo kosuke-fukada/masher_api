@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace App\Http\User\GetTwitterRedirectUrl;
 
-use App\Interfaces\Usecases\Signin\GetRedirectUrlInterface;
-use App\ValueObjects\User\OauthProviderName;
+use Throwable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
-use Throwable;
+use App\ValueObjects\User\OauthProviderName;
+use App\Interfaces\Usecases\User\GetRedirectUrl\GetRedirectUrlInterface;
 
 class GetTwitterRedirectUrlAction
 {
