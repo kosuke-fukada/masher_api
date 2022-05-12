@@ -11,6 +11,7 @@ use App\Interfaces\Usecases\CreateLikeCount\CreateLikeCountInterface;
 use App\Interfaces\Usecases\Signin\GetRedirectUrlInterface;
 use App\Interfaces\Usecases\Signin\SigninAuthUserInterface;
 use App\Interfaces\Usecases\Signout\SignoutInterface;
+use App\Interfaces\Usecases\UpdateLikeCount\UpdateLikeCountInterface;
 use App\Usecases\GetTweet\GetTweet;
 use App\Usecases\GetTwitterLikeList\GetTwitterLikeList;
 use App\Usecases\GetUserInfo\GetUserInfo;
@@ -19,6 +20,7 @@ use App\Usecases\CreateLikeCount\CreateLikeCount;
 use App\Usecases\Signin\GetRedirectUrl;
 use App\Usecases\Signin\SigninAuthUser;
 use App\Usecases\Signout\Signout;
+use App\Usecases\UpdateLikeCount\UpdateLikeCount;
 use Illuminate\Support\ServiceProvider;
 
 class UsecaseServiceProvider extends ServiceProvider
@@ -36,5 +38,6 @@ class UsecaseServiceProvider extends ServiceProvider
         $this->app->singleton(RefreshTwitterAccessTokenInterface::class, RefreshTwitterAccessToken::class);
         $this->app->singleton(GetTweetInterface::class, GetTweet::class);
         $this->app->singleton(CreateLikeCountInterface::class, CreateLikeCount::class);
+        $this->app->singleton(UpdateLikeCountInterface::class, UpdateLikeCount::class);
     }
 }
