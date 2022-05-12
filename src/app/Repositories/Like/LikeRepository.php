@@ -9,7 +9,6 @@ use App\Models\Like;
 use App\ValueObjects\Like\LikeIdentifier;
 use Fig\Http\Message\StatusCodeInterface;
 use Illuminate\Database\RecordsNotFoundException;
-use RuntimeException;
 
 class LikeRepository implements LikeRepositoryInterface
 {
@@ -70,5 +69,18 @@ class LikeRepository implements LikeRepositoryInterface
         $likeEntity->setLikeIdentifier($id);
 
         return $likeEntity;
+    }
+
+    /**
+     * @param \App\Entities\Like\Like $like
+     * @return void
+     */
+    public function updateLikeCount(\App\Entities\Like\Like $like): void
+    {
+        $this->model->newQuery()->find($like->likeIdentifier()->toInt())
+            ->fill([
+                'like_count' => $like->likeCount()->toInt()
+            ])
+            ->save();
     }
 }

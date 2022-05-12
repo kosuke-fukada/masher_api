@@ -19,4 +19,10 @@ interface LikeRepositoryInterface
      * @return \App\Entities\Like\Like
      */
     public function findById(LikeIdentifier $id): \App\Entities\Like\Like;
+
+    /**
+     * @param \App\Entities\Like\Like $like
+     * @return void
+     */
+    public function updateLikeCount(\App\Entities\Like\Like $like): void;
 }
