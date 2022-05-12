@@ -10,6 +10,7 @@ use App\Http\Signin\GetTwitterRedirectUrlAction;
 use App\Http\Middleware\VerifyTwitterAccessTokenExpired;
 use App\Http\GetTwitterLikeList\GetTwitterLikeListAction;
 use App\Http\RefreshTwitterAccessToken\RefreshTwitterAccessTokenAction;
+use App\Http\UpdateLikeCount\UpdateLikeCountAction;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +47,7 @@ Route::prefix('likes')->middleware(VerifyTwitterAccessTokenExpired::class)
 
 Route::get('/tweet', GetTweetAction::class);
 
-Route::post('/like_count', CreateLikeCountAction::class);
+Route::prefix('like_count')->group(function() {
+    Route::post('/', CreateLikeCountAction::class);
+    Route::put('/', UpdateLikeCountAction::class);
+});
