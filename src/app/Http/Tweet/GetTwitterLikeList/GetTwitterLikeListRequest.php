@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\GetTwitterLikeList;
+namespace App\Http\Tweet\GetTwitterLikeList;
 
 use App\ValueObjects\Tweet\NextToken;
 use Illuminate\Foundation\Http\FormRequest;

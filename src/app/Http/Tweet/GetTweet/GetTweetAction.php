@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\GetTweet;
+namespace App\Http\Tweet\GetTweet;
 
 use Psr\Log\LoggerInterface;
 use Illuminate\Http\JsonResponse;

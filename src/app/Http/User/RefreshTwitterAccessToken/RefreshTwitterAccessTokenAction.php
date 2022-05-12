@@ -1,29 +1,33 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\GetTwitterLikeList;
+namespace App\Http\User\RefreshTwitterAccessToken;
 
 use Throwable;
 use Psr\Log\LoggerInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
-use App\Interfaces\Usecases\GetTwitterLikeList\GetTwitterLikeListInterface;
-use App\Usecases\GetTwitterLikeList\GetTwitterLikeListInput;
+use Fig\Http\Message\StatusCodeInterface;
+use App\Interfaces\Usecases\RefreshTwitterAccessToken\RefreshTwitterAccessTokenInterface;
 
-class GetTwitterLikeListAction
+class RefreshTwitterAccessTokenAction
 {
     /**
-     * @var GetTwitterLikeListInterface
+     * @var RefreshTwitterAccessTokenInterface
      */
-    private GetTwitterLikeListInterface $usecase;
+    private RefreshTwitterAccessTokenInterface $usecase;
 
     /**
      * @var LoggerInterface
      */
     private LoggerInterface $logger;
 
+    /**
+     * @param RefreshTwitterAccessTokenInterface $usecase
+     * @param LoggerInterface $logger
+     */
     public function __construct(
-        GetTwitterLikeListInterface $usecase,
+        RefreshTwitterAccessTokenInterface $usecase,
         LoggerInterface $logger
     )
     {
@@ -34,13 +38,10 @@ class GetTwitterLikeListAction
     /**
      * @return JsonResponse
      */
-    public function __invoke(GetTwitterLikeListRequest $request): JsonResponse
+    public function __invoke(): JsonResponse
     {
-        $input = new GetTwitterLikeListInput(
-            $request->nextToken()
-        );
         try {
-            $list = $this->usecase->process($input);
+            $this->usecase->process();
         } catch (Throwable $e) {
             $this->logger->error((string)$e);
             return Response::json(
@@ -51,6 +52,6 @@ class GetTwitterLikeListAction
             );
         }
 
-        return Response::json($list);
+        return Response::json([], StatusCodeInterface::STATUS_NO_CONTENT);
     }
 }

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Signin;
+namespace App\Http\User\SigninWithTwitter;
 
 use Throwable;
 use Illuminate\Http\JsonResponse;

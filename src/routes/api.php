@@ -1,16 +1,16 @@
 <?php
 
-use App\Http\CreateLikeCount\CreateLikeCountAction;
-use App\Http\Signout\SignoutAction;
-use App\Http\GetTweet\GetTweetAction;
 use Illuminate\Support\Facades\Route;
-use App\Http\GetUserInfo\GetUserInfoAction;
-use App\Http\Signin\SigninWithTwitterAction;
-use App\Http\Signin\GetTwitterRedirectUrlAction;
+use App\Http\User\Signout\SignoutAction;
+use App\Http\Tweet\GetTweet\GetTweetAction;
+use App\Http\User\GetUserInfo\GetUserInfoAction;
+use App\Http\Like\CreateLikeCount\CreateLikeCountAction;
+use App\Http\Like\UpdateLikeCount\UpdateLikeCountAction;
 use App\Http\Middleware\VerifyTwitterAccessTokenExpired;
-use App\Http\GetTwitterLikeList\GetTwitterLikeListAction;
-use App\Http\RefreshTwitterAccessToken\RefreshTwitterAccessTokenAction;
-use App\Http\UpdateLikeCount\UpdateLikeCountAction;
+use App\Http\User\SigninWithTwitter\SigninWithTwitterAction;
+use App\Http\Tweet\GetTwitterLikeList\GetTwitterLikeListAction;
+use App\Http\User\GetTwitterRedirectUrl\GetTwitterRedirectUrlAction;
+use App\Http\User\RefreshTwitterAccessToken\RefreshTwitterAccessTokenAction;
 
 /*
 |--------------------------------------------------------------------------

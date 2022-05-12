@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\CreateLikeCount;
+namespace App\Http\Like\CreateLikeCount;
 
 use App\ValueObjects\Like\LikeCount;
 use App\ValueObjects\Shared\AccountId;

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\GetUserInfo;
+namespace App\Http\User\GetUserInfo;
 
 use Throwable;
 use Illuminate\Http\JsonResponse;

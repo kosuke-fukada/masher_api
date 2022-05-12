@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\CreateLikeCount;
+namespace App\Http\Like\CreateLikeCount;
 
 use Throwable;
 use Psr\Log\LoggerInterface;

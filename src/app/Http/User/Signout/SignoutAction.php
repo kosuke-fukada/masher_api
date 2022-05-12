@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Signout;
+namespace App\Http\User\Signout;
 
 use App\Interfaces\Usecases\Signout\SignoutInterface;
 use App\ValueObjects\Foundation\StatusCode;

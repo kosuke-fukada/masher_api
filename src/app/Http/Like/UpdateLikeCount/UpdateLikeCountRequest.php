@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\UpdateLikeCount;
+namespace App\Http\Like\UpdateLikeCount;
 
 use App\ValueObjects\User\UserId;
 use App\ValueObjects\Tweet\TweetId;
