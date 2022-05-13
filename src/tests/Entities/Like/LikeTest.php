@@ -34,6 +34,13 @@ class LikeTest extends TestCase
         $this->assertSame($accountId, (string)$like->accountId());
         $this->assertSame($likeCount, $like->likeCount()->toInt());
 
+        $likeArray = $like->toArray();
+        $this->assertNull($likeArray['id']);
+        $this->assertSame($userId, $likeArray['user_id']);
+        $this->assertSame($tweetId, $likeArray['tweet_id']);
+        $this->assertSame($accountId, $likeArray['author_id']);
+        $this->assertSame($likeCount, $likeArray['like_count']);
+
         $updatedLikeIdentifier = 100;
         $like->setLikeIdentifier(new LikeIdentifier($updatedLikeIdentifier));
         $this->assertSame($updatedLikeIdentifier, $like->likeIdentifier()->toInt());

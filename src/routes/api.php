@@ -5,6 +5,7 @@ use App\Http\User\Signout\SignoutAction;
 use App\Http\Tweet\GetTweet\GetTweetAction;
 use App\Http\User\GetUserInfo\GetUserInfoAction;
 use App\Http\Like\CreateLikeCount\CreateLikeCountAction;
+use App\Http\Like\GetLikeCount\GetLikeCountAction;
 use App\Http\Like\UpdateLikeCount\UpdateLikeCountAction;
 use App\Http\Middleware\VerifyTwitterAccessTokenExpired;
 use App\Http\User\SigninWithTwitter\SigninWithTwitterAction;
@@ -48,6 +49,7 @@ Route::prefix('likes')->middleware(VerifyTwitterAccessTokenExpired::class)
 Route::get('/tweet', GetTweetAction::class);
 
 Route::prefix('like_count')->group(function() {
+    Route::get('/', GetLikeCountAction::class);
     Route::post('/', CreateLikeCountAction::class);
     Route::put('/', UpdateLikeCountAction::class);
 });
