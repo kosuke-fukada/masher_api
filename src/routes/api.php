@@ -11,6 +11,7 @@ use App\Http\Middleware\VerifyTwitterAccessTokenExpired;
 use App\Http\User\SigninWithTwitter\SigninWithTwitterAction;
 use App\Http\Tweet\GetTwitterLikeList\GetTwitterLikeListAction;
 use App\Http\User\GetTwitterRedirectUrl\GetTwitterRedirectUrlAction;
+use App\Http\User\GetTwitterUser\GetTwitterUserAction;
 use App\Http\User\RefreshTwitterAccessToken\RefreshTwitterAccessTokenAction;
 
 /*
@@ -36,6 +37,7 @@ Route::get('/signout', SignoutAction::class);
 Route::prefix('user')->middleware(VerifyTwitterAccessTokenExpired::class)
     ->group(function() {
         Route::get('/', GetUserInfoAction::class);
+        Route::get('/twitter', GetTwitterUserAction::class);
         Route::get('/refresh/twitter', RefreshTwitterAccessTokenAction::class);
     });
 
