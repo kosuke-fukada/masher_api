@@ -121,7 +121,7 @@ class Like
     public function toArray(): array
     {
         return [
-            'id' => $this->likeIdentifier()->toInt(),
+            'id' => is_null($this->likeIdentifier()) ? null : $this->likeIdentifier()->toInt(),
             'user_id' => $this->userId()->toInt(),
             'tweet_id' => (string)$this->tweetId(),
             'author_id' => (string)$this->accountId(),
