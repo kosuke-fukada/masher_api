@@ -4,13 +4,13 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Closure;
+use Throwable;
+use RuntimeException;
 use Illuminate\Http\Request;
 use Psr\Log\LoggerInterface;
 use App\Interfaces\Factories\User\UserFactoryInterface;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
-use App\Interfaces\Usecases\RefreshTwitterAccessToken\RefreshTwitterAccessTokenInterface;
-use RuntimeException;
-use Throwable;
+use App\Interfaces\Usecases\User\RefreshTwitterAccessToken\RefreshTwitterAccessTokenInterface;
 
 class VerifyTwitterAccessTokenExpired
 {
