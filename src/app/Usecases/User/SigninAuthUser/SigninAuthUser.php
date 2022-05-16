@@ -20,9 +20,9 @@ use Laravel\Socialite\Facades\Socialite;
 use App\ValueObjects\Foundation\StatusCode;
 use App\ValueObjects\User\OauthProviderName;
 use App\Interfaces\Factories\User\UserFactoryInterface;
-use App\Interfaces\Usecases\User\SigninAuthUser\SigninAuthUserInterface;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
-use App\Interfaces\Services\Signin\SetAuthSessionServiceInterface;
+use App\Interfaces\Services\User\Signin\SetAuthSessionServiceInterface;
+use App\Interfaces\Usecases\User\SigninAuthUser\SigninAuthUserInterface;
 
 class SigninAuthUser implements SigninAuthUserInterface
 {
