@@ -45,8 +45,10 @@ class GetTwitterLikeListTest extends TestCase
         );
         $result = $usecase->process($input);
         $this->assertIsArray($result);
-        $this->assertArrayHasKey('tweet_id', $result[0]);
-        $this->assertArrayHasKey('account_id', $result[0]);
-        $this->assertArrayHasKey('user_name', $result[0]);
+        $this->assertArrayHasKey('tweetList', $result);
+        $this->assertArrayHasKey('tweet_id', $result['tweetList'][0]);
+        $this->assertArrayHasKey('account_id', $result['tweetList'][0]);
+        $this->assertArrayHasKey('user_name', $result['tweetList'][0]);
+        $this->assertArrayHasKey('nextToken', $result);
     }
 }

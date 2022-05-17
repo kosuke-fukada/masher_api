@@ -87,6 +87,9 @@ class GetTwitterLikeList implements GetTwitterLikeListInterface
             throw new RuntimeException($e->getMessage(), $e->getCode());
         }
 
-        return $tweetList;
+        return [
+            'tweetList' => $tweetList,
+            'nextToken' => isset($list['meta']['next_token']) ? $list['meta']['next_token'] : ''
+        ];
     }
 }

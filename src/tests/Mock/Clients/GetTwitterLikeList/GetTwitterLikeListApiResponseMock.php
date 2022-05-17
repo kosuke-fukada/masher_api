@@ -28,6 +28,9 @@ class GetTwitterLikeListApiResponseMock implements GetTwitterLikeListApiClientRe
                         'username' => 'test_user_name'
                     ]
                 ]
+            ],
+            'meta' => [
+                'next_token' => 'test_next_token'
             ]
         ]);
     }
