@@ -31,6 +31,6 @@ class GetTwitterLikeListRequest extends FormRequest
      */
     public function nextToken(): NextToken
     {
-        return new NextToken($this->get('next_token', ''));
+        return new NextToken((string)$this->get('next_token', ''));
     }
 }
