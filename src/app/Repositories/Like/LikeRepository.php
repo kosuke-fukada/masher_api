@@ -44,7 +44,7 @@ class LikeRepository implements LikeRepositoryInterface
         return $this->model->newQuery()->create([
             'user_id' => $like->userId()->toInt(),
             'tweet_id' => (string)$like->tweetId(),
-            'author_id' => (string)$like->accountId(),
+            'author_id' => (string)$like->authorId(),
             'like_count' => $like->likeCount()->toInt()
         ]);
     }

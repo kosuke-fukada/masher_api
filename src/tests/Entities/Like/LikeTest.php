@@ -20,25 +20,25 @@ class LikeTest extends TestCase
     {
         $userId = 1;
         $tweetId = '1';
-        $accountId = '1';
+        $authorId = '1';
         $likeCount = 0;
         $like = new Like(
             new UserId($userId),
             new TweetId($tweetId),
-            new AccountId($accountId),
+            new AccountId($authorId),
             new LikeCount($likeCount)
         );
         $this->assertNull($like->likeIdentifier());
         $this->assertSame($userId, $like->userId()->toInt());
         $this->assertSame($tweetId, (string)$like->tweetId());
-        $this->assertSame($accountId, (string)$like->accountId());
+        $this->assertSame($authorId, (string)$like->authorId());
         $this->assertSame($likeCount, $like->likeCount()->toInt());
 
         $likeArray = $like->toArray();
         $this->assertNull($likeArray['id']);
         $this->assertSame($userId, $likeArray['user_id']);
         $this->assertSame($tweetId, $likeArray['tweet_id']);
-        $this->assertSame($accountId, $likeArray['author_id']);
+        $this->assertSame($authorId, $likeArray['author_id']);
         $this->assertSame($likeCount, $likeArray['like_count']);
 
         $updatedLikeIdentifier = 100;
@@ -53,7 +53,7 @@ class LikeTest extends TestCase
         $this->assertSame($updatedLikeIdentifier, $likeArray['id']);
         $this->assertSame($userId, $likeArray['user_id']);
         $this->assertSame($tweetId, $likeArray['tweet_id']);
-        $this->assertSame($accountId, $likeArray['author_id']);
+        $this->assertSame($authorId, $likeArray['author_id']);
         $this->assertSame($updatedLikeCount, $likeArray['like_count']);
     }
 }

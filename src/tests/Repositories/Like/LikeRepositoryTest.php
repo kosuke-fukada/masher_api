@@ -34,19 +34,19 @@ class LikeRepositoryTest extends TestCase
     {
         $userId = 1;
         $tweetId = '1';
-        $accountId = '1';
+        $authorId = '1';
         $likeCount = 1;
         $like = new \App\Entities\Like\Like(
             new UserId($userId),
             new TweetId($tweetId),
-            new AccountId($accountId),
+            new AccountId($authorId),
             new LikeCount($likeCount)
         );
         $created = $likeRepository->createLike($like);
         $this->assertInstanceOf(Like::class, $created);
         $this->assertSame($userId, (int)$created->getAttribute('user_id'));
         $this->assertSame($tweetId, (string)$created->getAttribute('tweet_id'));
-        $this->assertSame($accountId, (string)$created->getAttribute('author_id'));
+        $this->assertSame($authorId, (string)$created->getAttribute('author_id'));
         $this->assertSame($likeCount, (int)$created->getAttribute('like_count'));
     }
 

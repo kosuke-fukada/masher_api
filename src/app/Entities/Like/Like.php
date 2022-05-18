@@ -29,7 +29,7 @@ class Like
     /**
      * @var AccountId
      */
-    private AccountId $accountId;
+    private AccountId $authorId;
 
     /**
      * @var LikeCount
@@ -39,19 +39,19 @@ class Like
     /**
      * @param UserId $userId
      * @param TweetId $tweetId
-     * @param AccountId $accountId
+     * @param AccountId $authorId
      * @param LikeCount $likeCount
      */
     public function __construct(
         UserId $userId,
         TweetId $tweetId,
-        AccountId $accountId,
+        AccountId $authorId,
         LikeCount $likeCount
     )
     {
         $this->userId = $userId;
         $this->tweetId = $tweetId;
-        $this->accountId = $accountId;
+        $this->authorId = $authorId;
         $this->likeCount = $likeCount;
     }
 
@@ -93,9 +93,9 @@ class Like
     /**
      * @return AccountId
      */
-    public function accountId(): AccountId
+    public function authorId(): AccountId
     {
-        return $this->accountId;
+        return $this->authorId;
     }
 
     /**
@@ -124,7 +124,7 @@ class Like
             'id' => is_null($this->likeIdentifier()) ? null : $this->likeIdentifier()->toInt(),
             'user_id' => $this->userId()->toInt(),
             'tweet_id' => (string)$this->tweetId(),
-            'author_id' => (string)$this->accountId(),
+            'author_id' => (string)$this->authorId(),
             'like_count' => $this->likeCount()->toInt(),
         ];
     }

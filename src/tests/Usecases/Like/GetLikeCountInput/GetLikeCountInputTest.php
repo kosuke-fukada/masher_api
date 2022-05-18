@@ -19,15 +19,15 @@ class GetLikeCountInputTest extends TestCase
     {
         $userId = 1;
         $tweetId = '1';
-        $accountId = '1';
+        $authorId = '1';
         $input = new GetLikeCountInput(
             new UserId($userId),
             new TweetId($tweetId),
-            new AccountId($accountId)
+            new AccountId($authorId)
         );
         $this->assertInstanceOf(GetLikeCountInputPort::class, $input);
         $this->assertSame($userId, $input->userId()->toInt());
         $this->assertSame($tweetId, (string)$input->tweetId());
-        $this->assertSame($accountId, (string)$input->accountId());
+        $this->assertSame($authorId, (string)$input->authorId());
     }
 }

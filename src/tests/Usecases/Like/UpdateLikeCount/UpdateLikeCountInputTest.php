@@ -22,20 +22,20 @@ class UpdateLikeCountInputTest extends TestCase
         $likeIdentifier = 1;
         $userId = 1;
         $tweetId = '1';
-        $accountId = '1';
+        $authorId = '1';
         $likeCount = 0;
         $input = new UpdateLikeCountInput(
             new LikeIdentifier($likeIdentifier),
             new UserId($userId),
             new TweetId($tweetId),
-            new AccountId($accountId),
+            new AccountId($authorId),
             new LikeCount($likeCount)
         );
         $this->assertInstanceOf(UpdateLikeCountInputPort::class, $input);
         $this->assertSame($likeIdentifier, $input->likeIdentifier()->toInt());
         $this->assertSame($userId, $input->userId()->toInt());
         $this->assertSame($tweetId, (string)$input->tweetId());
-        $this->assertSame($accountId, (string)$input->accountId());
+        $this->assertSame($authorId, (string)$input->authorId());
         $this->assertSame($likeCount, $input->likeCount()->toInt());
     }
 }

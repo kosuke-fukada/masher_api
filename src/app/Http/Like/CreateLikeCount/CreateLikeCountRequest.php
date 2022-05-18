@@ -51,7 +51,7 @@ class CreateLikeCountRequest extends FormRequest
     /**
      * @return AccountId
      */
-    public function accountId(): AccountId
+    public function authorId(): AccountId
     {
         return new AccountId((string)$this->get('author_id'));
     }

@@ -45,7 +45,7 @@ class UpdateLikeCountAction
             $request->id(),
             $request->userId(),
             $request->tweetId(),
-            $request->accountId(),
+            $request->authorId(),
             $request->likeCount()
         );
 

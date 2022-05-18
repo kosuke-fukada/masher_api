@@ -30,7 +30,7 @@ class UpdateLikeCountInput implements UpdateLikeCountInputPort
     /**
      * @var AccountId
      */
-    private AccountId $accountId;
+    private AccountId $authorId;
 
     /**
      * @var LikeCount
@@ -41,21 +41,21 @@ class UpdateLikeCountInput implements UpdateLikeCountInputPort
      * @param LikeIdentifier $likeIdentifier
      * @param UserId $userId
      * @param TweetId $tweetId
-     * @param AccountId $accountId
+     * @param AccountId $authorId
      * @param LikeCount $likeCount
      */
     public function __construct(
         LikeIdentifier $likeIdentifier,
         UserId $userId,
         TweetId $tweetId,
-        AccountId $accountId,
+        AccountId $authorId,
         LikeCount $likeCount
     )
     {
         $this->likeIdentifier = $likeIdentifier;
         $this->userId = $userId;
         $this->tweetId = $tweetId;
-        $this->accountId = $accountId;
+        $this->authorId = $authorId;
         $this->likeCount = $likeCount;
     }
 
@@ -86,9 +86,9 @@ class UpdateLikeCountInput implements UpdateLikeCountInputPort
     /**
      * @return AccountId
      */
-    public function accountId(): AccountId
+    public function authorId(): AccountId
     {
-        return $this->accountId;
+        return $this->authorId;
     }
 
     /**

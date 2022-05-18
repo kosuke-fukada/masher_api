@@ -23,22 +23,22 @@ class GetLikeCountInput implements GetLikeCountInputPort
     /**
      * @var AccountId
      */
-    private AccountId $accountId;
+    private AccountId $authorId;
 
     /**
      * @param UserId $userId
      * @param TweetId $tweetId
-     * @param AccountId $accountId
+     * @param AccountId $authorId
      */
     public function __construct(
         UserId $userId,
         TweetId $tweetId,
-        AccountId $accountId
+        AccountId $authorId
     )
     {
         $this->userId = $userId;
         $this->tweetId = $tweetId;
-        $this->accountId = $accountId;
+        $this->authorId = $authorId;
     }
 
     /**
@@ -60,8 +60,8 @@ class GetLikeCountInput implements GetLikeCountInputPort
     /**
      * @return AccountId
      */
-    public function accountId(): AccountId
+    public function authorId(): AccountId
     {
-        return $this->accountId;
+        return $this->authorId;
     }
 }
