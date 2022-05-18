@@ -31,15 +31,15 @@ class GetTweetTest extends TestCase
     public function testProcess(GetTweetInterface $usecase): void
     {
         $tweetId = '1';
-        $accountId = 'test_account_id';
-        $userName = 'test_user_name';
+        $authorId = 'test_author_id';
+        $authorName = 'test_author_name';
         $input = new GetTweetInput(
             new TweetId($tweetId),
-            new AccountId($accountId),
-            new UserName($userName)
+            new AccountId($authorId),
+            new UserName($authorName)
         );
         $tweetData = $usecase->process($input);
         $this->assertIsArray($tweetData);
-        $this->assertSame($userName, $tweetData['author_name']);
+        $this->assertSame($authorName, $tweetData['author_name']);
     }
 }

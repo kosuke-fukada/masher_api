@@ -17,19 +17,19 @@ class TweetTest extends TestCase
     public function test__construct(): void
     {
         $tweetId = '1';
-        $accountId = 'test_account_id';
-        $userName = 'test_user_name';
+        $authorId = 'test_author_id';
+        $authorName = 'test_author_name';
         $tweet = new Tweet(
             new TweetId($tweetId),
-            new AccountId($accountId),
-            new UserName($userName)
+            new AccountId($authorId),
+            new UserName($authorName)
         );
         $this->assertSame($tweetId, (string)$tweet->tweetId());
-        $this->assertSame($accountId, (string)$tweet->accountId());
-        $this->assertSame($userName, (string)$tweet->userName());
-        $this->assertSame('https://twitter.com/test_user_name/status/1', $tweet->tweetUrl());
+        $this->assertSame($authorId, (string)$tweet->authorId());
+        $this->assertSame($authorName, (string)$tweet->authorName());
+        $this->assertSame('https://twitter.com/test_author_name/status/1', $tweet->tweetUrl());
         $this->assertSame($tweetId, $tweet->toArray()['tweet_id']);
-        $this->assertSame($accountId, $tweet->toArray()['account_id']);
-        $this->assertSame($userName, $tweet->toArray()['user_name']);
+        $this->assertSame($authorId, $tweet->toArray()['author_id']);
+        $this->assertSame($authorName, $tweet->toArray()['author_name']);
     }
 }

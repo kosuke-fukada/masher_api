@@ -17,10 +17,10 @@ interface GetTweetInputPort
     /**
      * @return AccountId
      */
-    public function accountId(): AccountId;
+    public function authorId(): AccountId;
 
     /**
      * @return UserName
      */
-    public function userName(): UserName;
+    public function authorName(): UserName;
 }

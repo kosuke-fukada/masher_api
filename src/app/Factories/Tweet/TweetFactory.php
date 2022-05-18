@@ -13,20 +13,20 @@ class TweetFactory implements TweetFactoryInterface
 {
     /**
      * @param string $tweetId
-     * @param string $accountId
-     * @param string $userName
+     * @param string $authorId
+     * @param string $authorName
      * @return Tweet
      */
     public function createTweet(
         string $tweetId,
-        string $accountId,
-        string $userName
+        string $authorId,
+        string $authorName
     ): Tweet
     {
         return new Tweet(
             new TweetId($tweetId),
-            new AccountId($accountId),
-            new UserName($userName)
+            new AccountId($authorId),
+            new UserName($authorName)
         );
     }
 }

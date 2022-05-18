@@ -14,9 +14,9 @@ class GetTweetApiClientResponseMock implements GetTweetApiClientResponseInterfac
     public function contents(): string
     {
         return json_encode([
-            'url' => 'https://twitter.com/test_user_name/status/1',
-            'author_name' => 'test_user_name',
-            'author_url' => 'https://twitter.com/test_user_name',
+            'url' => 'https://twitter.com/test_author_name/status/1',
+            'author_name' => 'test_author_name',
+            'author_url' => 'https://twitter.com/test_author_name',
             'width' => 550,
             'height' => null,
             'type' => 'rich',

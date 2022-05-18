@@ -44,8 +44,8 @@ class GetTweetAction extends Controller
     {
         $input = new GetTweetInput(
             $request->tweetId(),
-            $request->accountId(),
-            $request->userName()
+            $request->authorId(),
+            $request->authorName()
         );
 
         try {

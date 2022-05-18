@@ -18,16 +18,16 @@ class GetTweetInputTest extends TestCase
     public function test__construct(): void
     {
         $tweetId = '1';
-        $accountId = 'test_account_id';
-        $userName = 'test_user_name';
+        $authorId = 'test_author_id';
+        $authorName = 'test_author_name';
         $input = new GetTweetInput(
             new TweetId($tweetId),
-            new AccountId($accountId),
-            new UserName($userName)
+            new AccountId($authorId),
+            new UserName($authorName)
         );
         $this->assertInstanceOf(GetTweetInputPort::class, $input);
         $this->assertSame($tweetId, (string)$input->tweetId());
-        $this->assertSame($accountId, (string)$input->accountId());
-        $this->assertSame($userName, (string)$input->userName());
+        $this->assertSame($authorId, (string)$input->authorId());
+        $this->assertSame($authorName, (string)$input->authorName());
     }
 }
