@@ -53,7 +53,7 @@ class GetLikeCount implements GetLikeCountInterface
         return $this->likeFactory->createLike(
             $input->userId()->toInt(),
             (string)$input->tweetId(),
-            (string)$input->accountId(),
+            (string)$input->authorId(),
             $likeCount
         )->toArray();
     }

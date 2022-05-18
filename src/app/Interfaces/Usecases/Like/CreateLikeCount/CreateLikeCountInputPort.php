@@ -29,7 +29,7 @@ interface CreateLikeCountInputPort
     /**
      * @return AccountId
      */
-    public function accountId(): AccountId;
+    public function authorId(): AccountId;
 
     /**
      * @return LikeCount

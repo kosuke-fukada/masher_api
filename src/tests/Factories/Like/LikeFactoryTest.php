@@ -29,12 +29,12 @@ class LikeFactoryTest extends TestCase
     {
         $userId = 1;
         $tweetId = '1';
-        $accountId = '1';
+        $authorId = '1';
         $likeCount = 0;
         $like = $factory->createLike(
             $userId,
             $tweetId,
-            $accountId,
+            $authorId,
             $likeCount
         );
         $this->assertInstanceOf(Like::class, $like);

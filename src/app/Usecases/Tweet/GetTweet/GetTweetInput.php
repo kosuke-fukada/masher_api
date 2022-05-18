@@ -18,27 +18,27 @@ class GetTweetInput implements GetTweetInputPort
     /**
      * @var AccountId
      */
-    private AccountId $accountId;
+    private AccountId $authorId;
 
     /**
      * @var UserName
      */
-    private UserName $userName;
+    private UserName $authorName;
 
     /**
      * @param TweetId $tweetId
-     * @param AccountId $accountId
-     * @param UserName $userName
+     * @param AccountId $authorId
+     * @param UserName $authorName
      */
     public function __construct(
         TweetId $tweetId,
-        AccountId $accountId,
-        UserName $userName
+        AccountId $authorId,
+        UserName $authorName
     )
     {
         $this->tweetId = $tweetId;
-        $this->accountId = $accountId;
-        $this->userName = $userName;
+        $this->authorId = $authorId;
+        $this->authorName = $authorName;
     }
 
     /**
@@ -52,16 +52,16 @@ class GetTweetInput implements GetTweetInputPort
     /**
      * @return AccountId
      */
-    public function accountId(): AccountId
+    public function authorId(): AccountId
     {
-        return $this->accountId;
+        return $this->authorId;
     }
 
     /**
      * @return UserName
      */
-    public function userName(): UserName
+    public function authorName(): UserName
     {
-        return $this->userName;
+        return $this->authorName;
     }
 }

@@ -33,18 +33,18 @@ class CreateLikeCountTest extends TestCase
     {
         $userId = 1;
         $tweetId = '1';
-        $accountId = '1';
+        $authorId = '1';
         $likeCount = 1;
         $input = new CreateLikeCountInput(
             new UserId($userId),
             new TweetId($tweetId),
-            new AccountId($accountId),
+            new AccountId($authorId),
             new LikeCount($likeCount)
         );
         $created = $usecase->process($input);
         $this->assertSame($userId, $created['user_id']);
         $this->assertSame($tweetId, $created['tweet_id']);
-        $this->assertSame($accountId, $created['author_id']);
+        $this->assertSame($authorId, $created['author_id']);
         $this->assertSame($likeCount, $created['like_count']);
     }
 }

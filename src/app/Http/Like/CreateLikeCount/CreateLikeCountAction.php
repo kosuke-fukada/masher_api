@@ -44,7 +44,7 @@ class CreateLikeCountAction
         $input = new CreateLikeCountInput(
             $request->userId(),
             $request->tweetId(),
-            $request->accountId(),
+            $request->authorId(),
             $request->likeCount()
         );
 

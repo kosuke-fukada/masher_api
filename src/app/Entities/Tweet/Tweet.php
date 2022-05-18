@@ -17,27 +17,27 @@ class Tweet
     /**
      * @var AccountId
      */
-    private AccountId $accountId;
+    private AccountId $authorId;
 
     /**
      * @var UserName
      */
-    private UserName $userName;
+    private UserName $authorName;
 
     /**
      * @param TweetId $tweetId
-     * @param AccountId $accountId
-     * @param UserName $userName
+     * @param AccountId $authorId
+     * @param UserName $authorName
      */
     public function __construct(
         TweetId $tweetId,
-        AccountId $accountId,
-        UserName $userName
+        AccountId $authorId,
+        UserName $authorName
     )
     {
         $this->tweetId = $tweetId;
-        $this->accountId = $accountId;
-        $this->userName = $userName;
+        $this->authorId = $authorId;
+        $this->authorName = $authorName;
     }
 
     /**
@@ -51,17 +51,17 @@ class Tweet
     /**
      * @return AccountId
      */
-    public function accountId(): AccountId
+    public function authorId(): AccountId
     {
-        return $this->accountId;
+        return $this->authorId;
     }
 
     /**
      * @return UserName
      */
-    public function userName(): UserName
+    public function authorName(): UserName
     {
-        return $this->userName;
+        return $this->authorName;
     }
 
     /**
@@ -69,7 +69,7 @@ class Tweet
      */
     public function tweetUrl(): string
     {
-        return config('client.twitter.base_url') . $this->userName() . '/status/' . $this->tweetId();
+        return config('client.twitter.base_url') . $this->authorName() . '/status/' . $this->tweetId();
     }
 
     /**
@@ -79,8 +79,8 @@ class Tweet
     {
         return [
             'tweet_id' => (string)$this->tweetId(),
-            'account_id' => (string)$this->accountId(),
-            'user_name' => (string)$this->userName()
+            'author_id' => (string)$this->authorId(),
+            'author_name' => (string)$this->authorName()
         ];
     }
 }

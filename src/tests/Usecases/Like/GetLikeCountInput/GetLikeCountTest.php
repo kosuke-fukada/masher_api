@@ -32,15 +32,15 @@ class GetLikeCountTest extends TestCase
     {
         $userId = 1;
         $tweetId = '1';
-        $accountId = '1';
+        $authorId = '1';
         $input = new GetLikeCountInput(
             new UserId($userId),
             new TweetId($tweetId),
-            new AccountId($accountId)
+            new AccountId($authorId)
         );
         $like = $usecase->process($input);
         $this->assertSame($userId, $like['user_id']);
         $this->assertSame($tweetId, $like['tweet_id']);
-        $this->assertSame($accountId, $like['author_id']);
+        $this->assertSame($authorId, $like['author_id']);
     }
 }

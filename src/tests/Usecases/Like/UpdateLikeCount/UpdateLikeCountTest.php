@@ -37,13 +37,13 @@ class UpdateLikeCountTest extends TestCase
         $likeIdentifier = 1;
         $userId = 1;
         $tweetId = '1';
-        $accountId = '1';
+        $authorId = '1';
         $likeCount = 1000;
         $input = new UpdateLikeCountInput(
             new LikeIdentifier($likeIdentifier),
             new UserId($userId),
             new TweetId($tweetId),
-            new AccountId($accountId),
+            new AccountId($authorId),
             new LikeCount($likeCount)
         );
         $original = $likeRepository->findById($input->likeIdentifier());

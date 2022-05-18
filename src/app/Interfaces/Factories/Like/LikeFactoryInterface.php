@@ -10,14 +10,14 @@ interface LikeFactoryInterface
     /**
      * @param integer $userId
      * @param string $tweetId
-     * @param string $accountId
+     * @param string $authorId
      * @param integer $likeCount
      * @return Like
      */
     public function createLike(
         int $userId,
         string $tweetId,
-        string $accountId,
+        string $authorId,
         int $likeCount
     ): Like;
 }

@@ -20,19 +20,19 @@ class CreateLikeCountInputTest extends TestCase
     {
         $userId = 1;
         $tweetId = '1';
-        $accountId = '1';
+        $authorId = '1';
         $likeCount = 0;
         $input = new CreateLikeCountInput(
             new UserId($userId),
             new TweetId($tweetId),
-            new AccountId($accountId),
+            new AccountId($authorId),
             new LikeCount($likeCount)
         );
         $this->assertInstanceOf(CreateLikeCountInputPort::class, $input);
         $this->assertNull($input->likeIdentifier());
         $this->assertSame($userId, $input->userId()->toInt());
         $this->assertSame($tweetId, (string)$input->tweetId());
-        $this->assertSame($accountId, (string)$input->accountId());
+        $this->assertSame($authorId, (string)$input->authorId());
         $this->assertSame($likeCount, $input->likeCount()->toInt());
     }
 }

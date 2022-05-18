@@ -22,5 +22,5 @@ interface GetLikeCountInputPort
     /**
      * @return AccountId
      */
-    public function accountId(): AccountId;
+    public function authorId(): AccountId;
 }

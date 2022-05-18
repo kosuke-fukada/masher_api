@@ -25,8 +25,8 @@ class GetTweetRequest extends FormRequest
     {
         return [
             'tweet_id' => ['required', 'string'],
-            'account_id' => ['required', 'string'],
-            'user_name' => ['required', 'string']
+            'author_id' => ['required', 'string'],
+            'author_name' => ['required', 'string']
         ];
     }
 
@@ -41,16 +41,16 @@ class GetTweetRequest extends FormRequest
     /**
      * @return AccountId
      */
-    public function accountId(): AccountId
+    public function authorId(): AccountId
     {
-        return new AccountId((string)$this->get('account_id'));
+        return new AccountId((string)$this->get('author_id'));
     }
 
     /**
      * @return UserName
      */
-    public function userName(): UserName
+    public function authorName(): UserName
     {
-        return new UserName((string)$this->get('user_name'));
+        return new UserName((string)$this->get('author_name'));
     }
 }

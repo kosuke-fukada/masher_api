@@ -46,7 +46,7 @@ class CreateLikeCount implements CreateLikeCountInterface
         $like = $this->likeFactory->createLike(
             $input->userId()->toInt(),
             (string)$input->tweetId(),
-            (string)$input->accountId(),
+            (string)$input->authorId(),
             $input->likeCount()->toInt()
         );
 
