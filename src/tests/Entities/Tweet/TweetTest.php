@@ -5,8 +5,8 @@ namespace Tests\Entities\Tweet;
 
 use Tests\TestCase;
 use App\Entities\Tweet\Tweet;
-use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\Shared\UserName;
+use App\ValueObjects\Tweet\AuthorId;
 use App\ValueObjects\Tweet\TweetId;
 
 class TweetTest extends TestCase
@@ -21,7 +21,7 @@ class TweetTest extends TestCase
         $authorName = 'test_author_name';
         $tweet = new Tweet(
             new TweetId($tweetId),
-            new AccountId($authorId),
+            new AuthorId($authorId),
             new UserName($authorName)
         );
         $this->assertSame($tweetId, (string)$tweet->tweetId());

@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace App\Entities\Tweet;
 
 use App\ValueObjects\Tweet\TweetId;
+use App\ValueObjects\Tweet\AuthorId;
 use App\ValueObjects\Shared\UserName;
-use App\ValueObjects\Shared\AccountId;
 
 class Tweet
 {
@@ -15,9 +15,9 @@ class Tweet
     private TweetId $tweetId;
 
     /**
-     * @var AccountId
+     * @var AuthorId
      */
-    private AccountId $authorId;
+    private AuthorId $authorId;
 
     /**
      * @var UserName
@@ -26,12 +26,12 @@ class Tweet
 
     /**
      * @param TweetId $tweetId
-     * @param AccountId $authorId
+     * @param AuthorId $authorId
      * @param UserName $authorName
      */
     public function __construct(
         TweetId $tweetId,
-        AccountId $authorId,
+        AuthorId $authorId,
         UserName $authorName
     )
     {
@@ -49,9 +49,9 @@ class Tweet
     }
 
     /**
-     * @return AccountId
+     * @return AuthorId
      */
-    public function authorId(): AccountId
+    public function authorId(): AuthorId
     {
         return $this->authorId;
     }

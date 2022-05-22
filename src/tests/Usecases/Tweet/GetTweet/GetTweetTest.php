@@ -6,8 +6,8 @@ namespace Tests\Usecases\Tweet\GetTweet;
 use App\Interfaces\Usecases\Tweet\GetTweet\GetTweetInterface;
 use App\Usecases\Tweet\GetTweet\GetTweet;
 use App\Usecases\Tweet\GetTweet\GetTweetInput;
-use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\Shared\UserName;
+use App\ValueObjects\Tweet\AuthorId;
 use App\ValueObjects\Tweet\TweetId;
 use Tests\TestCase;
 
@@ -35,7 +35,7 @@ class GetTweetTest extends TestCase
         $authorName = 'test_author_name';
         $input = new GetTweetInput(
             new TweetId($tweetId),
-            new AccountId($authorId),
+            new AuthorId($authorId),
             new UserName($authorName)
         );
         $tweetData = $usecase->process($input);
