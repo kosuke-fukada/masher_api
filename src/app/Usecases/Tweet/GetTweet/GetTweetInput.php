@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace App\Usecases\Tweet\GetTweet;
 
 use App\ValueObjects\Tweet\TweetId;
+use App\ValueObjects\Tweet\AuthorId;
 use App\ValueObjects\Shared\UserName;
-use App\ValueObjects\Shared\AccountId;
 use App\Interfaces\Usecases\Tweet\GetTweet\GetTweetInputPort;
 
 class GetTweetInput implements GetTweetInputPort
@@ -16,9 +16,9 @@ class GetTweetInput implements GetTweetInputPort
     private TweetId $tweetId;
 
     /**
-     * @var AccountId
+     * @var AuthorId
      */
-    private AccountId $authorId;
+    private AuthorId $authorId;
 
     /**
      * @var UserName
@@ -27,12 +27,12 @@ class GetTweetInput implements GetTweetInputPort
 
     /**
      * @param TweetId $tweetId
-     * @param AccountId $authorId
+     * @param AuthorId $authorId
      * @param UserName $authorName
      */
     public function __construct(
         TweetId $tweetId,
-        AccountId $authorId,
+        AuthorId $authorId,
         UserName $authorName
     )
     {
@@ -50,9 +50,9 @@ class GetTweetInput implements GetTweetInputPort
     }
 
     /**
-     * @return AccountId
+     * @return AuthorId
      */
-    public function authorId(): AccountId
+    public function authorId(): AuthorId
     {
         return $this->authorId;
     }

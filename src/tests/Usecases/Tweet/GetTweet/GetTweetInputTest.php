@@ -7,8 +7,8 @@ use PHPUnit\Framework\TestCase;
 use App\ValueObjects\Tweet\TweetId;
 use App\Usecases\Tweet\GetTweet\GetTweetInput;
 use App\Interfaces\Usecases\Tweet\GetTweet\GetTweetInputPort;
-use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\Shared\UserName;
+use App\ValueObjects\Tweet\AuthorId;
 
 class GetTweetInputTest extends TestCase
 {
@@ -22,7 +22,7 @@ class GetTweetInputTest extends TestCase
         $authorName = 'test_author_name';
         $input = new GetTweetInput(
             new TweetId($tweetId),
-            new AccountId($authorId),
+            new AuthorId($authorId),
             new UserName($authorName)
         );
         $this->assertInstanceOf(GetTweetInputPort::class, $input);
