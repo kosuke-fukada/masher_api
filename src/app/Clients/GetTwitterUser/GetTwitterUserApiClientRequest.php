@@ -54,6 +54,6 @@ class GetTwitterUserApiClientRequest implements GetTwitterUserApiClientRequestIn
      */
     public function endpointUri(UriInterface $uri): UriInterface
     {
-        return $uri->withPath('2/users/by/username' . (string)$this->userName);
+        return $uri->withPath('2/users/by/username/' . (string)$this->userName);
     }
 }
