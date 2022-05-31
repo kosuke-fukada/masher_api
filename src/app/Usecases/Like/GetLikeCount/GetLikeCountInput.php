@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace App\Usecases\Like\GetLikeCount;
 
-use App\ValueObjects\Tweet\TweetId;
-use App\Interfaces\Usecases\Like\GetLikeCount\GetLikeCountInputPort;
-use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\User\UserId;
+use App\ValueObjects\Tweet\TweetId;
+use App\ValueObjects\Tweet\AuthorId;
+use App\Interfaces\Usecases\Like\GetLikeCount\GetLikeCountInputPort;
 
 class GetLikeCountInput implements GetLikeCountInputPort
 {
@@ -21,19 +21,19 @@ class GetLikeCountInput implements GetLikeCountInputPort
     private TweetId $tweetId;
 
     /**
-     * @var AccountId
+     * @var AuthorId
      */
-    private AccountId $authorId;
+    private AuthorId $authorId;
 
     /**
      * @param UserId $userId
      * @param TweetId $tweetId
-     * @param AccountId $authorId
+     * @param AuthorId $authorId
      */
     public function __construct(
         UserId $userId,
         TweetId $tweetId,
-        AccountId $authorId
+        AuthorId $authorId
     )
     {
         $this->userId = $userId;
@@ -58,9 +58,9 @@ class GetLikeCountInput implements GetLikeCountInputPort
     }
 
     /**
-     * @return AccountId
+     * @return AuthorId
      */
-    public function authorId(): AccountId
+    public function authorId(): AuthorId
     {
         return $this->authorId;
     }

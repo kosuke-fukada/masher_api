@@ -6,7 +6,7 @@ namespace Tests\Usecases\Like\GetLikeCount;
 use App\Interfaces\Usecases\Like\GetLikeCount\GetLikeCountInterface;
 use App\Usecases\Like\GetLikeCount\GetLikeCount;
 use App\Usecases\Like\GetLikeCount\GetLikeCountInput;
-use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\Tweet\AuthorId;
 use App\ValueObjects\Tweet\TweetId;
 use App\ValueObjects\User\UserId;
 use Tests\TestCase;
@@ -36,7 +36,7 @@ class GetLikeCountTest extends TestCase
         $input = new GetLikeCountInput(
             new UserId($userId),
             new TweetId($tweetId),
-            new AccountId($authorId)
+            new AuthorId($authorId)
         );
         $like = $usecase->process($input);
         $this->assertSame($userId, $like['user_id']);

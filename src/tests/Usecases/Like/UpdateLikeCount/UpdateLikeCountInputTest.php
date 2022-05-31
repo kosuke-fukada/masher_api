@@ -7,7 +7,7 @@ use App\Interfaces\Usecases\Like\UpdateLikeCount\UpdateLikeCountInputPort;
 use App\Usecases\Like\UpdateLikeCount\UpdateLikeCountInput;
 use App\ValueObjects\Like\LikeCount;
 use App\ValueObjects\Like\LikeIdentifier;
-use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\Tweet\AuthorId;
 use App\ValueObjects\Tweet\TweetId;
 use App\ValueObjects\User\UserId;
 use PHPUnit\Framework\TestCase;
@@ -28,7 +28,7 @@ class UpdateLikeCountInputTest extends TestCase
             new LikeIdentifier($likeIdentifier),
             new UserId($userId),
             new TweetId($tweetId),
-            new AccountId($authorId),
+            new AuthorId($authorId),
             new LikeCount($likeCount)
         );
         $this->assertInstanceOf(UpdateLikeCountInputPort::class, $input);

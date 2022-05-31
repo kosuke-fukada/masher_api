@@ -44,18 +44,15 @@ class CreateLikeCount implements CreateLikeCountInterface
     {
         // Entityを作成
         $like = $this->likeFactory->createLike(
-            $input->userId()->toInt(),
-            (string)$input->tweetId(),
-            (string)$input->authorId(),
-            $input->likeCount()->toInt()
+            $input->userId(),
+            $input->tweetId(),
+            $input->authorId(),
+            $input->likeCount()
         );
 
         try {
             // 永続化
             $created = $this->likeRepository->createLike($like);
-
-            // 返り値を元にEntityにidをセット
-            $like->setLikeIdentifier(new LikeIdentifier((int)$created->getAttribute('id')));
         } catch (Throwable $e) {
             throw new RuntimeException($e->getMessage(), $e->getCode());
         }

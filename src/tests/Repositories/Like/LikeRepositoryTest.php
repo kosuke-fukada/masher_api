@@ -8,10 +8,10 @@ use App\Models\Like;
 use App\ValueObjects\User\UserId;
 use App\ValueObjects\Tweet\TweetId;
 use App\ValueObjects\Like\LikeCount;
-use App\ValueObjects\Shared\AccountId;
 use App\Repositories\Like\LikeRepository;
 use App\Interfaces\Repositories\Like\LikeRepositoryInterface;
 use App\ValueObjects\Like\LikeIdentifier;
+use App\ValueObjects\Tweet\AuthorId;
 
 class LikeRepositoryTest extends TestCase
 {
@@ -32,14 +32,16 @@ class LikeRepositoryTest extends TestCase
      */
     public function testCreateLike(LikeRepositoryInterface $likeRepository): void
     {
+        $likeIdentifier = 1;
         $userId = 1;
         $tweetId = '1';
         $authorId = '1';
         $likeCount = 1;
         $like = new \App\Entities\Like\Like(
+            new LikeIdentifier($likeIdentifier),
             new UserId($userId),
             new TweetId($tweetId),
-            new AccountId($authorId),
+            new AuthorId($authorId),
             new LikeCount($likeCount)
         );
         $created = $likeRepository->createLike($like);
@@ -63,12 +65,12 @@ class LikeRepositoryTest extends TestCase
         $accountId = '1';
         $likeCount = 100;
         $like = new \App\Entities\Like\Like(
+            new LikeIdentifier($likeIdentifier),
             new UserId($userId),
             new TweetId($tweetId),
-            new AccountId($accountId),
+            new AuthorId($accountId),
             new LikeCount($likeCount)
         );
-        $like->setLikeIdentifier(new LikeIdentifier($likeIdentifier));
         $original = $likeRepository->findById($like->likeIdentifier());
         $likeRepository->updateLikeCount($like);
         $updated = $likeRepository->findById($like->likeIdentifier());

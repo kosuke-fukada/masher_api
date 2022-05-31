@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Usecases\Like\CreateLikeCount;
 
-use App\ValueObjects\Like\LikeCount;
-use App\ValueObjects\Like\LikeIdentifier;
-use App\ValueObjects\Shared\AccountId;
-use App\ValueObjects\Tweet\TweetId;
 use App\ValueObjects\User\UserId;
+use App\ValueObjects\Tweet\TweetId;
+use App\ValueObjects\Like\LikeCount;
+use App\ValueObjects\Tweet\AuthorId;
+use App\ValueObjects\Like\LikeIdentifier;
 
 interface CreateLikeCountInputPort
 {
@@ -27,9 +27,9 @@ interface CreateLikeCountInputPort
     public function tweetId(): TweetId;
 
     /**
-     * @return AccountId
+     * @return AuthorId
      */
-    public function authorId(): AccountId;
+    public function authorId(): AuthorId;
 
     /**
      * @return LikeCount

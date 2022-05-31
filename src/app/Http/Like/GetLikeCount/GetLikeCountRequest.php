@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Http\Like\GetLikeCount;
 
-use App\ValueObjects\Shared\AccountId;
-use App\ValueObjects\Tweet\TweetId;
 use App\ValueObjects\User\UserId;
+use App\ValueObjects\Tweet\TweetId;
+use App\ValueObjects\Tweet\AuthorId;
 use Illuminate\Foundation\Http\FormRequest;
 
 class GetLikeCountRequest extends FormRequest
@@ -47,10 +47,10 @@ class GetLikeCountRequest extends FormRequest
     }
 
     /**
-     * @return AccountId
+     * @return AuthorId
      */
-    public function authorId(): AccountId
+    public function authorId(): AuthorId
     {
-        return new AccountId((string)$this->get('author_id'));
+        return new AuthorId((string)$this->get('author_id'));
     }
 }

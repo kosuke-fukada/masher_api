@@ -6,7 +6,7 @@ namespace App\Usecases\Like\UpdateLikeCount;
 use App\ValueObjects\User\UserId;
 use App\ValueObjects\Tweet\TweetId;
 use App\ValueObjects\Like\LikeCount;
-use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\Tweet\AuthorId;
 use App\ValueObjects\Like\LikeIdentifier;
 use App\Interfaces\Usecases\Like\UpdateLikeCount\UpdateLikeCountInputPort;
 
@@ -28,9 +28,9 @@ class UpdateLikeCountInput implements UpdateLikeCountInputPort
     private TweetId $tweetId;
 
     /**
-     * @var AccountId
+     * @var AuthorId
      */
-    private AccountId $authorId;
+    private AuthorId $authorId;
 
     /**
      * @var LikeCount
@@ -41,14 +41,14 @@ class UpdateLikeCountInput implements UpdateLikeCountInputPort
      * @param LikeIdentifier $likeIdentifier
      * @param UserId $userId
      * @param TweetId $tweetId
-     * @param AccountId $authorId
+     * @param AuthorId $authorId
      * @param LikeCount $likeCount
      */
     public function __construct(
         LikeIdentifier $likeIdentifier,
         UserId $userId,
         TweetId $tweetId,
-        AccountId $authorId,
+        AuthorId $authorId,
         LikeCount $likeCount
     )
     {
@@ -84,9 +84,9 @@ class UpdateLikeCountInput implements UpdateLikeCountInputPort
     }
 
     /**
-     * @return AccountId
+     * @return AuthorId
      */
-    public function authorId(): AccountId
+    public function authorId(): AuthorId
     {
         return $this->authorId;
     }

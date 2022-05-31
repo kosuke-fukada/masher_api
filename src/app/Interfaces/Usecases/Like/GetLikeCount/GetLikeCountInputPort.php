@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Interfaces\Usecases\Like\GetLikeCount;
 
-use App\ValueObjects\Shared\AccountId;
-use App\ValueObjects\Tweet\TweetId;
 use App\ValueObjects\User\UserId;
+use App\ValueObjects\Tweet\TweetId;
+use App\ValueObjects\Tweet\AuthorId;
 
 interface GetLikeCountInputPort
 {
@@ -20,7 +20,7 @@ interface GetLikeCountInputPort
     public function tweetId(): TweetId;
 
     /**
-     * @return AccountId
+     * @return AuthorId
      */
-    public function authorId(): AccountId;
+    public function authorId(): AuthorId;
 }

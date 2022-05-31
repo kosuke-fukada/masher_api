@@ -7,6 +7,7 @@ use App\Interfaces\Factories\Like\LikeFactoryInterface;
 use App\Interfaces\Usecases\Like\GetLikeCount\GetLikeCountInputPort;
 use App\Interfaces\Usecases\Like\GetLikeCount\GetLikeCountInterface;
 use App\Models\Like;
+use App\ValueObjects\Like\LikeCount;
 use App\ValueObjects\Like\LikeIdentifier;
 
 class GetLikeCount implements GetLikeCountInterface
@@ -46,18 +47,21 @@ class GetLikeCount implements GetLikeCountInterface
             ->first();
 
         if (is_null($like)) {
-            $likeCount = 0;
-        } else {
-            $likeCount = $like->getAttribute('like_count');
+            return [
+                'id' => null,
+                'user_id' => $input->userId()->toInt(),
+                'tweet_id' => (string)$input->tweetId(),
+                'author_id' => (string)$input->authorId(),
+                'like_count' => 0,
+            ];
         }
 
-        $likeEntity = $this->likeFactory->createLike(
-            $input->userId()->toInt(),
-            (string)$input->tweetId(),
-            (string)$input->authorId(),
-            $likeCount
-        );
-        $likeEntity->setLikeIdentifier(new LikeIdentifier((int)$like->getAttribute('id')));
-        return $likeEntity->toArray();
+        return [
+            'id' => (int)$like->getAttribute('id'),
+            'user_id' => $input->userId()->toInt(),
+            'tweet_id' => (string)$input->tweetId(),
+            'author_id' => (string)$input->authorId(),
+            'like_count' => (int)$like->getAttribute('like_count'),
+        ];
     }
 }

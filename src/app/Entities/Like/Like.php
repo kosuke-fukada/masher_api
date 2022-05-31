@@ -6,15 +6,15 @@ namespace App\Entities\Like;
 use App\ValueObjects\User\UserId;
 use App\ValueObjects\Tweet\TweetId;
 use App\ValueObjects\Like\LikeCount;
+use App\ValueObjects\Tweet\AuthorId;
 use App\ValueObjects\Like\LikeIdentifier;
-use App\ValueObjects\Shared\AccountId;
 
 class Like
 {
     /**
-     * @var LikeIdentifier|null
+     * @var LikeIdentifier
      */
-    private ?LikeIdentifier $likeIdentifier = null;
+    private LikeIdentifier $likeIdentifier;
 
     /**
      * @var UserId
@@ -27,9 +27,9 @@ class Like
     private TweetId $tweetId;
 
     /**
-     * @var AccountId
+     * @var AuthorId
      */
-    private AccountId $authorId;
+    private AuthorId $authorId;
 
     /**
      * @var LikeCount
@@ -37,18 +37,21 @@ class Like
     private LikeCount $likeCount;
 
     /**
+     * @param LikeIdentifier $likeIdentifier
      * @param UserId $userId
      * @param TweetId $tweetId
-     * @param AccountId $authorId
+     * @param AuthorId $authorId
      * @param LikeCount $likeCount
      */
     public function __construct(
+        LikeIdentifier $likeIdentifier,
         UserId $userId,
         TweetId $tweetId,
-        AccountId $authorId,
+        AuthorId $authorId,
         LikeCount $likeCount
     )
     {
+        $this->likeIdentifier = $likeIdentifier;
         $this->userId = $userId;
         $this->tweetId = $tweetId;
         $this->authorId = $authorId;
@@ -56,22 +59,11 @@ class Like
     }
 
     /**
-     * @return LikeIdentifier|null
+     * @return LikeIdentifier
      */
-    public function likeIdentifier(): ?LikeIdentifier
+    public function likeIdentifier(): LikeIdentifier
     {
         return $this->likeIdentifier;
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @param LikeIdentifier $likeIdentifier
-     * @return void
-     */
-    public function setLikeIdentifier(LikeIdentifier $likeIdentifier): void
-    {
-        $this->likeIdentifier = $likeIdentifier;
     }
 
     /**
@@ -91,9 +83,9 @@ class Like
     }
 
     /**
-     * @return AccountId
+     * @return AuthorId
      */
-    public function authorId(): AccountId
+    public function authorId(): AuthorId
     {
         return $this->authorId;
     }
@@ -121,7 +113,7 @@ class Like
     public function toArray(): array
     {
         return [
-            'id' => is_null($this->likeIdentifier()) ? null : $this->likeIdentifier()->toInt(),
+            'id' => $this->likeIdentifier()->toInt(),
             'user_id' => $this->userId()->toInt(),
             'tweet_id' => (string)$this->tweetId(),
             'author_id' => (string)$this->authorId(),

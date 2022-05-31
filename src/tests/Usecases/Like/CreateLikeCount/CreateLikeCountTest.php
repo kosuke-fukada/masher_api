@@ -7,7 +7,7 @@ use App\Interfaces\Usecases\Like\CreateLikeCount\CreateLikeCountInterface;
 use App\Usecases\Like\CreateLikeCount\CreateLikeCount;
 use App\Usecases\Like\CreateLikeCount\CreateLikeCountInput;
 use App\ValueObjects\Like\LikeCount;
-use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\Tweet\AuthorId;
 use App\ValueObjects\Tweet\TweetId;
 use App\ValueObjects\User\UserId;
 use Tests\TestCase;
@@ -38,7 +38,7 @@ class CreateLikeCountTest extends TestCase
         $input = new CreateLikeCountInput(
             new UserId($userId),
             new TweetId($tweetId),
-            new AccountId($authorId),
+            new AuthorId($authorId),
             new LikeCount($likeCount)
         );
         $created = $usecase->process($input);
