@@ -6,7 +6,11 @@ namespace App\Repositories\Like;
 use App\Interfaces\Factories\Like\LikeFactoryInterface;
 use App\Interfaces\Repositories\Like\LikeRepositoryInterface;
 use App\Models\Like;
+use App\ValueObjects\Like\LikeCount;
 use App\ValueObjects\Like\LikeIdentifier;
+use App\ValueObjects\Tweet\AuthorId;
+use App\ValueObjects\Tweet\TweetId;
+use App\ValueObjects\User\UserId;
 use Fig\Http\Message\StatusCodeInterface;
 use Illuminate\Database\RecordsNotFoundException;
 
@@ -61,12 +65,11 @@ class LikeRepository implements LikeRepositoryInterface
         }
 
         $likeEntity = $this->factory->createLike(
-            (int)$like->getAttribute('user_id'),
-            (string)$like->getAttribute('tweet_id'),
-            (string)$like->getAttribute('author_id'),
-            (int)$like->getAttribute('like_count')
+            new UserId((int)$like->getAttribute('user_id')),
+            new TweetId((string)$like->getAttribute('tweet_id')),
+            new AuthorId((string)$like->getAttribute('author_id')),
+            new LikeCount((int)$like->getAttribute('like_count'))
         );
-        $likeEntity->setLikeIdentifier($id);
 
         return $likeEntity;
     }

@@ -5,7 +5,7 @@ namespace Tests\Usecases\Like\GetLikeCount;
 
 use App\Interfaces\Usecases\Like\GetLikeCount\GetLikeCountInputPort;
 use App\Usecases\Like\GetLikeCount\GetLikeCountInput;
-use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\Tweet\AuthorId;
 use App\ValueObjects\Tweet\TweetId;
 use App\ValueObjects\User\UserId;
 use PHPUnit\Framework\TestCase;
@@ -23,7 +23,7 @@ class GetLikeCountInputTest extends TestCase
         $input = new GetLikeCountInput(
             new UserId($userId),
             new TweetId($tweetId),
-            new AccountId($authorId)
+            new AuthorId($authorId)
         );
         $this->assertInstanceOf(GetLikeCountInputPort::class, $input);
         $this->assertSame($userId, $input->userId()->toInt());

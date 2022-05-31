@@ -6,7 +6,7 @@ namespace App\Interfaces\Usecases\Like\UpdateLikeCount;
 use App\ValueObjects\User\UserId;
 use App\ValueObjects\Tweet\TweetId;
 use App\ValueObjects\Like\LikeCount;
-use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\Tweet\AuthorId;
 use App\ValueObjects\Like\LikeIdentifier;
 
 interface UpdateLikeCountInputPort
@@ -27,9 +27,9 @@ interface UpdateLikeCountInputPort
     public function tweetId(): TweetId;
 
     /**
-     * @return AccountId
+     * @return AuthorId
      */
-    public function authorId(): AccountId;
+    public function authorId(): AuthorId;
 
     /**
      * @return LikeCount

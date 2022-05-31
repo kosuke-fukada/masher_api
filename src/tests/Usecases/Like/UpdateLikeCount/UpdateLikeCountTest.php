@@ -9,7 +9,7 @@ use App\Usecases\Like\UpdateLikeCount\UpdateLikeCount;
 use App\Usecases\Like\UpdateLikeCount\UpdateLikeCountInput;
 use App\ValueObjects\Like\LikeCount;
 use App\ValueObjects\Like\LikeIdentifier;
-use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\Tweet\AuthorId;
 use App\ValueObjects\Tweet\TweetId;
 use App\ValueObjects\User\UserId;
 use Tests\TestCase;
@@ -43,7 +43,7 @@ class UpdateLikeCountTest extends TestCase
             new LikeIdentifier($likeIdentifier),
             new UserId($userId),
             new TweetId($tweetId),
-            new AccountId($authorId),
+            new AuthorId($authorId),
             new LikeCount($likeCount)
         );
         $original = $likeRepository->findById($input->likeIdentifier());

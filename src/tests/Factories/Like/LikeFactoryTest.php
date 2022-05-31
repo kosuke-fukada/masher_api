@@ -6,6 +6,11 @@ namespace Tests\Factories\Like;
 use App\Entities\Like\Like;
 use App\Factories\Like\LikeFactory;
 use App\Interfaces\Factories\Like\LikeFactoryInterface;
+use App\ValueObjects\Like\LikeCount;
+use App\ValueObjects\Like\LikeIdentifier;
+use App\ValueObjects\Tweet\AuthorId;
+use App\ValueObjects\Tweet\TweetId;
+use App\ValueObjects\User\UserId;
 use Tests\TestCase;
 
 class LikeFactoryTest extends TestCase
@@ -32,10 +37,10 @@ class LikeFactoryTest extends TestCase
         $authorId = '1';
         $likeCount = 0;
         $like = $factory->createLike(
-            $userId,
-            $tweetId,
-            $authorId,
-            $likeCount
+            new UserId($userId),
+            new TweetId($tweetId),
+            new AuthorId($authorId),
+            new LikeCount($likeCount)
         );
         $this->assertInstanceOf(Like::class, $like);
     }
