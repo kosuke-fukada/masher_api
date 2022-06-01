@@ -12,9 +12,9 @@ use App\ValueObjects\Like\LikeIdentifier;
 class Like
 {
     /**
-     * @var LikeIdentifier
+     * @var LikeIdentifier|null
      */
-    private LikeIdentifier $likeIdentifier;
+    private ?LikeIdentifier $likeIdentifier;
 
     /**
      * @var UserId
@@ -37,14 +37,14 @@ class Like
     private LikeCount $likeCount;
 
     /**
-     * @param LikeIdentifier $likeIdentifier
+     * @param LikeIdentifier|null $likeIdentifier
      * @param UserId $userId
      * @param TweetId $tweetId
      * @param AuthorId $authorId
      * @param LikeCount $likeCount
      */
     public function __construct(
-        LikeIdentifier $likeIdentifier,
+        ?LikeIdentifier $likeIdentifier,
         UserId $userId,
         TweetId $tweetId,
         AuthorId $authorId,
@@ -59,9 +59,9 @@ class Like
     }
 
     /**
-     * @return LikeIdentifier
+     * @return LikeIdentifier|null
      */
-    public function likeIdentifier(): LikeIdentifier
+    public function likeIdentifier(): ?LikeIdentifier
     {
         return $this->likeIdentifier;
     }

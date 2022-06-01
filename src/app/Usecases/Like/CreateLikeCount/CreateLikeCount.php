@@ -44,6 +44,7 @@ class CreateLikeCount implements CreateLikeCountInterface
     {
         // Entityを作成
         $like = $this->likeFactory->createLike(
+            null,
             $input->userId(),
             $input->tweetId(),
             $input->authorId(),
@@ -57,6 +58,6 @@ class CreateLikeCount implements CreateLikeCountInterface
             throw new RuntimeException($e->getMessage(), $e->getCode());
         }
 
-        return $like->toArray();
+        return $created->toArray();
     }
 }

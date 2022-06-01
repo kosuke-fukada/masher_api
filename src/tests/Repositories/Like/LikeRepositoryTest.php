@@ -32,13 +32,12 @@ class LikeRepositoryTest extends TestCase
      */
     public function testCreateLike(LikeRepositoryInterface $likeRepository): void
     {
-        $likeIdentifier = 1;
         $userId = 1;
         $tweetId = '1';
         $authorId = '1';
         $likeCount = 1;
         $like = new \App\Entities\Like\Like(
-            new LikeIdentifier($likeIdentifier),
+            null,
             new UserId($userId),
             new TweetId($tweetId),
             new AuthorId($authorId),
@@ -71,7 +70,6 @@ class LikeRepositoryTest extends TestCase
             new AuthorId($accountId),
             new LikeCount($likeCount)
         );
-        $original = $likeRepository->findById($like->likeIdentifier());
         $likeRepository->updateLikeCount($like);
         $updated = $likeRepository->findById($like->likeIdentifier());
         $this->assertSame($likeCount, $updated->likeCount()->toInt());

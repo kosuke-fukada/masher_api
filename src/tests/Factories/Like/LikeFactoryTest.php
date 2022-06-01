@@ -37,6 +37,17 @@ class LikeFactoryTest extends TestCase
         $authorId = '1';
         $likeCount = 0;
         $like = $factory->createLike(
+            null,
+            new UserId($userId),
+            new TweetId($tweetId),
+            new AuthorId($authorId),
+            new LikeCount($likeCount)
+        );
+        $this->assertInstanceOf(Like::class, $like);
+
+        $likeIdentifier = 1;
+        $like = $factory->createLike(
+            new LikeIdentifier($likeIdentifier),
             new UserId($userId),
             new TweetId($tweetId),
             new AuthorId($authorId),
