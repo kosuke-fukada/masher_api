@@ -14,19 +14,7 @@ use App\Interfaces\Factories\Like\LikeFactoryInterface;
 class LikeFactory implements LikeFactoryInterface
 {
     /**
-     * @var \App\Models\Like
-     */
-    private \App\Models\Like $like;
-
-    /**
-     * @param \App\Models\Like $like
-     */
-    public function __construct(\App\Models\Like $like)
-    {
-        $this->like = $like;
-    }
-
-    /**
+     * @param LikeIdentifier|null $likeIdentifier
      * @param UserId $userId
      * @param TweetId $tweetId
      * @param AuthorId $authorId
@@ -34,21 +22,15 @@ class LikeFactory implements LikeFactoryInterface
      * @return Like
      */
     public function createLike(
+        ?LikeIdentifier $likeIdentifier,
         UserId $userId,
         TweetId $tweetId,
         AuthorId $authorId,
         LikeCount $likeCount
     ): Like
     {
-        $likeModelObject = $this->like->newQuery()
-            ->firstOrNew([
-                'user_id' => $userId->toInt(),
-                'tweet_id' => (string)$tweetId,
-                'author_id' => (string)$authorId
-            ]);
-        $likeModelObject->save();
         return new Like(
-            new LikeIdentifier((int)$likeModelObject->getAttribute('id')),
+            $likeIdentifier,
             $userId,
             $tweetId,
             $authorId,

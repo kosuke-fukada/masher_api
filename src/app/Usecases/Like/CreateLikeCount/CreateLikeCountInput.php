@@ -7,16 +7,10 @@ use App\ValueObjects\User\UserId;
 use App\ValueObjects\Tweet\TweetId;
 use App\ValueObjects\Like\LikeCount;
 use App\ValueObjects\Tweet\AuthorId;
-use App\ValueObjects\Like\LikeIdentifier;
 use App\Interfaces\Usecases\Like\CreateLikeCount\CreateLikeCountInputPort;
 
 class CreateLikeCountInput implements CreateLikeCountInputPort
 {
-    /**
-     * @var LikeIdentifier|null
-     */
-    private ?LikeIdentifier $likeIdentifier = null;
-
     /**
      * @var UserId
      */
@@ -54,14 +48,6 @@ class CreateLikeCountInput implements CreateLikeCountInputPort
         $this->tweetId = $tweetId;
         $this->authorId = $authorId;
         $this->likeCount = $likeCount;
-    }
-
-    /**
-     * @return LikeIdentifier|null
-     */
-    public function likeIdentifier(): ?LikeIdentifier
-    {
-        return $this->likeIdentifier;
     }
 
     /**

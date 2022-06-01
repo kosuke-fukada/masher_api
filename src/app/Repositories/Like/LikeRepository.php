@@ -65,6 +65,7 @@ class LikeRepository implements LikeRepositoryInterface
         }
 
         $likeEntity = $this->factory->createLike(
+            new LikeIdentifier((int)$like->getAttribute('id')),
             new UserId((int)$like->getAttribute('user_id')),
             new TweetId((string)$like->getAttribute('tweet_id')),
             new AuthorId((string)$like->getAttribute('author_id')),

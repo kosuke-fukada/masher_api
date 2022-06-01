@@ -7,15 +7,9 @@ use App\ValueObjects\User\UserId;
 use App\ValueObjects\Tweet\TweetId;
 use App\ValueObjects\Like\LikeCount;
 use App\ValueObjects\Tweet\AuthorId;
-use App\ValueObjects\Like\LikeIdentifier;
 
 interface CreateLikeCountInputPort
 {
-    /**
-     * @return LikeIdentifier|null
-     */
-    public function likeIdentifier(): ?LikeIdentifier;
-
     /**
      * @return UserId
      */
