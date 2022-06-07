@@ -17,7 +17,7 @@ class UpdateLikeCountRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->getAttribute('id') === (int)$this->get('user_id');
     }
 
     /**
