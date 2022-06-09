@@ -5,9 +5,9 @@ namespace App\Entities\User;
 
 use App\ValueObjects\User\Avatar;
 use App\ValueObjects\User\UserId;
+use App\ValueObjects\User\AccountId;
 use App\ValueObjects\User\ExpiresAt;
 use App\ValueObjects\Shared\UserName;
-use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\User\AccessToken;
 use App\ValueObjects\User\DisplayName;
 use App\ValueObjects\User\RefreshToken;

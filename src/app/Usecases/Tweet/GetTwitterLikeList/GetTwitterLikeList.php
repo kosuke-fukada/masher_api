@@ -5,7 +5,7 @@ namespace App\Usecases\Tweet\GetTwitterLikeList;
 
 use Throwable;
 use RuntimeException;
-use App\ValueObjects\Shared\AccountId;
+use App\ValueObjects\User\AccountId;
 use App\ValueObjects\User\AccessToken;
 use Fig\Http\Message\StatusCodeInterface;
 use App\Interfaces\Factories\Tweet\TweetFactoryInterface;

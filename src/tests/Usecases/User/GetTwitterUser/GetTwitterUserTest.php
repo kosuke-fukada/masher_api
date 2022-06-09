@@ -4,9 +4,9 @@ declare(strict_types=1);
 namespace Tests\Usecases\User\GetTwitterUser;
 
 use Tests\TestCase;
+use App\ValueObjects\User\AccountId;
 use Illuminate\Support\Facades\Auth;
 use App\ValueObjects\Shared\UserName;
-use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\User\OauthProviderName;
 use App\Usecases\User\GetTwitterUser\GetTwitterUser;
 use App\Usecases\User\GetTwitterUser\GetTwitterUserInput;

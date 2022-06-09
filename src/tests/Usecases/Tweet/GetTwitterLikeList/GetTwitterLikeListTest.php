@@ -4,13 +4,13 @@ declare(strict_types=1);
 namespace Tests\Usecases\Tweet\GetTwitterLikeList;
 
 use Tests\TestCase;
+use App\ValueObjects\User\AccountId;
 use Illuminate\Support\Facades\Auth;
 use App\ValueObjects\Tweet\NextToken;
-use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\User\OauthProviderName;
+use App\Interfaces\Repositories\User\UserRepositoryInterface;
 use App\Usecases\Tweet\GetTwitterLikeList\GetTwitterLikeList;
 use App\Usecases\Tweet\GetTwitterLikeList\GetTwitterLikeListInput;
-use App\Interfaces\Repositories\User\UserRepositoryInterface;
 use App\Interfaces\Usecases\Tweet\GetTwitterLikeList\GetTwitterLikeListInterface;
 
 class GetTwitterLikeListTest extends TestCase

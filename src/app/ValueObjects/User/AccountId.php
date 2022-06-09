@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace App\ValueObjects\Shared;
+namespace App\ValueObjects\User;
 
 use InvalidArgumentException;
 use App\ValueObjects\Foundation\StringValueObject;
