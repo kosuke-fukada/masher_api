@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace App\Clients\GetTwitterLikeList;
 
 use Psr\Http\Message\UriInterface;
+use App\ValueObjects\User\AccountId;
 use App\ValueObjects\Tweet\NextToken;
-use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\User\AccessToken;
 use Psr\Http\Message\RequestInterface;
 use Fig\Http\Message\RequestMethodInterface;

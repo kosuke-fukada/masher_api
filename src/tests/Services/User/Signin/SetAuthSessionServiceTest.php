@@ -5,8 +5,8 @@ namespace Tests\Services\User\Signin;
 
 use Tests\TestCase;
 use App\Models\User;
+use App\ValueObjects\User\AccountId;
 use Illuminate\Support\Facades\Auth;
-use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\User\OauthProviderName;
 use App\Services\User\Signin\SetAuthSessionService;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;

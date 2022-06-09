@@ -5,8 +5,8 @@ namespace Tests\Usecases\User\RefreshTwitterAccessToken;
 
 use Tests\TestCase;
 use App\ValueObjects\User\UserId;
+use App\ValueObjects\User\AccountId;
 use Illuminate\Support\Facades\Auth;
-use App\ValueObjects\Shared\AccountId;
 use App\ValueObjects\User\OauthProviderName;
 use App\Interfaces\Repositories\User\UserRepositoryInterface;
 use App\Usecases\User\RefreshTwitterAccessToken\RefreshTwitterAccessToken;
