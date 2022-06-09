@@ -6,6 +6,9 @@ namespace Tests\Factories\Tweet;
 use App\Entities\Tweet\Tweet;
 use App\Factories\Tweet\TweetFactory;
 use App\Interfaces\Factories\Tweet\TweetFactoryInterface;
+use App\ValueObjects\Shared\UserName;
+use App\ValueObjects\Tweet\AuthorId;
+use App\ValueObjects\Tweet\TweetId;
 use Tests\TestCase;
 
 class TweetFactoryTest extends TestCase
@@ -31,13 +34,13 @@ class TweetFactoryTest extends TestCase
         $authorId = 'test_author_id';
         $authorName = 'test_author_name';
         $tweet = $factory->createTweet(
-            $tweetId,
-            $authorId,
-            $authorName
+            new TweetId($tweetId),
+            new AuthorId($authorId),
+            new UserName($authorName)
         );
         $this->assertInstanceOf(Tweet::class, $tweet);
-        $this->assertSame($tweetId, (string)$tweet->tweetId());
-        $this->assertSame($authorId, (string)$tweet->authorId());
-        $this->assertSame($authorName, (string)$tweet->authorName());
+        $this->assertSame((string)$tweetId, (string)$tweet->tweetId());
+        $this->assertSame((string)$authorId, (string)$tweet->authorId());
+        $this->assertSame((string)$authorName, (string)$tweet->authorName());
     }
 }

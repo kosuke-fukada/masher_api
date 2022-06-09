@@ -14,6 +14,9 @@ use App\Clients\GetTwitterLikeList\GetTwitterLikeListApiRequest;
 use App\Interfaces\Usecases\Tweet\GetTwitterLikeList\GetTwitterLikeListInputPort;
 use App\Interfaces\Usecases\Tweet\GetTwitterLikeList\GetTwitterLikeListInterface;
 use App\Interfaces\Clients\GetTwitterLikeList\GetTwitterLikeListApiClientInterface;
+use App\ValueObjects\Shared\UserName;
+use App\ValueObjects\Tweet\AuthorId;
+use App\ValueObjects\Tweet\TweetId;
 
 class GetTwitterLikeList implements GetTwitterLikeListInterface
 {
@@ -77,9 +80,9 @@ class GetTwitterLikeList implements GetTwitterLikeListInterface
                     }))[0]['username'];
 
                     $tweetList[] = $this->tweetFactory->createTweet(
-                        $tweet['id'],
-                        $tweet['author_id'],
-                        $authorName
+                        new TweetId($tweet['id']),
+                        new AuthorId($tweet['author_id']),
+                        new UserName($authorName)
                     )->toArray();
                 }
             }
