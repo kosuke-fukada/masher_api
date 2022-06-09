@@ -12,21 +12,21 @@ use App\ValueObjects\Tweet\AuthorId;
 class TweetFactory implements TweetFactoryInterface
 {
     /**
-     * @param string $tweetId
-     * @param string $authorId
-     * @param string $authorName
+     * @param TweetId $tweetId
+     * @param AuthorId $authorId
+     * @param UserName $authorName
      * @return Tweet
      */
     public function createTweet(
-        string $tweetId,
-        string $authorId,
-        string $authorName
+        TweetId $tweetId,
+        AuthorId $authorId,
+        UserName $authorName
     ): Tweet
     {
         return new Tweet(
-            new TweetId($tweetId),
-            new AuthorId($authorId),
-            new UserName($authorName)
+            $tweetId,
+            $authorId,
+            $authorName
         );
     }
 }
