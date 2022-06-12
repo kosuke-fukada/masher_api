@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Inquiry\PostInquiry\PostInquiryAction;
 use Illuminate\Support\Facades\Route;
 use App\Http\User\Signout\SignoutAction;
 use App\Http\Tweet\GetTweet\GetTweetAction;
@@ -55,3 +56,5 @@ Route::prefix('like_count')->group(function() {
     Route::post('/', CreateLikeCountAction::class);
     Route::put('/', UpdateLikeCountAction::class);
 });
+
+Route::post('/inquiry', PostInquiryAction::class);

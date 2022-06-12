@@ -91,8 +91,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'info@masher.app'),
+        'name' => env('MAIL_FROM_NAME', 'Masher'),
     ],
 
     /*
@@ -113,5 +113,7 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
+
+    'address' => env('APP_MAIL_ADDRESS', 'info@masher.app'),
 
 ];

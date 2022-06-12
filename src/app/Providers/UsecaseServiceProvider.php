@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Interfaces\Usecases\Inquiry\PostInquiry\PostInquiryInterface;
 use App\Usecases\User\Signout\Signout;
 use Illuminate\Support\ServiceProvider;
 use App\Usecases\Tweet\GetTweet\GetTweet;
@@ -24,6 +25,7 @@ use App\Usecases\User\RefreshTwitterAccessToken\RefreshTwitterAccessToken;
 use App\Interfaces\Usecases\Tweet\GetTwitterLikeList\GetTwitterLikeListInterface;
 use App\Interfaces\Usecases\User\GetTwitterUser\GetTwitterUserInterface;
 use App\Interfaces\Usecases\User\RefreshTwitterAccessToken\RefreshTwitterAccessTokenInterface;
+use App\Usecases\Inquiry\PostInquiry\PostInquiry;
 use App\Usecases\Like\GetLikeCount\GetLikeCount;
 use App\Usecases\User\GetTwitterUser\GetTwitterUser;
 
@@ -45,5 +47,6 @@ class UsecaseServiceProvider extends ServiceProvider
         $this->app->singleton(UpdateLikeCountInterface::class, UpdateLikeCount::class);
         $this->app->singleton(GetLikeCountInterface::class, GetLikeCount::class);
         $this->app->singleton(GetTwitterUserInterface::class, GetTwitterUser::class);
+        $this->app->singleton(PostInquiryInterface::class, PostInquiry::class);
     }
 }
