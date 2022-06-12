@@ -199,4 +199,6 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'web_url' => env('WEB_URL'),
+
 ];
