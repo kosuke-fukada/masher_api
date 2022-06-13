@@ -24,7 +24,8 @@ return new class extends Migration
             $table->timestamp('expires_at')->nullable();
             $table->string('provider')->nullable(false);
             $table->string('remember_token', 100)->nullable();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent()->nullable();
+            $table->timestamp('updated_at')->useCurrent()->nullable();
         });
     }
 
