@@ -178,7 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\FactoryServiceProvider::class,
-        App\Providers\ServiceServiceProvider::class,
+        App\Providers\DomainServiceProvider::class,
         App\Providers\UsecaseServiceProvider::class,
         App\Providers\ClientServiceProvider::class,
 
