@@ -15,12 +15,36 @@ class LikeSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('likes')->insert([
-            'id' => 1,
-            'user_id' => 1,
-            'tweet_id' => '1',
-            'author_id' => '1',
-            'like_count' => 0,
-        ]);
+        DB::table('likes')->insert(
+            [
+                [
+                    'id' => 1,
+                    'user_id' => 1,
+                    'tweet_id' => '1',
+                    'author_id' => '1',
+                    'like_count' => 10,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ],
+                [
+                    'id' => 2,
+                    'user_id' => 1,
+                    'tweet_id' => '2',
+                    'author_id' => '2',
+                    'like_count' => 20,
+                    'created_at' => now()->addHour(),
+                    'updated_at' => now()->addHour()
+                ],
+                [
+                    'id' => 3,
+                    'user_id' => 1,
+                    'tweet_id' => '3',
+                    'author_id' => '3',
+                    'like_count' => 15,
+                    'created_at' => now()->addHour(2),
+                    'updated_at' => now()->addHour(2)
+                ],
+            ]
+        );
     }
 }
