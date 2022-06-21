@@ -14,9 +14,11 @@ class GetTwitterUserByIdApiClientResponseMock implements GetTwitterUserByIdApiCl
     public function contents(): string
     {
         return json_encode([
-            'id' => '1',
-            'name' => 'test_name',
-            'username' => 'test_user_name',
+            'data' => [
+                'id' => '1',
+                'name' => 'test_name',
+                'username' => 'test_user_name',
+            ],
         ]);
     }
 

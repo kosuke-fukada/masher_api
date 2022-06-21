@@ -43,7 +43,7 @@ class AddAuthorNameToLikeListService implements AddAuthorNameToLikeListServiceIn
                 'id' => $like->getAttribute('id'),
                 'tweet_id' => $like->getAttribute('tweet_id'),
                 'author_id' => $like->getAttribute('author_id'),
-                'author_name' => $author['username'],
+                'author_name' => $author['data']['username'],
                 'like_count' => $like->getAttribute('like_count')
             ];
         })->toArray();
