@@ -12,12 +12,15 @@ use App\Clients\GetTweet\GetTweetApiClient;
 use Tests\Mock\Clients\GetTweet\GetTweetApiClientMock;
 use App\Clients\GetTwitterUser\GetTwitterUserApiClient;
 use App\Clients\GetTwitterLikeList\GetTwitterLikeListApiClient;
+use App\Clients\GetTwitterUserById\GetTwitterUserByIdApiClient;
 use App\Interfaces\Clients\GetTweet\GetTweetApiClientInterface;
 use Tests\Mock\Clients\GetTwitterUser\GetTwitterUserApiClientMock;
 use Tests\Mock\Clients\GetTwitterLikeList\GetTwitterLikeListApiClientMock;
+use Tests\Mock\Clients\GetTwitterUserById\GetTwitterUserByIdApiClientMock;
 use App\Interfaces\Clients\GetTwitterUser\GetTwitterUserApiClientInterface;
 use App\Clients\RefreshTwitterAccessToken\RefreshTwitterAccessTokenApiClient;
 use App\Interfaces\Clients\GetTwitterLikeList\GetTwitterLikeListApiClientInterface;
+use App\Interfaces\Clients\GetTwitterUserById\GetTwitterUserByIdApiClientInterface;
 use Tests\Mock\Clients\RefreshTwitterAccessToken\RefreshTwitterAccessTokenApiClientMock;
 use App\Interfaces\Clients\RefreshTwitterAccessToken\RefreshTwitterAccessTokenApiClientInterface;
 
@@ -33,6 +36,7 @@ class ClientServiceProvider extends ServiceProvider
             $this->app->singleton(RefreshTwitterAccessTokenApiClientInterface::class, RefreshTwitterAccessTokenApiClientMock::class);
             $this->app->singleton(GetTweetApiClientInterface::class, GetTweetApiClientMock::class);
             $this->app->singleton(GetTwitterUserApiClientInterface::class, GetTwitterUserApiClientMock::class);
+            $this->app->singleton(GetTwitterUserByIdApiClientInterface::class, GetTwitterUserByIdApiClientMock::class);
         } else {
             $this->app->singleton(GetTwitterLikeListApiClientInterface::class, function() {
                 $factory = new Psr17Factory();
@@ -85,6 +89,20 @@ class ClientServiceProvider extends ServiceProvider
                     $factory
                 );
                 return new GetTwitterUserApiClient(
+                    $psrFactories->uriFactory()->createUri(config('client.api.twitter.base_url')),
+                    new GuzzleClient(),
+                    $psrFactories
+                );
+            });
+            $this->app->singleton(GetTwitterUserByIdApiClientInterface::class, function() {
+                $factory = new Psr17Factory();
+                $psrFactories = new PsrFactories(
+                    $factory,
+                    $factory,
+                    $factory,
+                    $factory
+                );
+                return new GetTwitterUserByIdApiClient(
                     $psrFactories->uriFactory()->createUri(config('client.api.twitter.base_url')),
                     new GuzzleClient(),
                     $psrFactories

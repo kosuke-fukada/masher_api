@@ -5,10 +5,14 @@ namespace Tests\Usecases\Like\GetLikeList;
 
 use Tests\TestCase;
 use App\ValueObjects\User\UserId;
+use App\ValueObjects\User\AccountId;
+use Illuminate\Support\Facades\Auth;
 use App\ValueObjects\Shared\OrderKey;
 use App\ValueObjects\Shared\OrderValue;
+use App\ValueObjects\User\OauthProviderName;
 use App\Usecases\Like\GetLikeList\GetLikeList;
 use App\Usecases\Like\GetLikeList\GetLikeListInput;
+use App\Interfaces\Repositories\User\UserRepositoryInterface;
 use App\Interfaces\Usecases\Like\GetLikeList\GetLikeListInterface;
 
 class GetLikeListTest extends TestCase
@@ -30,6 +34,13 @@ class GetLikeListTest extends TestCase
      */
     public function testProcess(GetLikeListInterface $usecase): void
     {
+        $accountId = 'test_account_id';
+        $userRepository = $this->app->make(UserRepositoryInterface::class);
+        $user = $userRepository->findByAccountIdAndProvider(
+            new AccountId($accountId),
+            OauthProviderName::TWITTER
+        );
+        Auth::login($user);
         $userId = 1;
         $orderKey = OrderKey::ID;
         $orderValue = OrderValue::ASC;
