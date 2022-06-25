@@ -17,3 +17,4 @@ yarn-error.log
 /certs/server.key
 /certs/server.key.org
 :shared-memory:
+secret.yaml
