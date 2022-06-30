@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('user_id')->nullable(false);
             $table->string('tweet_id')->nullable(false);
             $table->string('author_id')->nullable(false);
-            $table->unsignedInteger('like_count')->nullable(false);
+            $table->unsignedBigInteger('like_count')->nullable(false);
             $table->timestamps();
         });
     }
