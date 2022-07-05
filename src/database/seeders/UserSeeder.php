@@ -24,6 +24,7 @@ class UserSeeder extends Seeder
             'refresh_token' => 'test_refresh_token',
             'expires_at' => date('Y-m-d H:i:s'),
             'provider' => 'twitter',
+            'remember_token' => 'test_remember_token',
         ]);
     }
 }
