@@ -31,7 +31,7 @@ class SigninWithTwitterAction
     public function __invoke(): JsonResponse
     {
         try {
-            $this->usecase->process(OauthProviderName::TWITTER);
+            $authUser = $this->usecase->process(OauthProviderName::TWITTER);
         } catch (Throwable $e) {
             return Response::json(
                 [
@@ -41,6 +41,15 @@ class SigninWithTwitterAction
             );
         }
 
-        return Response::json([], StatusCode::STATUS_CODE_NO_CONTENT->value);
+        $cookie = cookie(
+            '__session',
+            $authUser->getAttribute('remember_token'),
+            config('session.lifetime'),
+            config('session.path'),
+            config('session.domain'),
+            config('session.secure'),
+        );
+        return response()->cookie($cookie)
+            ->json([], StatusCode::STATUS_CODE_NO_CONTENT->value);
     }
 }

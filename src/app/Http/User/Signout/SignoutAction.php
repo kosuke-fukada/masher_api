@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
 use App\ValueObjects\Foundation\StatusCode;
 use App\Interfaces\Usecases\User\Signout\SignoutInterface;
+use Illuminate\Support\Facades\Cookie;
 
 class SignoutAction
 {
@@ -31,7 +32,7 @@ class SignoutAction
     {
         try {
             $this->usecase->process();
-            return Response::json([], StatusCode::STATUS_CODE_NO_CONTENT->value);
+            return response()->withoutCookie('__session')->json([], StatusCode::STATUS_CODE_NO_CONTENT->value);
         } catch (Throwable $e) {
             return Response::json(
                 [

@@ -15,6 +15,7 @@ use App\Http\Tweet\GetTwitterLikeList\GetTwitterLikeListAction;
 use App\Http\User\GetTwitterRedirectUrl\GetTwitterRedirectUrlAction;
 use App\Http\User\GetTwitterUser\GetTwitterUserAction;
 use App\Http\User\RefreshTwitterAccessToken\RefreshTwitterAccessTokenAction;
+use App\Http\User\SigninWithRememberToken\SigninWithRememberTokenAction;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ Route::prefix('signin')->group(function() {
         Route::get('/', GetTwitterRedirectUrlAction::class);
         Route::get('/callback', SigninWithTwitterAction::class);
     });
+    Route::get('/remember_token', SigninWithRememberTokenAction::class);
 });
 
 Route::get('/signout', SignoutAction::class);
