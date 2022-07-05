@@ -49,7 +49,7 @@ class SigninWithTwitterAction
             config('session.domain'),
             config('session.secure'),
         );
-        return response()->cookie($cookie)
-            ->json([], StatusCode::STATUS_CODE_NO_CONTENT->value);
+        return response()->json([], StatusCode::STATUS_CODE_NO_CONTENT->value)
+            ->cookie($cookie);
     }
 }
