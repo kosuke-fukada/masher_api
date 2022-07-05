@@ -33,7 +33,8 @@ Route::prefix('signin')->group(function() {
         Route::get('/', GetTwitterRedirectUrlAction::class);
         Route::get('/callback', SigninWithTwitterAction::class);
     });
-    Route::get('/remember_token', SigninWithRememberTokenAction::class);
+    Route::get('/remember_token', SigninWithRememberTokenAction::class)
+        ->middleware(VerifyTwitterAccessTokenExpired::class);
 });
 
 Route::get('/signout', SignoutAction::class);
