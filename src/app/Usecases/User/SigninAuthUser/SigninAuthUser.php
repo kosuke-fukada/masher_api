@@ -67,9 +67,9 @@ class SigninAuthUser implements SigninAuthUserInterface
 
     /**
      * @param OauthProviderName $oauthProviderName
-     * @return void
+     * @return User
      */
-    public function process(OauthProviderName $oauthProviderName): void
+    public function process(OauthProviderName $oauthProviderName): User
     {
         $user = Socialite::driver($oauthProviderName->value)->stateless()->user();
 
@@ -136,5 +136,7 @@ class SigninAuthUser implements SigninAuthUserInterface
             $this->logger->error($e->getMessage());
             throw new RuntimeException('Failed to signin: ' . $e->getMessage(), StatusCode::STATUS_CODE_INTERNAL_SERVER_ERROR->value, $e);
         }
+
+        return $signedInUser;
     }
 }
