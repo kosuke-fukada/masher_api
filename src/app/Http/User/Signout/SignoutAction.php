@@ -32,7 +32,7 @@ class SignoutAction
     {
         try {
             $this->usecase->process();
-            return response()->withoutCookie('__session')->json([], StatusCode::STATUS_CODE_NO_CONTENT->value);
+            return response()->json([], StatusCode::STATUS_CODE_NO_CONTENT->value)->withoutCookie('__session');
         } catch (Throwable $e) {
             return Response::json(
                 [
