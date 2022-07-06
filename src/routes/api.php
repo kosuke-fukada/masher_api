@@ -39,20 +39,22 @@ Route::prefix('signin')->group(function() {
 
 Route::get('/signout', SignoutAction::class);
 
-Route::prefix('user')->middleware(VerifyTwitterAccessTokenExpired::class)
+Route::prefix('user')
+    ->middleware(['remember_token', 'access_token'])
     ->group(function() {
         Route::get('/', GetUserInfoAction::class);
         Route::get('/twitter', GetTwitterUserAction::class);
         Route::get('/refresh/twitter', RefreshTwitterAccessTokenAction::class);
     });
 
-Route::prefix('likes')->group(function() {
-    Route::get('/', GetLikeListAction::class);
-    Route::prefix('twitter')->middleware(VerifyTwitterAccessTokenExpired::class)
-        ->group(function() {
-            Route::get('/', GetTwitterLikeListAction::class);
-        });
-});
+Route::prefix('likes')->middleware(['remember_token', 'access_token'])
+    ->group(function() {
+        Route::get('/', GetLikeListAction::class);
+        Route::prefix('twitter')
+            ->group(function() {
+                Route::get('/', GetTwitterLikeListAction::class);
+            });
+    });
 
 Route::get('/tweet', GetTweetAction::class);
 

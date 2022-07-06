@@ -3,6 +3,8 @@
 namespace App\Http;
 
 use App\Http\Middleware\AjaxOnly;
+use App\Http\Middleware\RememberTokenSignin;
+use App\Http\Middleware\VerifyTwitterAccessTokenExpired;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -69,5 +71,12 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'remember_token' => RememberTokenSignin::class,
+        'access_token' => VerifyTwitterAccessTokenExpired::class,
+    ];
+
+    protected $middlewarePriority = [
+        RememberTokenSignin::class,
+        VerifyTwitterAccessTokenExpired::class,
     ];
 }
