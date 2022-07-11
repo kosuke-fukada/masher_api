@@ -50,7 +50,10 @@ class GetTweet implements GetTweetInterface
         );
 
         // APIから取得
-        $request = new GetTweetApiClientRequest($tweet);
+        $request = new GetTweetApiClientRequest(
+            $tweet,
+            $input->accessToken()
+        );
         try {
             $response = $this->client->process($request);
             $tweetData = json_decode($response->contents(), true, 512, JSON_THROW_ON_ERROR);
@@ -58,6 +61,13 @@ class GetTweet implements GetTweetInterface
             throw new RuntimeException($e->getMessage(), $e->getCode());
         }
 
-        return $tweetData;
+        return [
+            'text' => $tweetData['data']['text'],
+            'display_name' => $tweetData['includes']['users'][0]['name'],
+            'author_name' => $tweetData['includes']['users'][0]['username'],
+            'avatar' => $tweetData['includes']['users'][0]['profile_image_url'],
+            'created_at' => $tweetData['data']['created_at'],
+            'media' => $tweetData['includes']['media'] ?? []
+        ];
     }
 }
