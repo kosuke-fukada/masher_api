@@ -6,6 +6,7 @@ namespace App\Interfaces\Usecases\Tweet\GetTweet;
 use App\ValueObjects\Tweet\TweetId;
 use App\ValueObjects\Tweet\AuthorId;
 use App\ValueObjects\Shared\UserName;
+use App\ValueObjects\User\AccessToken;
 
 interface GetTweetInputPort
 {
@@ -23,4 +24,9 @@ interface GetTweetInputPort
      * @return UserName
      */
     public function authorName(): UserName;
+
+    /**
+     * @return AccessToken
+     */
+    public function accessToken(): AccessToken;
 }

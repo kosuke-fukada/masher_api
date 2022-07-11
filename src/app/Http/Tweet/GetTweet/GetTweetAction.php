@@ -4,12 +4,15 @@ declare(strict_types=1);
 namespace App\Http\Tweet\GetTweet;
 
 use Throwable;
+use App\Models\User;
 use Psr\Log\LoggerInterface;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use App\Usecases\Tweet\GetTweet\GetTweetInput;
 use App\Interfaces\Usecases\Tweet\GetTweet\GetTweetInterface;
+use App\ValueObjects\User\AccessToken;
 
 class GetTweetAction extends Controller
 {
@@ -42,10 +45,13 @@ class GetTweetAction extends Controller
      */
     public function __invoke(GetTweetRequest $request): JsonResponse
     {
+        /** @var User $authUser */
+        $authUser = Auth::user();
         $input = new GetTweetInput(
             $request->tweetId(),
             $request->authorId(),
-            $request->authorName()
+            $request->authorName(),
+            new AccessToken($authUser->getAttribute('access_token'))
         );
 
         try {
