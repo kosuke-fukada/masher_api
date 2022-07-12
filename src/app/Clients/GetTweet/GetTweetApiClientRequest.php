@@ -54,7 +54,7 @@ class GetTweetApiClientRequest implements GetTweetApiClientRequestInterface
      */
     public function endpointUri(UriInterface $uri): UriInterface
     {
-        $query = 'user.fields=id,username,profile_image_url&tweet.fields=created_at&media.fields=url,variants&expansions=author_id,attachments.media_keys';
+        $query = 'user.fields=id,username,profile_image_url&tweet.fields=created_at&media.fields=url,variants,preview_image_url&expansions=author_id,attachments.media_keys';
         return $uri->withPath('2/tweets/' . (string)$this->tweet->tweetId())
             ->withQuery($query);
     }
